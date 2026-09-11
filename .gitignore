@@ -1,0 +1,13 @@
+/.quarto/
+/.venv/
+__pycache__/
+.DS_Store
+lectures/*/video/
+.Rhistory
+*.quarto_ipynb
+lectures/*/export/
+lectures/*/exercise_files/
+/.venv-colab/
+lectures/*/*/video/
+lectures/*/*/slide.html
+lectures/*/*/slide_files/
