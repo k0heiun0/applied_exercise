@@ -3270,9 +3270,13 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">&#39;figure.figsize&#39;</span>] <span class="op">=</span> (<span class="dv">9</span>, <span class="dv">5</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">&#39;font.size&#39;</span>] <span class="op">=</span> <span class="dv">13</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;セットアップ完了&#39;</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">-</span>q japanize<span class="op">-</span>matplotlib   <span class="co"># 図中の日本語が □ になるのを防ぐ</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> japanize_matplotlib</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">&#39;figure.figsize&#39;</span>] <span class="op">=</span> (<span class="dv">9</span>, <span class="dv">5</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">&#39;font.size&#39;</span>] <span class="op">=</span> <span class="dv">13</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">&#39;axes.unicode_minus&#39;</span>] <span class="op">=</span> <span class="va">False</span>   <span class="co"># マイナス記号の化けを防ぐ</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;セットアップ完了&#39;</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="データの読み込みと欠測の確認" class="level2">
