@@ -11,3 +11,6 @@ lectures/*/exercise_files/
 lectures/*/*/video/
 lectures/*/*/slide.html
 lectures/*/*/slide_files/
+
+# SDD 作業用スクラッチ（実行台帳・ブリーフ・レビュー資材）
+.superpowers/
