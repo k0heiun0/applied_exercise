@@ -3248,16 +3248,16 @@ window.Quarto = {
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
 <p><strong>ラベルなしで、4096次元の顔を少数の軸で捉え、圧縮したい。</strong></p>
-<p>この演習では、PCA で顔画像を固有顔に分解し、累積寄与率で次元を減らし、少数の成分で顔を再構成する流れを、自分の手で動かします。主成分がなぜ「分散が最大の方向」になるのか、その正体である固有値分解まで踏み込みます。TODOに取り組みながら、最後の「目標に答えられたか」で振り返りましょう。</p>
+<p>この演習では、PCA で顔画像を固有顔に分解し、累積寄与率（cumulative proportion of variance explained）で次元を減らし、少数の成分で顔を再構成する流れを、自分の手で動かします。主成分（principal component）がなぜ「分散が最大の方向」になるのか、その正体である固有値分解（eigendecomposition）まで踏み込みます。TODOに取り組みながら、最後の「目標に答えられたか」で振り返りましょう。</p>
 </section>
 <section id="学習ゴール" class="level2">
 <h2 class="anchored" data-anchor-id="学習ゴール">学習ゴール</h2>
 <p>この回を終えると、次のことができるようになります。</p>
 <ul>
 <li>正解ラベルのないデータで何を手がかりにするのかを、教師あり学習との違いとして説明できる</li>
-<li>主成分が共分散行列の固有ベクトルであり、固有値がその向きの分散そのものであることを、実行値で確かめて言える</li>
+<li>主成分が共分散行列（covariance matrix）の固有ベクトル（eigenvector）であり、固有値（eigenvalue）がその向きの分散そのものであることを、実行値で確かめて言える</li>
 <li>累積寄与率から「上位 <span class="math inline">\(K\)</span> 個で保てる情報と失う情報」を読み取り、必要な成分数を自分で決められる</li>
-<li>平均顔に固有顔を重み付きで足す形で顔を再構成し、成分数を変えて圧縮と画質のトレードオフを目で確かめられる</li>
+<li>平均顔に固有顔を重み（weight）付きで足す形で顔を再構成し、成分数を変えて圧縮と画質のトレードオフを目で確かめられる</li>
 <li>このデータでは4096次元を50次元に落としても人物当ての正解率が変わらない理由を、識別の手がかりが分散の大きい向きに乗っていることから説明できる</li>
 </ul>
 <div id="46015338" class="cell" data-execution_count="1">
@@ -3282,7 +3282,7 @@ window.Quarto = {
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="b1a10003" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3316,9 +3316,9 @@ window.Quarto = {
 <section id="深掘り固有顔の正体共分散行列の固有値分解-sigma-v-lambda-v" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り固有顔の正体共分散行列の固有値分解-sigma-v-lambda-v">深掘り：固有顔の正体——共分散行列の固有値分解 <span class="math inline">\(\Sigma v = \lambda v\)</span></h3>
 <p>この節で並ぶ「固有顔」は、なぜ<strong>顔の形</strong>をしているのでしょう。名前に「固有」とつくのは飾りではなく、PCA の主成分が<strong>共分散行列の固有ベクトル</strong>そのものだからです。ここを一段だけ数式で押さえておくと、以降の再構成も圧縮も一本の線でつながります。</p>
-<p><strong>まず土俵をそろえる（中心化）</strong>　400枚の顔を平均した<strong>平均顔</strong> <span class="math inline">\(\bar{x}\)</span>（この節の図の左上の画像）を各画像から引き、<span class="math inline">\(\tilde{x} = x - \bar{x}\)</span> という「平均からのズレ」に直します。以降はこのズレだけを扱います。画像は全ピクセルが 0〜1 の同じ明るさスケールなので、平均を引く<strong>中心化</strong>はしても、ピクセルごとに割り算する標準化はしません（この判断の理由は次節で詳しく述べます）。</p>
+<p><strong>まず土俵をそろえる（中心化）</strong>　400枚の顔を平均した<strong>平均顔</strong> <span class="math inline">\(\bar{x}\)</span>（この節の図の左上の画像）を各画像から引き、<span class="math inline">\(\tilde{x} = x - \bar{x}\)</span> という「平均からのズレ」に直します。以降はこのズレだけを扱います。画像は全ピクセルが 0〜1 の同じ明るさスケールなので、平均を引く<strong>中心化（centering）</strong>はしても、ピクセルごとに割り算する標準化（standardization）はしません（この判断の理由は次節で詳しく述べます）。</p>
 <p><strong>共分散行列 <span class="math inline">\(\Sigma\)</span> とは</strong>　4096個のピクセルについて、「ピクセル <span class="math inline">\(j\)</span> が平均より明るいとき、ピクセル <span class="math inline">\(k\)</span> も一緒に明るくなりやすいか」を全ペアで表した <span class="math inline">\(4096\times4096\)</span> の表が、共分散行列 <span class="math inline">\(\Sigma\)</span> です。対角がそのピクセル単体の分散、非対角がピクセル間の連動を表します。顔では「額が明るいとき頬も明るい」のように、多くのピクセルが連動して動きます。この連動の構造こそ、PCA が取り出したいものです。</p>
-<p><strong>主成分＝分散が最大の方向、その骨子</strong>　4096次元の空間で、ある単位ベクトル <span class="math inline">\(v\)</span>（長さ1の向き）を1本引きます。各顔のズレ <span class="math inline">\(\tilde{x}\)</span> をこの向きに射影した値 <span class="math inline">\(\tilde{x}\cdot v\)</span> の<strong>分散</strong>は、<span class="math inline">\(v^{\top}\Sigma v\)</span> と書けます。PCA は「射影したとき最も散らばる（分散が最大の）向き」を探すので、</p>
+<p><strong>主成分＝分散が最大の方向、その骨子</strong>　4096次元の空間で、ある単位ベクトル <span class="math inline">\(v\)</span>（長さ1の向き）を1本引きます。各顔のズレ <span class="math inline">\(\tilde{x}\)</span> をこの向きに射影（projection）した値 <span class="math inline">\(\tilde{x}\cdot v\)</span> の<strong>分散</strong>は、<span class="math inline">\(v^{\top}\Sigma v\)</span> と書けます。PCA は「射影したとき最も散らばる（分散が最大の）向き」を探すので、</p>
 <p><span class="math display">\[
 \max_{v}\ v^{\top}\Sigma v \quad \text{s.t.}\quad \lVert v \rVert = 1
 \]</span></p>
@@ -3327,14 +3327,14 @@ window.Quarto = {
 \Sigma v = \lambda v
 \]</span></p>
 <p>を満たします——これが<strong>固有値方程式</strong>で、<span class="math inline">\(v\)</span> が <span class="math inline">\(\Sigma\)</span> の<strong>固有ベクトル</strong>、<span class="math inline">\(\lambda\)</span> がその<strong>固有値</strong>です。つまり「分散が最大の方向」を探す作業は、共分散行列の固有ベクトルを求める作業と<strong>同じもの</strong>でした。さらに、この <span class="math inline">\(v\)</span> に沿った分散を計算し直すと <span class="math inline">\(v^{\top}\Sigma v = v^{\top}(\lambda v) = \lambda\)</span>。<strong>固有値 <span class="math inline">\(\lambda\)</span> が、その方向に沿った分散の量そのもの</strong>なのです。だから固有値のいちばん大きい向きが第1主成分、次が第2主成分……と並びます。</p>
-<p><strong>第2・第3主成分はどこから来るか</strong>　第2主成分は「第1主成分と直交する向きのうち、次に分散が大きい向き」でした。これも同じ <span class="math inline">\(\Sigma v = \lambda v\)</span> の、2番目に大きい固有値に対応する固有ベクトルとして自動的に出てきます。対称行列 <span class="math inline">\(\Sigma\)</span> の固有ベクトルは互いに直交するので、主成分が直交する（重複しない情報を持つ）のは、固有ベクトルの性質のあらわれです。厳密な最大化の証明（対称行列のスペクトル分解の定理や、逐次的に直交制約下で最大化すると固有値の大きい順に主成分が並ぶこと）は、行列解析の標準的な参考書——Horn・Johnson『Matrix Analysis』のスペクトル定理とレイリー商を扱う章に譲ります。ここでは「分散最大＝固有値最大」「直交＝対称行列の固有ベクトル」という骨格をつかめれば十分です。</p>
-<p><strong>この実データの数字で確かめる</strong>　第1主成分の固有値は <span class="math inline">\(\lambda_1 \approx 18.84\)</span>。これは下のセルで確かめるとおり、第1主成分に射影したスコアの分散と<strong>ぴたり一致</strong>します（固有値＝その方向の分散、の実証）。固有値をすべて足すと <span class="math inline">\(\sum_j \lambda_j \approx 79.12\)</span> で、これは元の4096ピクセルの分散の総和と一致します。固有値分解は<strong>分散の総量を保ったまま、それを少数の向きへ組み替えているだけ</strong>なのです。だから各主成分の<strong>寄与率</strong>は <span class="math inline">\(\lambda_1 / \sum_j \lambda_j = 18.84/79.12 \approx 23.8\%\)</span> と計算でき、この節の数値確認のセルが表示する「第1主成分で約24%」の中身がこれです。第2主成分は約14%、第3主成分は約8%と、後ろほど固有値が小さく、寄与率も小さくなっていきます。</p>
+<p><strong>第2・第3主成分はどこから来るか</strong>　第2主成分は「第1主成分と直交（orthogonal）する向きのうち、次に分散が大きい向き」でした。これも同じ <span class="math inline">\(\Sigma v = \lambda v\)</span> の、2番目に大きい固有値に対応する固有ベクトルとして自動的に出てきます。対称行列 <span class="math inline">\(\Sigma\)</span> の固有ベクトルは互いに直交するので、主成分が直交する（重複しない情報を持つ）のは、固有ベクトルの性質のあらわれです。厳密な最大化の証明（対称行列のスペクトル分解の定理や、逐次的に直交制約下で最大化すると固有値の大きい順に主成分が並ぶこと）は、行列解析の標準的な参考書——Horn・Johnson『Matrix Analysis』のスペクトル定理とレイリー商を扱う章に譲ります。ここでは「分散最大＝固有値最大」「直交＝対称行列の固有ベクトル」という骨格をつかめれば十分です。</p>
+<p><strong>この実データの数字で確かめる</strong>　第1主成分の固有値は <span class="math inline">\(\lambda_1 \approx 18.84\)</span>。これは下のセルで確かめるとおり、第1主成分に射影したスコアの分散と<strong>ぴたり一致</strong>します（固有値＝その方向の分散、の実証）。固有値をすべて足すと <span class="math inline">\(\sum_j \lambda_j \approx 79.12\)</span> で、これは元の4096ピクセルの分散の総和と一致します。固有値分解は<strong>分散の総量を保ったまま、それを少数の向きへ組み替えているだけ</strong>なのです。だから各主成分の<strong>寄与率（proportion of variance explained）</strong>は <span class="math inline">\(\lambda_1 / \sum_j \lambda_j = 18.84/79.12 \approx 23.8\%\)</span> と計算でき、この節の数値確認のセルが表示する「第1主成分で約24%」の中身がこれです。第2主成分は約14%、第3主成分は約8%と、後ろほど固有値が小さく、寄与率も小さくなっていきます。</p>
 <p><strong>固有ベクトルを画像に戻すと固有顔</strong>　固有ベクトル <span class="math inline">\(v\)</span> は 4096個の数字の並び。それを <span class="math inline">\(64\times64\)</span> に並べ直したものが<strong>固有顔</strong>です。つまり固有顔は、抽象的な主成分を<strong>そのまま絵にしたもの</strong>にほかなりません。そして任意の顔は</p>
 <p><span class="math display">\[
 x \;=\; \bar{x} \;+\; \sum_k s_k\, v_k, \qquad s_k = \tilde{x}\cdot v_k
 \]</span></p>
 <p>と、<strong>平均顔に固有顔を重み付きで足し合わせた形</strong>で表せます。重み <span class="math inline">\(s_k\)</span>（スコア）は「その顔がその固有顔をどれだけ含むか」。たとえば1枚目の顔 <code>X[0]</code> のスコアは、第1〜5成分でおよそ <span class="math inline">\((6.43,\ 0.70,\ -1.43,\ 1.28,\ -2.56)\)</span>。これは「この顔 ＝ 平均顔 ＋ 6.43×固有顔1 ＋ 0.70×固有顔2 ＋ …」という<strong>レシピ</strong>を読んでいるのと同じです。第1成分の重みが飛び抜けて大きいのは、固有顔1が明るさや大きな陰影という「どの顔にも強く効く成分」だから。この足し算を上位 <span class="math inline">\(K\)</span> 個で打ち切れば、4096個の数字を <span class="math inline">\(K\)</span> 個のスコアへ圧縮したことになります。次の節では、この打ち切りを実際に目で確かめます。</p>
-<p><strong>別の見方：最良の低ランク近似（SVD）</strong>　同じことは、中心化したデータ行列そのものの<strong>特異値分解（SVD）</strong>としても見えます。上位 <span class="math inline">\(K\)</span> 個の主成分で作った再構成は、元データに<strong>いちばん近い</strong>（二乗誤差が最小の）<span class="math inline">\(K\)</span>本の軸による近似になっている——これは行列近似の基本定理（エッカート＝ヤング）が保証します。「分散を最大に残す向きを選ぶ」ことと「元画像との誤差を最小にする向きを選ぶ」ことが<strong>表裏一体</strong>だという事実が、次節の再構成が一番よく効く理由です。</p>
+<p><strong>別の見方：最良の低ランク近似（SVD）</strong>　同じことは、中心化したデータ行列そのものの<strong>特異値分解（singular value decomposition, SVD）</strong>としても見えます。上位 <span class="math inline">\(K\)</span> 個の主成分で作った再構成は、元データに<strong>いちばん近い</strong>（二乗誤差が最小の）<span class="math inline">\(K\)</span>本の軸による近似になっている——これは行列近似の基本定理（エッカート＝ヤング）が保証します。「分散を最大に残す向きを選ぶ」ことと「元画像との誤差を最小にする向きを選ぶ」ことが<strong>表裏一体</strong>だという事実が、次節の再構成が一番よく効く理由です。</p>
 <p><strong>つまずきどころ：固有顔を1枚だけで意味づけすぎない</strong>　固有顔1は明るさ、固有顔2は左右の向き……と読みたくなりますが、各固有顔は多数のピクセルの混ぜ合わせで、前方の成分ほど大域的（明るさ・向き）、後方ほど細部（しわ・メガネの縁）を担う傾向がある、という程度に留めるのが安全です。「この1枚が“目”を表す」といった過度な意味づけは、次節・次々節のつまずき（標準化と符号）と並ぶ、PCA 解釈の落とし穴です。</p>
 <p><strong>計算上の補足：<span class="math inline">\(4096\times4096\)</span> の行列は作らない</strong>　共分散行列 <span class="math inline">\(\Sigma\)</span> は <span class="math inline">\(4096\times4096\)</span> と巨大ですが、幸い画像はたった400枚。<code>sklearn</code> の <code>PCA</code> は <span class="math inline">\(\Sigma\)</span> を明示的に組み立てず、中心化したデータ行列の<strong>特異値分解（SVD）</strong>で同じ固有ベクトル・固有値を効率よく求めます。だから4096次元でも一瞬で終わります。そして忘れてはならないのは、ここまで<strong>ラベル <code>y</code>（誰の顔か）を一度も使っていない</strong>こと。分散という手がかりだけで軸を見つける——これが教師なし学習らしさです（<code>y</code> を使うのは、次節でわざわざ人物当てを試すときだけ）。</p>
 <div id="deep-eigen-01-check" class="cell" data-execution_count="3">
@@ -3444,8 +3444,8 @@ x \;=\; \bar{x} \;+\; \sum_k s_k\, v_k, \qquad s_k = \tilde{x}\cdot v_k
 </tbody>
 </table>
 <p><span class="math inline">\(K=50\)</span> で累積 <strong>87.4%</strong>、失う情報は約 <strong>12.6%</strong>。だから50成分の再構成は、細部は少しぼやけても顔立ちはしっかり残ります。<span class="math inline">\(K=100\)</span> では <strong>93.5%</strong>（損失 6.5%）まで上がり、元画像とほとんど見分けがつきません。この節の再構成の画像で「成分を増やすほど元に近づく」のは、この表の累積寄与率が1へ近づき、失う情報が減っていく様子そのものです。</p>
-<p><strong>発展：累積寄与率を「次元を決めるつまみ」に使う</strong>　何成分まで残すかは、累積寄与率を目標ラインに合わせて決められます。この顔データでは、<strong>80%なら27成分、90%なら66成分、95%なら123成分、99%なら260成分</strong>が必要です。表からも分かるとおり、第1成分だけで24%、上位5個で54%と前半の主成分がぐんぐん稼ぎ、20個を過ぎると1個あたりの寄与率は1%を切ってなだらかになります。この「最初は急でやがて平ら」の形がスクリープロット（がれ場の図）で、寄与率がガクッと落ちて平坦になる肘のあたりを目安にしたり、用途に必要な精度から逆算したりして次元を選びます。圧縮率と情報保持のトレードオフを、この一本の曲線で操作できるのが便利なところです。</p>
-<p><strong>圧縮を数で数える</strong>　1枚の顔はもともと4096個の数字。50成分に落とすと、1枚あたり保持するのは<strong>50個のスコア</strong>だけです（平均顔と50枚の固有顔は全400枚で共有する“辞書”なので、枚数が増えるほど1枚あたりの取り分は50個へ近づく）。4096が50へ、約80分の1。この身軽さのまま87%の情報が残り、顔立ちも保てるからこそ、次節の「50次元でも人物を当てられる」が効いてきます。 <strong>つまずきどころ：画像では標準化しない</strong>　正則化の回では「罰金の前に必ず標準化」でしたが、PCA では<strong>中心化はするが、画像ではふつう標準化しない</strong>——ここは混同しやすい要所です。標準化はピクセルごとにその標準偏差で割る操作ですが、顔画像の四隅や背景のピクセルは<strong>ほとんど動かない（標準偏差がごく小さい）</strong>。小さい値で割ると、そうした<strong>背景のわずかなちらつきが過大に増幅</strong>され、PCA が意味のない背景ノイズを主成分に拾ってしまいます。全ピクセルが 0〜1 の同じ単位に乗っているこのデータでは、平均顔を引く中心化だけで土俵はそろっており、標準化は害になります（<code>PCA</code> は中心化は自動で行い、標準化はしません）。逆に、単位のバラバラな<strong>表データ</strong>では標準化が要る——「標準化するか否かはデータの素性しだい」で、画像だから省ける、と理解するのが正解です。</p>
+<p><strong>発展：累積寄与率を「次元を決めるつまみ」に使う</strong>　何成分まで残すかは、累積寄与率を目標ラインに合わせて決められます。この顔データでは、<strong>80%なら27成分、90%なら66成分、95%なら123成分、99%なら260成分</strong>が必要です。表からも分かるとおり、第1成分だけで24%、上位5個で54%と前半の主成分がぐんぐん稼ぎ、20個を過ぎると1個あたりの寄与率は1%を切ってなだらかになります。この「最初は急でやがて平ら」の形がスクリープロット（scree plot、がれ場の図）で、寄与率がガクッと落ちて平坦になる肘のあたりを目安にしたり、用途に必要な精度から逆算したりして次元を選びます。圧縮率と情報保持のトレードオフを、この一本の曲線で操作できるのが便利なところです。</p>
+<p><strong>圧縮を数で数える</strong>　1枚の顔はもともと4096個の数字。50成分に落とすと、1枚あたり保持するのは<strong>50個のスコア</strong>だけです（平均顔と50枚の固有顔は全400枚で共有する“辞書”なので、枚数が増えるほど1枚あたりの取り分は50個へ近づく）。4096が50へ、約80分の1。この身軽さのまま87%の情報が残り、顔立ちも保てるからこそ、次節の「50次元でも人物を当てられる」が効いてきます。 <strong>つまずきどころ：画像では標準化しない</strong>　正則化（regularization）の回では「罰金の前に必ず標準化」でしたが、PCA では<strong>中心化はするが、画像ではふつう標準化しない</strong>——ここは混同しやすい要所です。標準化はピクセルごとにその標準偏差（standard deviation）で割る操作ですが、顔画像の四隅や背景のピクセルは<strong>ほとんど動かない（標準偏差がごく小さい）</strong>。小さい値で割ると、そうした<strong>背景のわずかなちらつきが過大に増幅</strong>され、PCA が意味のない背景ノイズを主成分に拾ってしまいます。全ピクセルが 0〜1 の同じ単位に乗っているこのデータでは、平均顔を引く中心化だけで土俵はそろっており、標準化は害になります（<code>PCA</code> は中心化は自動で行い、標準化はしません）。逆に、単位のバラバラな<strong>表データ</strong>では標準化が要る——「標準化するか否かはデータの素性しだい」で、画像だから省ける、と理解するのが正解です。</p>
 <div id="2c1b3ffd" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>face <span class="op">=</span> X[<span class="dv">0</span>] <span class="op">-</span> X.mean(<span class="dv">0</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="fl">2.6</span>))</span>
@@ -3478,11 +3478,11 @@ x \;=\; \bar{x} \;+\; \sum_k s_k\, v_k, \qquad s_k = \tilde{x}\cdot v_k
 <p>4096次元と、PCAで減らした50次元で、人物当ての正解率を比べます（ここだけラベル y を使います）。</p>
 <section id="深掘り50次元でも人物を見分けられる理由符号の任意性と白色化" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り50次元でも人物を見分けられる理由符号の任意性と白色化">深掘り：50次元でも人物を見分けられる理由／符号の任意性と白色化</h3>
-<p><strong>なぜ80分の1に減らしても正解率が落ちないのか</strong>　人物を見分ける手がかり（目鼻立ちや輪郭の個人差）は、まさに<strong>顔どうしが大きく散らばる方向</strong>に乗っています。PCA は分散の大きい向きから順に主成分を並べるので、上位50成分は「人によく効く違い」をほぼ取り切っています。捨てた約12.6%の裾は、細かなテクスチャやノイズが主で、識別にはあまり効きません。だから 4096次元でも50次元でも正解率は <strong>0.972 のまま</strong>。PCA が「情報の多い順」に軸を並べてくれる性質が、そのまま<strong>識別に効く情報を優先して残す</strong>ことにつながっているのです。しかも次元が80分の1になれば、ロジスティック回帰の学習も予測も軽く速くなります——顔認識システムが固有顔で実用的に動く理由が、この一手です。</p>
-<p><strong>別の見方：圧縮とノイズ除去は同じ操作</strong>　小さい固有値の主成分を捨てることは、「情報の少ない向き」を落とすと同時に、そこに乗っている<strong>細かなノイズを一緒に落とす</strong>ことでもあります。だから PCA は、次元削減の道具であると同時に<strong>ノイズ除去</strong>の道具でもあります。圧縮・可視化・ノイズ除去は別々のご利益に見えて、「分散の小さい向きを捨てる」という一つの操作の別の顔なのです。ただし顔の細部（本物の個性）と雑音の境目は曖昧で、削りすぎれば個性まで落ちる——前節の累積寄与率と再構成画像で、どこまで削ってよいかを必ず目で確かめる姿勢が要ります。</p>
+<p><strong>なぜ80分の1に減らしても正解率が落ちないのか</strong>　人物を見分ける手がかり（目鼻立ちや輪郭の個人差）は、まさに<strong>顔どうしが大きく散らばる方向</strong>に乗っています。PCA は分散の大きい向きから順に主成分を並べるので、上位50成分は「人によく効く違い」をほぼ取り切っています。捨てた約12.6%の裾は、細かなテクスチャやノイズが主で、識別にはあまり効きません。だから 4096次元でも50次元でも正解率は <strong>0.972 のまま</strong>。PCA が「情報の多い順」に軸を並べてくれる性質が、そのまま<strong>識別に効く情報を優先して残す</strong>ことにつながっているのです。しかも次元が80分の1になれば、ロジスティック回帰（logistic regression）の学習も予測も軽く速くなります——顔認識システムが固有顔で実用的に動く理由が、この一手です。</p>
+<p><strong>別の見方：圧縮とノイズ除去は同じ操作</strong>　小さい固有値の主成分を捨てることは、「情報の少ない向き」を落とすと同時に、そこに乗っている<strong>細かなノイズを一緒に落とす</strong>ことでもあります。だから PCA は、次元削減（dimensionality reduction）の道具であると同時に<strong>ノイズ除去</strong>の道具でもあります。圧縮・可視化・ノイズ除去は別々のご利益に見えて、「分散の小さい向きを捨てる」という一つの操作の別の顔なのです。ただし顔の細部（本物の個性）と雑音の境目は曖昧で、削りすぎれば個性まで落ちる——前節の累積寄与率と再構成画像で、どこまで削ってよいかを必ず目で確かめる姿勢が要ります。</p>
 <p><strong>つまずきどころ：主成分の符号は決められない</strong>　固有値方程式 <span class="math inline">\(\Sigma v = \lambda v\)</span> は、<span class="math inline">\(v\)</span> を符号反転した <span class="math inline">\(-v\)</span> でも同じように成り立ちます（<span class="math inline">\(\Sigma(-v)=\lambda(-v)\)</span>）。つまり<strong>主成分の向きの符号は本質的に任意</strong>で、ライブラリは内部の約束で片方に決めているだけ。データや実行環境が変われば、同じ固有顔が明暗反転して出ることもあります。ただし心配は要りません。ある固有顔 <span class="math inline">\(v_k\)</span> の符号を反転しても、対応するスコア <span class="math inline">\(s_k = \tilde{x}\cdot v_k\)</span> も同時に符号が変わるため、積 <span class="math inline">\(s_k v_k\)</span> は不変で、<strong>再構成される顔はまったく同じ</strong>です（実際に符号を反転して再構成しても画像はぴたり一致します）。注意すべきは解釈のときで、固有顔の「こちらが明るく、あちらが暗い」を<strong>絶対的な意味</strong>として読まないこと。意味があるのは向き（軸）であって、その符号ではありません。前節の「固有顔を1枚だけで意味づけすぎない」と合わせて、PCA の解釈はいつも控えめに、が鉄則です。</p>
-<p><strong>発展：白色化（whitening）で軸のスケールをそろえる</strong>　主成分に射影しただけでは、各スコア軸の分散は固有値 <span class="math inline">\(\lambda_k\)</span> のまま<strong>バラバラ</strong>です（このデータでは第1〜5成分でおよそ 18.8, 11.1, 6.3, 4.0, 2.9）。第1成分は第5成分の6倍以上の分散を持つわけで、距離や内積で軸を対等に扱いたい後段の手法にそのまま渡すと、大きい軸ばかりが効いてしまいます。そこで各軸を <span class="math inline">\(\sqrt{\lambda_k}\)</span> で割り、<strong>すべての軸の分散を1にそろえる</strong>のが白色化です（<code>PCA(whiten=True)</code>）。そろえた後の各軸の分散はきれいに 1 になります。次回以降のクラスタリングのように距離を測る手法へ渡す前処理として有効ですが、小さい固有値の軸まで引き伸ばすとノイズも増幅されるので、使う成分数とセットで考える控えめな道具です。</p>
-<p><strong>忘れずに：PCA が捉えるのは「まっすぐな方向」だけ</strong>　ここまで見た強みは、すべて <span class="math inline">\(\Sigma v=\lambda v\)</span> という<strong>線形</strong>の枠組みから来ています。裏を返せば、PCA が見つけるのは直線的な（平らな）方向だけ。データが渦巻きやドーナツのように曲がって広がっているとき、その構造を1本の直線軸では表せません。顔画像がこれだけうまく圧縮できたのは、顔の違いの多くが「明るさ」「向き」といった<strong>おおむね直線的に効く成分</strong>で説明できたからでもあります。曲がった構造を相手にするときは、非線形の次元削減が別に必要になる——PCA は万能ではなく、まっすぐさを仮定した強力な道具だ、と位置づけておきましょう。</p>
+<p><strong>発展：白色化（whitening）で軸のスケールをそろえる</strong>　主成分に射影しただけでは、各スコア軸の分散は固有値 <span class="math inline">\(\lambda_k\)</span> のまま<strong>バラバラ</strong>です（このデータでは第1〜5成分でおよそ 18.8, 11.1, 6.3, 4.0, 2.9）。第1成分は第5成分の6倍以上の分散を持つわけで、距離や内積で軸を対等に扱いたい後段の手法にそのまま渡すと、大きい軸ばかりが効いてしまいます。そこで各軸を <span class="math inline">\(\sqrt{\lambda_k}\)</span> で割り、<strong>すべての軸の分散を1にそろえる</strong>のが白色化です（<code>PCA(whiten=True)</code>）。そろえた後の各軸の分散はきれいに 1 になります。次回以降のクラスタリング（clustering）のように距離を測る手法へ渡す前処理として有効ですが、小さい固有値の軸まで引き伸ばすとノイズも増幅されるので、使う成分数とセットで考える控えめな道具です。</p>
+<p><strong>忘れずに：PCA が捉えるのは「まっすぐな方向」だけ</strong>　ここまで見た強みは、すべて <span class="math inline">\(\Sigma v=\lambda v\)</span> という<strong>線形（linear）</strong>の枠組みから来ています。裏を返せば、PCA が見つけるのは直線的な（平らな）方向だけ。データが渦巻きやドーナツのように曲がって広がっているとき、その構造を1本の直線軸では表せません。顔画像がこれだけうまく圧縮できたのは、顔の違いの多くが「明るさ」「向き」といった<strong>おおむね直線的に効く成分</strong>で説明できたからでもあります。曲がった構造を相手にするときは、非線形（nonlinear）の次元削減が別に必要になる——PCA は万能ではなく、まっすぐさを仮定した強力な道具だ、と位置づけておきましょう。</p>
 <div id="90a7727b" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
@@ -3524,7 +3524,7 @@ PCAで50次元  : 正解率 0.972</code></pre>
 <section id="次回へ" class="level2">
 <h2 class="anchored" data-anchor-id="次回へ">次回へ</h2>
 <p>400枚の顔を、平均顔と数十枚の固有顔という共通の「辞書」に分解しました。1枚の顔は、その辞書に対する重みの並び——4096個の数字が50個のスコアに変わり、それでも人物は見分けられました。<strong>軸を作って、少数の座標でデータを言い直す</strong>。これが今日手に入れた道具です。</p>
-<p>ただし今日は、軸を作るところで止まっています。固有顔は絵として眺められましたが、表データの主成分は絵になりません。第1主成分に何という名前をつけるのか、どの変数がその軸を押し上げているのか——<strong>作った軸に意味を読む</strong>段が残っています。次回は自動車のデータで、個体の座標（スコア）と変数の重み（負荷量）を一枚に重ねたバイプロットという図を描き、軸を言葉にする作業をします。</p>
+<p>ただし今日は、軸を作るところで止まっています。固有顔は絵として眺められましたが、表データの主成分は絵になりません。第1主成分に何という名前をつけるのか、どの変数がその軸を押し上げているのか——<strong>作った軸に意味を読む</strong>段が残っています。次回は自動車のデータで、個体の座標（スコア）と変数の重み（負荷量）を一枚に重ねたバイプロット（biplot）という図を描き、軸を言葉にする作業をします。</p>
 </section>
 <section id="課題提出" class="level2">
 <h2 class="anchored" data-anchor-id="課題提出">課題（提出）</h2>

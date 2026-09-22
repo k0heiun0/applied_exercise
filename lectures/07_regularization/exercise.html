@@ -3242,19 +3242,19 @@ window.Quarto = {
 
 <section id="前回からの接続" class="level2">
 <h2 class="anchored" data-anchor-id="前回からの接続">前回からの接続</h2>
-<p>第6回では、標準化係数と VIF を使って「どの変数がどれだけ効くか」を読み解き、気温 temp と体感温度 atemp という相関 0.99 の双子が、係数をぐらつかせている犯人だと突き止めました。ただし、暴いただけで手当てはしていません——「額面どおり読めない係数」を保留のまま置いてきました。</p>
-<p>今日はその決着をつけます。第6回の最後で予告したとおり、係数に手綱をつけて暴れを抑える道具——正則化を、自分の手で動かします。</p>
+<p>第6回では、標準化（standardization）係数と VIF を使って「どの変数がどれだけ効くか」を読み解き、気温 temp と体感温度 atemp という相関 0.99 の双子が、係数をぐらつかせている犯人だと突き止めました。ただし、暴いただけで手当てはしていません——「額面どおり読めない係数」を保留のまま置いてきました。</p>
+<p>今日はその決着をつけます。第6回の最後で予告したとおり、係数に手綱をつけて暴れを抑える道具——正則化（regularization）を、自分の手で動かします。</p>
 </section>
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
 <p><strong>似た変数だらけでも、係数が信頼できるモデルにしたい。</strong></p>
-<p>この演習では、ブートストラップで係数のぐらつきを測り、Ridgeで抑え、Lassoで変数を選び、強さαを交差検証で選ぶ流れを、自転車データの双子（気温 temp と体感温度 atemp）で自分の手で確かめます。αを動かして「手綱」の感覚をつかみましょう。TODOに取り組みながら、最後の「目標に答えられたか」で振り返りましょう。</p>
+<p>この演習では、ブートストラップ（bootstrap）で係数のぐらつきを測り、Ridgeで抑え、Lassoで変数を選び、強さαを交差検証（cross-validation）で選ぶ流れを、自転車データの双子（気温 temp と体感温度 atemp）で自分の手で確かめます。αを動かして「手綱」の感覚をつかみましょう。TODOに取り組みながら、最後の「目標に答えられたか」で振り返りましょう。</p>
 </section>
 <section id="学習ゴール" class="level2">
 <h2 class="anchored" data-anchor-id="学習ゴール">学習ゴール</h2>
 <p>この回を終えると、次のことができるようになります。</p>
 <ul>
-<li>係数のぐらつきをブートストラップで測り、多重共線性が起きていることを自分で診断できる</li>
+<li>係数のぐらつきをブートストラップで測り、多重共線性（multicollinearity）が起きていることを自分で診断できる</li>
 <li>Ridge（縮める）と Lasso（ゼロにする）のちがいを、罰金の形の違いから説明できる</li>
 <li>手綱の強さ <span class="math inline">\(\alpha\)</span> を交差検証で選び、選ばれた <span class="math inline">\(\alpha\)</span> のもとで係数を読める</li>
 <li>正則化が「精度を上げる魔法」ではないと、根拠つきで言える——このデータでは予測の精度はほとんど変わらず、変わるのは係数の読みやすさである</li>
@@ -3287,7 +3287,7 @@ window.Quarto = {
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="7a10c003" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3354,7 +3354,7 @@ temp+atemp の合計: 平均950（合計は安定）</code></pre>
 </section>
 <section id="深掘りridge-の目的関数と二乗の罰金が双子を対等にする理由" class="level3">
 <h3 class="anchored" data-anchor-id="深掘りridge-の目的関数と二乗の罰金が双子を対等にする理由">深掘り：Ridge の目的関数と「二乗の罰金」が双子を対等にする理由</h3>
-<p><strong>目的関数の骨子</strong>　ふつうの線形回帰は「誤差だけ」を小さくします。Ridge は、そこに係数への罰金を足した合計を小さくします。</p>
+<p><strong>目的関数の骨子</strong>　ふつうの線形（linear）回帰は「誤差だけ」を小さくします。Ridge は、そこに係数への罰金を足した合計を小さくします。</p>
 <p><span class="math display">\[
 \min_{\beta}\ \underbrace{\lVert y - X\beta \rVert_2^2}_{\text{誤差（当てはまりの悪さ）}}\ +\ \alpha\,\underbrace{\lVert \beta \rVert_2^2}_{\text{罰金（係数の大きさ）}},
 \qquad \lVert \beta \rVert_2^2 = \sum_j \beta_j^2
@@ -3429,8 +3429,8 @@ temp+atemp の合計: 平均950（合計は安定）</code></pre>
 <li><strong>誤差の等高線</strong>：最小二乗解（罰金なしの答え）を中心に、外へ広がる<strong>楕円</strong>。中心から離れるほど誤差が大きい。</li>
 <li><strong>罰金の予算領域</strong>：Ridge（<span class="math inline">\(\sum \beta_j^2 \le t\)</span>）は<strong>円</strong>、Lasso（<span class="math inline">\(\sum \lvert\beta_j\rvert \le t\)</span>）は<strong>菱形</strong>（軸上に尖った頂点をもつダイヤ形）。</li>
 </ul>
-<p>予算 <span class="math inline">\(t\)</span> を絞っていくと解は領域の<strong>境界</strong>に来ます。答えは「楕円が予算領域に<strong>最初に触れる点</strong>」です。ここで形の違いが効きます。<strong>Lasso の菱形は角が座標軸の上に尖って飛び出している</strong>ので、外から膨らむ楕円は<strong>角に当たりやすい</strong>。角の座標では一方の係数が<strong>ちょうど 0</strong>——つまり Lasso はその変数をモデルから消します。いっぽう <strong>Ridge の円はなめらかで角がない</strong>ので、接点はふつうどの軸上にも乗らず、係数は 0 の<strong>手前で縮むだけ</strong>。これが「Lasso はゼロにする／Ridge は縮めるだけ」の幾何学的な理由です。変数が多い高次元でも同じで、菱形にあたる領域の角や稜が「いくつかの係数が 0」の座標面の上にあるため、Lasso の解は自然と<strong>スパース（多くがゼロ）</strong>になります。</p>
-<p><strong>同じことを傾きで見る</strong>　0 のすぐそばでの罰金の効き方でも説明できます。絶対値 <span class="math inline">\(\lvert\beta\rvert\)</span> は 0 の近くでも傾きが <span class="math inline">\(\pm\alpha\)</span> で一定——<strong>最後の一歩まで 0 へ押し込む力が残る</strong>。いっぽう二乗の罰金項 <span class="math inline">\(\alpha\beta^2\)</span> の傾きは <span class="math inline">\(2\alpha\beta\)</span> で、0 に近づくほど 0 になり、<strong>押す力が消えて手前で止まる</strong>。菱形の角の話と、この傾きの話は同じ現象の別の見方です。ただし絶対値は <span class="math inline">\(\beta=0\)</span> で折れていて微分できないので、ここを厳密に論じるには微分のかわりに<strong>劣微分</strong>という道具が要ります。その扱いと、そこから「小さい係数はきっちり 0 に潰す」規則（軟しきい値作用素）が出てくる筋道は、凸最適化の専門書に譲ります。</p>
+<p>予算 <span class="math inline">\(t\)</span> を絞っていくと解は領域の<strong>境界</strong>に来ます。答えは「楕円が予算領域に<strong>最初に触れる点</strong>」です。ここで形の違いが効きます。<strong>Lasso の菱形は角が座標軸の上に尖って飛び出している</strong>ので、外から膨らむ楕円は<strong>角に当たりやすい</strong>。角の座標では一方の係数が<strong>ちょうど 0</strong>——つまり Lasso はその変数をモデルから消します。いっぽう <strong>Ridge の円はなめらかで角がない</strong>ので、接点はふつうどの軸上にも乗らず、係数は 0 の<strong>手前で縮むだけ</strong>。これが「Lasso はゼロにする／Ridge は縮めるだけ」の幾何学的な理由です。変数が多い高次元でも同じで、菱形にあたる領域の角や稜が「いくつかの係数が 0」の座標面の上にあるため、Lasso の解は自然と<strong>スパース（sparse、多くがゼロ）</strong>になります。</p>
+<p><strong>同じことを傾きで見る</strong>　0 のすぐそばでの罰金の効き方でも説明できます。絶対値 <span class="math inline">\(\lvert\beta\rvert\)</span> は 0 の近くでも傾きが <span class="math inline">\(\pm\alpha\)</span> で一定——<strong>最後の一歩まで 0 へ押し込む力が残る</strong>。いっぽう二乗の罰金項 <span class="math inline">\(\alpha\beta^2\)</span> の傾きは <span class="math inline">\(2\alpha\beta\)</span> で、0 に近づくほど 0 になり、<strong>押す力が消えて手前で止まる</strong>。菱形の角の話と、この傾きの話は同じ現象の別の見方です。ただし絶対値は <span class="math inline">\(\beta=0\)</span> で折れていて微分できないので、ここを厳密に論じるには微分のかわりに<strong>劣微分</strong>という道具が要ります。その扱いと、そこから「小さい係数はきっちり 0 に潰す」規則（軟しきい値作用素）が出てくる筋道は、凸最適化（convex optimization）の専門書に譲ります。</p>
 <p><strong>この節の実データ</strong>　TODO② の α=200 の Lasso では、11 個中 <strong>5 個</strong>の係数がゼロになり、生き残るのは <code>temp, atemp, windspeed, season, yr, weathersit</code> の 6 個です（消えるのは湿度 <code>hum</code>・月 <code>mnth</code>・祝日 <code>holiday</code>・曜日 <code>weekday</code>・平日 <code>workingday</code>）。効きの弱い変数を自動で落とし、年・気温まわり・季節・風速・天気を残す——<strong>変数選択が学習と同時に済む</strong>のが Lasso の売りです。</p>
 <p><strong>つまずきどころ</strong>　ここでは双子の <code>temp</code> と <code>atemp</code> が両方残りましたが、相関の強い変数が並ぶとき、Lasso が<strong>どちらを残すか</strong>はデータのわずかな違いでぐらつくことがあります。ゼロになった＝無関係、と決めつけるのは早計です。「消えた変数」より「残った変数の顔ぶれ」を、複数の分割で見て確かめる姿勢が安全です。</p>
 <div id="7a10c004" class="cell" data-execution_count="5">
@@ -3503,7 +3503,7 @@ temp+atemp の合計: 平均950（合計は安定）</code></pre>
 ElasticNet  temp  +131  atemp  +133  非ゼロ 6個  残った変数 [&#39;temp&#39;, &#39;atemp&#39;, &#39;season&#39;, &#39;yr&#39;, &#39;mnth&#39;, &#39;weathersit&#39;]</code></pre>
 </div>
 </div>
-<p>Lasso は <code>temp</code> をきれいに切り捨てて <code>atemp</code> だけを残しました（<code>temp +0 / atemp +738</code>）。Elastic Net は双子をそろって残し、しかも <code>temp +131 / atemp +133</code> とほぼ対等に分け合っています。二乗の罰金の取り分がたった 1%（<code>l1_ratio=0.99</code>）でも性格の違いははっきり出ます——係数が数百というスケールなので、二乗の罰金は軽い重みでもよく効くからです。</p>
+<p>Lasso は <code>temp</code> をきれいに切り捨てて <code>atemp</code> だけを残しました（<code>temp +0 / atemp +738</code>）。Elastic Net は双子をそろって残し、しかも <code>temp +131 / atemp +133</code> とほぼ対等に分け合っています。二乗の罰金の取り分がたった 1%（<code>l1_ratio=0.99</code>）でも性格の違いははっきり出ます——係数が数百というスケールなので、二乗の罰金は軽い重み（weight）でもよく効くからです。</p>
 <p>そのぶん係数全体は Lasso より小さく縮んでいます（双子の合計は 738 → 264）。ここで見るべきは<strong>大きさではなく顔ぶれ</strong>です。相関の強い変数群を「どれか1本」ではなく「群ごと」扱いたいときに Elastic Net を選ぶ、と覚えてください。実務では、迷ったら Ridge → Lasso → Elastic Net と試し、<span class="math inline">\(\alpha\)</span> と <span class="math inline">\(r\)</span> の両方を交差検証で選びます。</p>
 </section>
 </section>
@@ -3514,8 +3514,8 @@ ElasticNet  temp  +131  atemp  +133  非ゼロ 6個  残った変数 [&#39;temp&
 <h3 class="anchored" data-anchor-id="深掘り手綱の強さもデータに選ばせるu字の先にある第二の谷">深掘り：手綱の強さもデータに選ばせる／U字の先にある「第二の谷」</h3>
 <p><strong><span class="math inline">\(\alpha\)</span> を交差検証で選ぶ</strong>　手綱の強さ <span class="math inline">\(\alpha\)</span> を勘で決めては、せっかくデータに語らせた意味が薄れます。<code>RidgeCV</code> は <span class="math inline">\(\alpha\)</span> の候補（ここでは <code>np.logspace(-1, 4, 50)</code>＝ <span class="math inline">\(10^{-1}\)</span> から <span class="math inline">\(10^{4}\)</span> まで 50 個）を交差検証で片っ端から試し、<strong>テスト性能がいちばん良い <span class="math inline">\(\alpha\)</span></strong> を選びます。このデータで選ばれるのは <span class="math inline">\(\alpha \approx 13.9\)</span>。深掘り②の表でいえば「<span class="math inline">\(\alpha=1\)</span>（ほぼ生）と <span class="math inline">\(\alpha=100\)</span>（対等）の間」の、比較的ゆるめの手綱です。<span class="math inline">\(\alpha\)</span> という<strong>つまみの位置すらデータに決めさせる</strong>——第5回の交差検証が、ここでそのまま働いています。</p>
 <p><strong>双子の物語の決着</strong>　下のセルの出力で、第1回に仕込み・第6回で暴いた双子が片づきます。線形回帰では <code>temp +371 / atemp +582</code> と、いちばん効きそうな気温が体感温度に負けてちぐはぐでした。Ridge をかけると双子はぐっと対等に近づきます。下のセルは見やすさのため強めの α=100 での比較で、そこでは <code>temp +455 / atemp +469</code> とほぼ横並び。CV が選ぶ α≈13.9 では <code>temp +443 / atemp +508</code> とまだ少し差が残りますが、それでも線形回帰の 371/582 よりずっと対等です。第6回で「額面どおり読めない」と保留した係数が、<strong>安心して読める形</strong>になりました。なお、線形回帰・Ridge・Lasso の予測精度（CV の R²）はどれも 0.78 前後でほぼ同じです——正則化は精度を上げる魔法ではなく、<strong>係数を安定させ解釈を守る</strong>ための道具だ、というのがこの回のいちばんの要点です。</p>
-<p><strong>ひとつ先へ：U字の山の向こうにある第二の谷（double descent）</strong>　第3回では、モデルの自由度（容量）を上げるほどテスト誤差がいったん下がり、やがて過学習で上がる<strong>U字</strong>を見ました。正則化を弱めることは、この容量を上げることと同じ向きの操作です。ところが、容量をさらに上げ続けると話には続きがあります。パラメータ数がデータ数に追いついたあたり（<strong>補間閾値</strong>、パラメータ数 ≈ データ数）でモデルは訓練データを誤差ゼロで通し切れるようになり、テスト誤差はここで<strong>いったん最悪の山</strong>を迎えます。そして<strong>そこを越えてさらに自由度を増やす</strong>と、テスト誤差が<strong>もう一度下がりはじめる</strong>——これが <strong>double descent</strong>（二度目の下降）です。過剰にパラメータがある領域では、訓練データを完全に通す無数の解の中から自然と「係数のノルムが最小」の解が選ばれ、これが<strong>暗黙の正則化</strong>として働くため、と説明されます。</p>
-<p>深入りはしません。押さえたいのは、<strong>正則化・容量・過学習は同じ一枚の絵を別の側から見たもの</strong>だということです。手綱をゆるめる＝容量を上げる＝過学習へ近づく、そしてその先にもうひとつ景色がある。なぜ第二の谷が現れるのかを式で説明するには、最小ノルム解のふるまいを追う議論が要ります。そこは統計的学習理論の教科書や、この現象を扱った論文に譲ります。なお今回の自転車データは行数 731・変数 11 と、パラメータ数がデータ数よりずっと少ない「補間閾値のはるか手前」にあります。だから素直な U 字の左側だけを歩いており、第二の谷は現れません。double descent が顔を出すのは、変数やパラメータをデータ数に迫るほど増やした、もっと過剰な設定の話です。この演習では、手綱を強く引いたりゆるめたりして、係数がどう動くかを自分の目でつかんでください。</p>
+<p><strong>ひとつ先へ：U字の山の向こうにある第二の谷（double descent）</strong>　第3回では、モデルの自由度（容量）を上げるほどテスト誤差がいったん下がり、やがて過学習（overfitting）で上がる<strong>U字</strong>を見ました。正則化を弱めることは、この容量を上げることと同じ向きの操作です。ところが、容量をさらに上げ続けると話には続きがあります。パラメータ数がデータ数に追いついたあたり（<strong>補間閾値</strong>、パラメータ数 ≈ データ数）でモデルは訓練データを誤差ゼロで通し切れるようになり、テスト誤差はここで<strong>いったん最悪の山</strong>を迎えます。そして<strong>そこを越えてさらに自由度（degrees of freedom）を増やす</strong>と、テスト誤差が<strong>もう一度下がりはじめる</strong>——これが <strong>double descent</strong>（二度目の下降）です。過剰にパラメータがある領域では、訓練データを完全に通す無数の解の中から自然と「係数のノルムが最小」の解が選ばれ、これが<strong>暗黙の正則化</strong>として働くため、と説明されます。</p>
+<p>深入りはしません。押さえたいのは、<strong>正則化・容量・過学習は同じ一枚の絵を別の側から見たもの</strong>だということです。手綱をゆるめる＝容量を上げる＝過学習へ近づく、そしてその先にもうひとつ景色がある。なぜ第二の谷が現れるのかを式で説明するには、最小ノルム解のふるまいを追う議論が要ります。そこは統計的学習理論の教科書や、この現象を扱った論文に譲ります。なお今回の自転車データは行数 731・変数 11 と、パラメータ数がデータ数よりずっと少ない「補間閾値（interpolation threshold）のはるか手前」にあります。だから素直な U 字の左側だけを歩いており、第二の谷は現れません。double descent が顔を出すのは、変数やパラメータをデータ数に迫るほど増やした、もっと過剰な設定の話です。この演習では、手綱を強く引いたりゆるめたりして、係数がどう動くかを自分の目でつかんでください。</p>
 <div id="999b25fd" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rc <span class="op">=</span> RidgeCV(alphas<span class="op">=</span>np.logspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">50</span>)).fit(X_s, y)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;RidgeCV が選んだ α: </span><span class="sc">{</span>rc<span class="sc">.</span>alpha_<span class="sc">:.1f}</span><span class="ss">&#39;</span>)</span>
@@ -3558,8 +3558,8 @@ Ridge    :   +455    +469  ← 双子がほぼ対等に</code></pre>
 </section>
 <section id="次回へ" class="level2">
 <h2 class="anchored" data-anchor-id="次回へ">次回へ</h2>
-<p>第2回からここまで、回帰をひととおり歩きました。当てはめ、汎化、前処理、評価、解釈、そして係数の安定化。<strong>数値を当てる</strong>問題の道具は、これで一周そろっています。</p>
-<p>次回からは問いの形が変わります。「何台か」ではなく「病気かどうか」——<strong>どちらかを当てる</strong>分類の問題です。当てる相手が数値からラベルに変わると、誤差の測り方も、良し悪しの物差しも作り直しになります。とくに医療のように<strong>見逃しと空振りで重みが違う</strong>場面では、正解率だけを見ていると何を見落とすのか。第8回はそこから始めます。</p>
+<p>第2回からここまで、回帰をひととおり歩きました。当てはめ、汎化（generalization）、前処理、評価、解釈、そして係数の安定化。<strong>数値を当てる</strong>問題の道具は、これで一周そろっています。</p>
+<p>次回からは問いの形が変わります。「何台か」ではなく「病気かどうか」——<strong>どちらかを当てる</strong>分類（classification）の問題です。当てる相手が数値からラベルに変わると、誤差の測り方も、良し悪しの物差しも作り直しになります。とくに医療のように<strong>見逃しと空振りで重みが違う</strong>場面では、正解率だけを見ていると何を見落とすのか。第8回はそこから始めます。</p>
 </section>
 <section id="課題提出" class="level2">
 <h2 class="anchored" data-anchor-id="課題提出">課題（提出）</h2>

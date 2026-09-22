@@ -3242,8 +3242,8 @@ window.Quarto = {
 
 <section id="前回からの接続" class="level2">
 <h2 class="anchored" data-anchor-id="前回からの接続">前回からの接続</h2>
-<p>第4回では、欠測を埋め、スケールをそろえ、カテゴリを開いて、現場から届いたままのデータを解析できる形に直しました。ただし、その良し悪しを判定していた物差しは R² ひとつきり。「生の数値扱い 0.829 とワンホット 0.844 ならこちら」とは言えても、「1日あたり何台ぶん外しているのか」には答えられないまま終わっています。</p>
-<p>今日は、その物差しそのものを主役にします。RMSE・MAE・R² を並べて性格の違いを確かめ、第3回で使った交差検証を今度は中から組み立てて、「単位付き・± 付き」で実力を言えるところまで持っていきます。</p>
+<p>第4回では、欠測（missing data）を埋め、スケールをそろえ、カテゴリを開いて、現場から届いたままのデータを解析できる形に直しました。ただし、その良し悪しを判定していた物差しは R² ひとつきり。「生の数値扱い 0.829 とワンホット（one-hot） 0.844 ならこちら」とは言えても、「1日あたり何台ぶん外しているのか」には答えられないまま終わっています。</p>
+<p>今日は、その物差しそのものを主役にします。RMSE・MAE・R² を並べて性格の違いを確かめ、第3回で使った交差検証（cross-validation）を今度は中から組み立てて、「単位付き・± 付き」で実力を言えるところまで持っていきます。</p>
 </section>
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
@@ -3289,7 +3289,7 @@ window.Quarto = {
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="5e1c0004" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3352,7 +3352,7 @@ window.Quarto = {
 <p><span class="math display">\[
 \mathrm{MAE}=\frac{1}{n}\sum_{i=1}^{n}\left|\,y_i-\hat y_i\,\right|
 \]</span></p>
-<p>絶対値で符号を消してから平均するだけ。二乗しないので、大きく外した日も<strong>等身大のまま</strong>数えます。この分割では約 <strong>617 台</strong>——「典型的にはおよそ 617 台ずれる」。外れた日が一日あっても、その一日ぶんしか効かないので、<strong>外れ値に頑健</strong>です。</p>
+<p>絶対値で符号を消してから平均するだけ。二乗しないので、大きく外した日も<strong>等身大のまま</strong>数えます。この分割では約 <strong>617 台</strong>——「典型的にはおよそ 617 台ずれる」。外れた日が一日あっても、その一日ぶんしか効かないので、<strong>外れ値（outlier）に頑健（robust）</strong>です。</p>
 <p><strong>RMSE——大外しに敏感</strong>　式は前の深掘りのとおり。二乗をはさむぶん、大きく外した日が強く効きます。だから同じ予測でも <strong>RMSE（831）≥ MAE（617）</strong> になります。この<strong>差そのものが情報</strong>です。比 <span class="math inline">\(\mathrm{RMSE}/\mathrm{MAE}\approx 1.35\)</span>。もし全部の誤差が同じ大きさなら両者は一致し、大外しがあってばらつくほど比は 1 より大きくなります。つまり <strong>RMSE と MAE の開き具合が、「一部の日で大きく外していないか」の目安</strong>になります。</p>
 <p><strong>外れ値ひとつでどれだけ変わるか</strong>　二乗の効き方は、具体例にするとよくわかります。ほぼ 200 台の誤差が 100 個ある状況を作り、そのうち<strong>たった1つ</strong>を 5000 台の大外しに置き換えてみます。すると <strong>RMSE は 200 → 538 へ跳ね上がる</strong>のに、<strong>MAE は 200 → 248 とほとんど動きません</strong>。100 個のうち 1 個の外れが、RMSE をこれだけ動かす——「RMSE は大外しに敏感、MAE は頑健」を、この一例が言い切っています。だから、外れ値の混じりやすいデータで<strong>典型的なずれ</strong>を知りたいなら MAE、逆に<strong>大外しを見逃したくない</strong>なら RMSE、と選び分けます。</p>
 <p><strong>なぜ必ず RMSE ≥ MAE なのか</strong>　二乗してから平均してルート（二乗平均平方根）は、絶対値の単純平均（MAE）を<strong>決して下回りません</strong>。等号は全誤差がぴったり等しいときだけ。だから計算して <strong>RMSE &lt; MAE</strong> になったら、それは指標の性質ではなく<strong>計算ミスのサイン</strong>です。この不等式は Jensen の不等式（凸関数と平均の関係）の一例で、証明そのものは凸関数の性質を扱う解析学の参考書に譲ります。</p>
@@ -3361,7 +3361,7 @@ window.Quarto = {
 R^2 = 1-\frac{\sum_i (y_i-\hat y_i)^2}{\sum_i (y_i-\bar y)^2}
 \;=\; 1-\frac{\mathrm{SS_{res}}}{\mathrm{SS_{tot}}}
 \]</span></p>
-<p>分子 <span class="math inline">\(\mathrm{SS_{res}}\)</span> は<strong>モデルの残差二乗和</strong>（この分割で約 <strong>1.02 億</strong>）、分母 <span class="math inline">\(\mathrm{SS_{tot}}\)</span> は<strong>平均 <span class="math inline">\(\bar y\)</span> で答えたときの二乗和</strong>（約 <strong>5.89 億</strong>）です。比はおよそ 0.172、それを 1 から引いて <strong>0.828</strong>。単位が約分で消えるので、台数の問題も別単位の問題も<strong>同じ土俵で比べられる</strong>のが R² の強みです。1 に近いほど良い、0 なら平均で答えるのと同じ、負なら平均以下。前の深掘りの「RMSE 831 対 平均 2003」と同じことを割合で言っているだけで、実際 <span class="math inline">\(R^2 = 1-(\mathrm{RMSE}/\mathrm{RMSE_{平均}})^2\)</span> が成り立ちます。</p>
+<p>分子 <span class="math inline">\(\mathrm{SS_{res}}\)</span> は<strong>モデルの残差（residual）二乗和</strong>（この分割で約 <strong>1.02 億</strong>）、分母 <span class="math inline">\(\mathrm{SS_{tot}}\)</span> は<strong>平均 <span class="math inline">\(\bar y\)</span> で答えたときの二乗和</strong>（約 <strong>5.89 億</strong>）です。比はおよそ 0.172、それを 1 から引いて <strong>0.828</strong>。単位が約分で消えるので、台数の問題も別単位の問題も<strong>同じ土俵で比べられる</strong>のが R² の強みです。1 に近いほど良い、0 なら平均で答えるのと同じ、負なら平均以下。前の深掘りの「RMSE 831 対 平均 2003」と同じことを割合で言っているだけで、実際 <span class="math inline">\(R^2 = 1-(\mathrm{RMSE}/\mathrm{RMSE_{平均}})^2\)</span> が成り立ちます。</p>
 <p><strong>いつ、どれを見るか</strong></p>
 <ul>
 <li>元の単位で「<strong>何台ずれるか</strong>」を人に伝えたい → <strong>RMSE か MAE</strong></li>
@@ -3371,7 +3371,7 @@ R^2 = 1-\frac{\sum_i (y_i-\hat y_i)^2}{\sum_i (y_i-\bar y)^2}
 </ul>
 <p>一つだけで判断しないのが要点です。RMSE と MAE の<strong>差</strong>、R² の<strong>水準</strong>を合わせて見れば、「そこそこ当たるが時々大外しする」といった性格まで読めます。</p>
 <p><strong>単一の数字は構造を隠す</strong>　三つとも、何百日ぶんの誤差を<strong>たった1つの数字</strong>に畳んでいます。便利な反面、「<strong>どの局面で</strong>外しているか」は消えます。予測が大きい日ほど一律に外す、季節ごとに偏る、といった<strong>模様</strong>は、残差（実際 − 予測）を予測値に対して散布図に描くと見えてきます。理想は残差が 0 の線のまわりに<strong>均等に散らばる</strong>こと。偏りや模様があれば、指標の数字が同じでも改善の余地が残っています。指標（要約）と残差の図（診断）は、<strong>併せて</strong>見るのが丁寧な評価です。</p>
-<p><strong>つまずき：R² が高い＝良いモデル、ではない</strong>　これがこの回いちばんの落とし穴です。R² は、<strong>当てはめるデータでなら、いくらでも上げられます</strong>。試しに、訓練データにまったく<strong>でたらめな乱数の列</strong>を説明変数として1本足すだけで、訓練 R² は <span class="math inline">\(0.79109 \to 0.79204\)</span> と（ごくわずかですが）<strong>上がります</strong>。当てはめの自由度を増やせば R² は<strong>決して下がらない</strong>からです。だから訓練データの R² だけを見て「良くなった」と喜ぶのは危険——これが<strong>過学習</strong>の入口です。本演習が R² を<strong>テストデータ・交差検証で</strong>測っているのは、この水増しを避けるためです。もう一つの落とし穴が<strong>外挿</strong>。学習した範囲の外（たとえば観測にない猛暑日）では、R² がいくら高くても予測は当てになりません。R² は「<strong>学習した範囲・データでどれだけ当てたか</strong>」であって、「どんな状況でも当たる保証」ではないのです。</p>
+<p><strong>つまずき：R² が高い＝良いモデル、ではない</strong>　これがこの回いちばんの落とし穴です。R² は、<strong>当てはめるデータでなら、いくらでも上げられます</strong>。試しに、訓練データにまったく<strong>でたらめな乱数（random number）の列</strong>を説明変数（explanatory variable）として1本足すだけで、訓練 R² は <span class="math inline">\(0.79109 \to 0.79204\)</span> と（ごくわずかですが）<strong>上がります</strong>。当てはめの自由度（degrees of freedom）を増やせば R² は<strong>決して下がらない</strong>からです。だから訓練データの R² だけを見て「良くなった」と喜ぶのは危険——これが<strong>過学習（overfitting）</strong>の入口です。本演習が R² を<strong>テストデータ・交差検証で</strong>測っているのは、この水増しを避けるためです。もう一つの落とし穴が<strong>外挿（extrapolation）</strong>。学習した範囲の外（たとえば観測にない猛暑日）では、R² がいくら高くても予測は当てになりません。R² は「<strong>学習した範囲・データでどれだけ当てたか</strong>」であって、「どんな状況でも当たる保証」ではないのです。</p>
 <p><strong>発展（控えめに）：調整済み R²</strong>　訓練 R² が変数を足すほど上がる弱点に、直接手を当てたのが調整済み R² です。</p>
 <p><span class="math display">\[
 R^2_{\text{adj}} = 1-(1-R^2)\,\frac{n-1}{n-p-1}
@@ -3397,13 +3397,13 @@ R²  : 0.8277</code></pre>
 <p>ここまでの数字は1回の分割の結果なので、分け方の運が残っています。交差検証で運をならしましょう。</p>
 <section id="todo②cross_val_score-で5分割交差検証する" class="level3">
 <h3 class="anchored" data-anchor-id="todo②cross_val_score-で5分割交差検証する">TODO②：cross_val_score で5分割交差検証する</h3>
-<p>標準化と線形回帰をまとめた <code>pipe</code>（この節のコードセルで定義済み）を使い、5分割の交差検証でR²を測って、「平均 ± ばらつき」の形で表示してください。分け方の運を残さないよう、混ぜてから分けます。</p>
+<p>標準化（standardization）と線形（linear）回帰をまとめた <code>pipe</code>（この節のコードセルで定義済み）を使い、5分割の交差検証でR²を測って、「平均 ± ばらつき」の形で表示してください。分け方の運を残さないよう、混ぜてから分けます。</p>
 </section>
 <section id="深掘りなぜ1回では足りないのかの意味とばらつきの読み方" class="level3">
 <h3 class="anchored" data-anchor-id="深掘りなぜ1回では足りないのかの意味とばらつきの読み方">深掘り：なぜ「1回」では足りないのか——±の意味とばらつきの読み方</h3>
 <p>ここまでの RMSE 831・R² 0.83 は、すべて <strong>1 回の Train/Test 分割</strong>の数字でした。この「1 回」には<strong>分け方の運</strong>が残ります。たまたまテスト側に予測しやすい日が集まれば数字は良く、難しい日が集まれば悪く出る。報告する側に盛るつもりがなくても、<strong>運で数字が上下</strong>してしまうのです。</p>
 <p>交差検証は、この運をならします。データを K 個に分け、テスト役を順に交代させて K 回測り、平均する。全データがちょうど一度ずつテストに回るので、特定の分割の当たり外れが平されます。</p>
-<p><strong>± は捨てるノイズではなく、情報です</strong>　5 分割で出る R² は 0.828 / 0.746 / 0.813 / 0.722 / 0.808 の 5 つ、その平均が 0.783、標準偏差が 0.042。この <strong>±0.042</strong> は「分け方を変えると成績がこのくらい揺れる」幅、つまり<strong>数字の信頼できる桁</strong>を教えてくれます。「R² 0.783 ± 0.042」と書けば、0.78 前後は堅いが小数第 2 位は分割次第、と読めます。逆に平均だけ報告して ± を捨てると、「0.7832」のような<strong>実態のない精度</strong>を主張してしまいます。RMSE でも同じで、<strong>887 ± 51 台</strong>——「平均およそ 887 台ずれ、ぶれ幅は 50 台ほど」。単位付き・± 付き、これが目標に掲げた形です。</p>
+<p><strong>± は捨てるノイズではなく、情報です</strong>　5 分割で出る R² は 0.828 / 0.746 / 0.813 / 0.722 / 0.808 の 5 つ、その平均が 0.783、標準偏差（standard deviation）が 0.042。この <strong>±0.042</strong> は「分け方を変えると成績がこのくらい揺れる」幅、つまり<strong>数字の信頼できる桁</strong>を教えてくれます。「R² 0.783 ± 0.042」と書けば、0.78 前後は堅いが小数第 2 位は分割次第、と読めます。逆に平均だけ報告して ± を捨てると、「0.7832」のような<strong>実態のない精度</strong>を主張してしまいます。RMSE でも同じで、<strong>887 ± 51 台</strong>——「平均およそ 887 台ずれ、ぶれ幅は 50 台ほど」。単位付き・± 付き、これが目標に掲げた形です。</p>
 <p><strong>発展：ばらつきそのものを読む</strong>　平均が同じでも ± が大きいモデルは、データの一部に<strong>弱点</strong>を抱えている疑いがあります（ある分割だけ大きく外す）。だからモデルを比べるときは、平均だけでなく ± まで見て「<strong>安定して勝っているか</strong>」を確かめます。ここで測った ± は、この先モデルを比べる場面でそのまま土俵として使えます。</p>
 <p><strong>発展：分割数 K はいくつにするか</strong>　K を 3・5・10 と変えると、平均 R² は 0.787 / 0.783 / 0.778 とほとんど動きません。一方 ± は 0.012 / 0.042 / 0.072 と <strong>K を増やすほど大きく</strong>なります。K を大きくすると 1 回あたりのテストが小さくなり、各回のスコアが振れやすくなるためです（究極は 1 件だけ抜く一個抜き法＝LOO。正確ですが計算は重い）。平均の推定値は K によらず安定するので、実務では計算の軽い <strong>5 分割か 10 分割</strong>が定番。迷えば 5 で十分です。</p>
 <p><strong>つまずき：shuffle を忘れると評価が壊れる</strong>　<code>KFold</code> に <code>shuffle=True</code> を指定せず、<code>cross_val_score</code> に <code>cv=5</code> と数字だけ渡すと、回帰では<strong>並び順のまま</strong>分割されます。このデータは<strong>日付順</strong>に並んでいるので、各分割が特定の季節・年に偏り（冬だけで学習して夏を当てるような分割になり）、試しに shuffle を外すと R² の平均は <strong>0.15 前後</strong>まで崩れます。だから<strong>混ぜてから分ける</strong>のが基本。ただし時系列予測など、順番自体に意味があるデータでは別の作法（過去で学び未来で測る）を使います。交差検証の作法——前処理を各分割の訓練内で完結させる、shuffle の要否、時系列やグループ構造に合った分割の選び方——は、scikit-learn 公式ドキュメントの交差検証の節に図つきで整理されています。細部はそちらに譲ります。</p>

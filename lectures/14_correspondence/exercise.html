@@ -3242,8 +3242,8 @@ window.Quarto = {
 
 <section id="前回からの接続" class="level2">
 <h2 class="anchored" data-anchor-id="前回からの接続">前回からの接続</h2>
-<p>第13回では142か国を K-means で群れに分け、エルボーとシルエット係数でグループ数 K の根拠を測りました。あそこで効いていたのは「平均が計算できる数値データ」という前提です。今日の相手はジャンルと公開年代——選択肢の集まりなので、平均も距離もそのままでは定義できません。</p>
-<p>それでも、数えることはできます。ジャンル×年代のマスに本数を入れたクロス表なら作れる。その表をカイ二乗で「関連があるか」まで確かめたうえで、一枚の地図に置き直すのが今日の対応分析です。数値データの地図を作り続けてきた最後に、カテゴリの地図を作ります。</p>
+<p>第13回では142か国を K-means で群れに分け、エルボーとシルエット（silhouette）係数でグループ数 K の根拠を測りました。あそこで効いていたのは「平均が計算できる数値データ」という前提です。今日の相手はジャンルと公開年代——選択肢の集まりなので、平均も距離もそのままでは定義できません。</p>
+<p>それでも、数えることはできます。ジャンル×年代のマスに本数を入れたクロス表なら作れる。その表をカイ二乗で「関連があるか」まで確かめたうえで、一枚の地図に置き直すのが今日の対応分析（correspondence analysis）です。数値データの地図を作り続けてきた最後に、カテゴリの地図を作ります。</p>
 </section>
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
@@ -3254,11 +3254,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="学習ゴール">学習ゴール</h2>
 <p>この回を終えると、次のことができるようになります。</p>
 <ul>
-<li>クロス表のカイ二乗が何のズレを測っているのかを、期待度数の作り方から説明できる</li>
+<li>クロス表のカイ二乗が何のズレを測っているのかを、期待度数（expected frequency）の作り方から説明できる</li>
 <li>カイ二乗の総量（総慣性 <span class="math inline">\(=\chi^2/n\)</span>）を対応分析が軸ごとに切り分けている、という両者のつながりを言える</li>
 <li>行（ジャンル）と列（年代）を重ねた地図を自分で描き、次元1が時代の軸になった理由を説明できる</li>
 <li>行どうし・列どうしは距離で、行と列のあいだは原点から見た向きで読む、という読み分けができる</li>
-<li>寄与率を添えて、その地図をどこまで信じて読んでよいかを言葉にできる</li>
+<li>寄与率（proportion of variance explained）を添えて、その地図をどこまで信じて読んでよいかを言葉にできる</li>
 </ul>
 <div id="pip-prince" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていないので、なければインストールする</span></span>
@@ -3299,7 +3299,7 @@ Thriller     11    32    32    49    95   180   420   654   417</code></pre>
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="ca140003" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3337,9 +3337,9 @@ Thriller     11    32    32    49    95   180   420   654   417</code></pre>
 \chi^2 \;=\; \sum_{i,j} \frac{(O_{ij}-E_{ij})^2}{E_{ij}},
 \qquad E_{ij} \;=\; \frac{(\text{行 }i\text{ の合計})\times(\text{列 }j\text{ の合計})}{\text{総数}}
 \]</span></p>
-<p>記号をほどきます。<span class="math inline">\(O_{ij}\)</span> は実際にマスに入った本数（観測度数）、<span class="math inline">\(E_{ij}\)</span> は「ジャンルと年代がまったく無関係なら、このマスに入るはずの本数（期待度数）」です。期待度数は「行の合計 × 列の合計 ÷ 総数」で作ります——無関係なら、どのジャンルも各年代へ同じ割合で散らばるはずだから。分子 <span class="math inline">\((O_{ij}-E_{ij})^2\)</span> は各マスのズレの二乗、それを期待度数 <span class="math inline">\(E_{ij}\)</span> で割って<strong>相対的な大きさ</strong>に直し、全マスで足し上げる。ズレの大きいマスが多いほど <span class="math inline">\(\chi^2\)</span> は大きく、「関連が強い」ことになります。観測度数の背後にある多項分布から出発して、この統計量が自由度 <span class="math inline">\((r-1)(c-1)\)</span> のカイ二乗分布へ漸近することを示す分布論の導出は、この統計量を提案した Pearson の原論文（1900）と、漸近論を扱う数理統計学の成書に譲ります。</p>
-<p><strong>このデータの実測値</strong>　セットアップのセルが表示したクロス表は10ジャンル × 9年代（総本数 18,544 本）。これを次のセルで検定すると <span class="math inline">\(\chi^2 \approx 548.4\)</span>、自由度は <span class="math inline">\((10-1)\times(9-1)=72\)</span>、p値は <span class="math inline">\(\approx 2\times 10^{-74}\)</span> という桁外れの小ささです。期待度数はどのマスも最小で約10本（5未満のマスはゼロ）なので、カイ二乗検定が前提とする「期待度数が小さすぎない」という条件も満たしています。<strong>「時代とジャンルは無関係」という帰無仮説は、まず疑う余地なく棄却される</strong>——時代が変わればジャンルの構成ははっきり偏る、と数字が断言しています。マスの本数が豊富な MovieLens を題材に選んだおかげで、この p値がここまで小さく、関連の有無で迷う余地がないのも心強いところです。</p>
-<p><strong>カイ二乗と対応分析をつなぐ一本の糸：総慣性</strong>　ここが今日の要です。カイ二乗は「関連が<strong>ある</strong>」ことは言えても「<strong>どの</strong>ジャンルが<strong>どの</strong>時代と結びつくか」は教えてくれません。その中身を地図にするのが対応分析（CA）ですが、両者は無関係な別物ではなく、<strong>同じ <span class="math inline">\(\chi^2\)</span> を分解しているだけ</strong>です。CA が地図に描く散らばりの総量（総慣性）は</p>
+<p>記号をほどきます。<span class="math inline">\(O_{ij}\)</span> は実際にマスに入った本数（観測度数）、<span class="math inline">\(E_{ij}\)</span> は「ジャンルと年代がまったく無関係なら、このマスに入るはずの本数（期待度数）」です。期待度数は「行の合計 × 列の合計 ÷ 総数」で作ります——無関係なら、どのジャンルも各年代へ同じ割合で散らばるはずだから。分子 <span class="math inline">\((O_{ij}-E_{ij})^2\)</span> は各マスのズレの二乗、それを期待度数 <span class="math inline">\(E_{ij}\)</span> で割って<strong>相対的な大きさ</strong>に直し、全マスで足し上げる。ズレの大きいマスが多いほど <span class="math inline">\(\chi^2\)</span> は大きく、「関連が強い」ことになります。観測度数（observed frequency）の背後にある多項分布から出発して、この統計量が自由度（degrees of freedom） <span class="math inline">\((r-1)(c-1)\)</span> のカイ二乗分布へ漸近することを示す分布論の導出は、この統計量を提案した Pearson の原論文（1900）と、漸近論を扱う数理統計学の成書に譲ります。</p>
+<p><strong>このデータの実測値</strong>　セットアップのセルが表示したクロス表は10ジャンル × 9年代（総本数 18,544 本）。これを次のセルで検定すると <span class="math inline">\(\chi^2 \approx 548.4\)</span>、自由度は <span class="math inline">\((10-1)\times(9-1)=72\)</span>、p値（p-value）は <span class="math inline">\(\approx 2\times 10^{-74}\)</span> という桁外れの小ささです。期待度数はどのマスも最小で約10本（5未満のマスはゼロ）なので、カイ二乗検定が前提とする「期待度数が小さすぎない」という条件も満たしています。<strong>「時代とジャンルは無関係」という帰無仮説（null hypothesis）は、まず疑う余地なく棄却される</strong>——時代が変わればジャンルの構成ははっきり偏る、と数字が断言しています。マスの本数が豊富な MovieLens を題材に選んだおかげで、この p値がここまで小さく、関連の有無で迷う余地がないのも心強いところです。</p>
+<p><strong>カイ二乗と対応分析をつなぐ一本の糸：総慣性（inertia）</strong>　ここが今日の要です。カイ二乗は「関連が<strong>ある</strong>」ことは言えても「<strong>どの</strong>ジャンルが<strong>どの</strong>時代と結びつくか」は教えてくれません。その中身を地図にするのが対応分析（CA）ですが、両者は無関係な別物ではなく、<strong>同じ <span class="math inline">\(\chi^2\)</span> を分解しているだけ</strong>です。CA が地図に描く散らばりの総量（総慣性）は</p>
 <p><span class="math display">\[
 \text{総慣性} \;=\; \frac{\chi^2}{n} \;=\; \frac{548.4}{18544} \;\approx\; 0.0296
 \]</span></p>
@@ -3357,7 +3357,7 @@ Thriller     11    32    32    49    95   180   420   654   417</code></pre>
 </section>
 <section id="図で追うクロス表-カイ二乗残差-地図" class="level3">
 <h3 class="anchored" data-anchor-id="図で追うクロス表-カイ二乗残差-地図">図で追う：クロス表 → カイ二乗残差 → 地図</h3>
-<p>カイ二乗が「ズレの総額」を測り、対応分析が「その内訳」を地図にする——この関係を、手続きの流れとして一枚に並べておきます。左から順に、①本数を数えたクロス表、②各マスを期待度数からのズレに直した残差の表、③そのズレを分解して行と列を置き直した地図です。</p>
+<p>カイ二乗が「ズレの総額」を測り、対応分析が「その内訳」を地図にする——この関係を、手続きの流れとして一枚に並べておきます。左から順に、①本数を数えたクロス表、②各マスを期待度数からのズレに直した残差（residual）の表、③そのズレを分解して行と列を置き直した地図です。</p>
 <div id="ca140005" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：対応分析の3段階（クロス表 → カイ二乗残差 → 地図）</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Rectangle</span>
@@ -3460,11 +3460,11 @@ Thriller     11    32    32    49    95   180   420   654   417</code></pre>
 <p>行（ジャンル）と列（年代）を同じ地図に描きます。</p>
 <section id="深掘り対応分析はカテゴリのための-pca地図がどう組み上がり次元1が時代になるのか" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り対応分析はカテゴリのための-pca地図がどう組み上がり次元1が時代になるのか">深掘り：対応分析は「カテゴリのための PCA」——地図がどう組み上がり、次元1が「時代」になるのか</h3>
-<p><strong>CA は PCA の親戚</strong>　第11・12回の PCA は、数値データの分散をいちばん多く残す軸を探して、点を低次元の地図に置き直しました。CA も発想はそっくりで、<strong>扱う相手がクロス表になっただけ</strong>です。手順を骨子だけ書くと——(1) 各マスを「観測 ÷ 期待 − 1」（独立からのズレ）に直し、期待度数で重みづけした<strong>標準化残差</strong>の行列を作る、(2) その行列を<strong>特異値分解（SVD）</strong>して、ズレの大きい方向から順に軸を取り出す、(3) ジャンル（行）と年代（列）を、その軸の座標として地図に置く。PCA が共分散行列を分解して「散らばりの大きい向き」を軸にしたのと同じ操作を、<span class="math inline">\(\chi^2\)</span> 残差に対して行っているのが CA です。だから PCA の直感——寄与率で信頼度を測る、上位2軸で要約する、バイプロットで行と列を重ねる——が、そっくりそのまま効きます。標準化残差の行列をどう組み立て、その特異値分解から行と列の主座標がどう定義されるのか——この行列表現の詳細は、対応分析だけを主題にした専門書（Greenacre『Correspondence Analysis in Practice』）の、行列による定式化を扱う章に譲ります。</p>
-<p><strong>次元1が「時代の軸」になったのはなぜか</strong>　地図を描くと、横軸（次元1）に沿って年代が古い順にきれいに並びます。TODO① で座標を取り出すと、年代の次元1は 1930年代 <span class="math inline">\(+0.49\)</span>・1940年代 <span class="math inline">\(+0.50\)</span>（右）から、2010年代 <span class="math inline">\(-0.16\)</span>・1980年代 <span class="math inline">\(-0.14\)</span>（左）へと単調に動きます。ジャンルも同じ軸に乗り、<strong>右（古い）</strong>に Romance <span class="math inline">\(+0.29\)</span>・Drama <span class="math inline">\(+0.13\)</span>、<strong>左（新しい）</strong>に Sci-Fi <span class="math inline">\(-0.21\)</span>・Action <span class="math inline">\(-0.19\)</span>・Horror <span class="math inline">\(-0.14\)</span>。SVD は「いちばんズレを説明する方向」を第1軸に選ぶので、このデータで最大のズレ＝<strong>時代によるジャンル構成の変化</strong>が、そのまま次元1になったわけです。誰も「時代順に並べよ」とは指示していないのに、独立からのズレを分解しただけで時間軸が浮かび上がる——これが CA の醍醐味です。次元2（寄与 16.6%）は、同じ年代のなかでのジャンルの毛色の違い（Horror や Sci-Fi が下方向へ離れる、など）を拾う副次的な軸で、この二つで大枠が説明できます。</p>
-<p><strong>発展：カテゴリが3つ以上なら多重対応分析（MCA）</strong>　今日は「ジャンル × 年代」の2つのカテゴリでした。これが「ジャンル × 年代 × 制作国 × …」と3つ以上になると、CA の自然な拡張である<strong>多重対応分析（MCA）</strong>の出番です。各カテゴリをダミー変数（0/1）に展開した表に CA を当てる、と考えればよく、アンケートの多数の設問を一枚の地図に載せて「どの回答傾向どうしが近いか」を眺められます。考え方は CA と地続きなので、今日の地図の読み方が、そのまま MCA の入り口になります。</p>
-<p><strong>別の見方：行と列は互いを説明し合う（双対）</strong>　CA のもう一つの顔は、行の地図と列の地図が<strong>表裏一体</strong>だということです。各ジャンルの座標は「そのジャンルが多い年代たちの重心」に、各年代の座標は「その年代に多いジャンルたちの重心」に、それぞれ（軸ごとの特異値で伸縮したうえで）置かれます。ジャンルが年代を説明し、同時に年代がジャンルを説明する——この相互関係（双対性）を一枚の SVD が同時に解いているので、行と列を同じ地図に重ねられるのです。第12回のバイプロットで点（個体）と矢印（変数）を重ねられたのと、根っこは同じ発想です。</p>
-<p><strong>順序カテゴリの癖：弧（アーチ効果）</strong>　年代のように<strong>順序のあるカテゴリ</strong>を CA にかけると、点が直線ではなく<strong>ゆるやかな弧</strong>を描いて並ぶことがあります。次元1で「時代」という強い一次元の順序を捉えたあと、次元2が「両端（大昔と現代）と中間の違い」を拾うために生じる、CA で有名な<strong>アーチ効果（Guttman 効果）</strong>です。この地図の年代配置もきれいな直線には乗っておらず、その名残がうかがえます。弧はデータの欠陥ではなく強い順序性の副産物なので、次元2を無理に別の意味へ読みすぎないのが安全——この癖を知っておくと、順序尺度を CA・MCA にかけた図を落ち着いて読めます。</p>
+<p><strong>CA は PCA の親戚</strong>　第11・12回の PCA は、数値データの分散をいちばん多く残す軸を探して、点を低次元の地図に置き直しました。CA も発想はそっくりで、<strong>扱う相手がクロス表になっただけ</strong>です。手順を骨子だけ書くと——(1) 各マスを「観測 ÷ 期待 − 1」（独立からのズレ）に直し、期待度数で重み（weight）づけした<strong>標準化（standardization）残差</strong>の行列を作る、(2) その行列を<strong>特異値分解（singular value decomposition, SVD）</strong>して、ズレの大きい方向から順に軸を取り出す、(3) ジャンル（行）と年代（列）を、その軸の座標として地図に置く。PCA が共分散行列（covariance matrix）を分解して「散らばりの大きい向き」を軸にしたのと同じ操作を、<span class="math inline">\(\chi^2\)</span> 残差に対して行っているのが CA です。だから PCA の直感——寄与率で信頼度を測る、上位2軸で要約する、バイプロット（biplot）で行と列を重ねる——が、そっくりそのまま効きます。標準化残差の行列をどう組み立て、その特異値分解から行と列の主座標がどう定義されるのか——この行列表現の詳細は、対応分析だけを主題にした専門書（Greenacre『Correspondence Analysis in Practice』）の、行列による定式化を扱う章に譲ります。</p>
+<p><strong>次元1が「時代の軸」になったのはなぜか</strong>　地図を描くと、横軸（次元1）に沿って年代が古い順にきれいに並びます。TODO① で座標を取り出すと、年代の次元1は 1930年代 <span class="math inline">\(+0.49\)</span>・1940年代 <span class="math inline">\(+0.50\)</span>（右）から、2010年代 <span class="math inline">\(-0.16\)</span>・1980年代 <span class="math inline">\(-0.14\)</span>（左）へと単調（monotonic）に動きます。ジャンルも同じ軸に乗り、<strong>右（古い）</strong>に Romance <span class="math inline">\(+0.29\)</span>・Drama <span class="math inline">\(+0.13\)</span>、<strong>左（新しい）</strong>に Sci-Fi <span class="math inline">\(-0.21\)</span>・Action <span class="math inline">\(-0.19\)</span>・Horror <span class="math inline">\(-0.14\)</span>。SVD は「いちばんズレを説明する方向」を第1軸に選ぶので、このデータで最大のズレ＝<strong>時代によるジャンル構成の変化</strong>が、そのまま次元1になったわけです。誰も「時代順に並べよ」とは指示していないのに、独立からのズレを分解しただけで時間軸が浮かび上がる——これが CA の醍醐味です。次元2（寄与 16.6%）は、同じ年代のなかでのジャンルの毛色の違い（Horror や Sci-Fi が下方向へ離れる、など）を拾う副次的な軸で、この二つで大枠が説明できます。</p>
+<p><strong>発展：カテゴリが3つ以上なら多重対応分析（multiple correspondence analysis, MCA）</strong>　今日は「ジャンル × 年代」の2つのカテゴリでした。これが「ジャンル × 年代 × 制作国 × …」と3つ以上になると、CA の自然な拡張である<strong>多重対応分析（MCA）</strong>の出番です。各カテゴリをダミー変数（dummy variable、0/1）に展開した表に CA を当てる、と考えればよく、アンケートの多数の設問を一枚の地図に載せて「どの回答傾向どうしが近いか」を眺められます。考え方は CA と地続きなので、今日の地図の読み方が、そのまま MCA の入り口になります。</p>
+<p><strong>別の見方：行と列は互いを説明し合う（双対）</strong>　CA のもう一つの顔は、行の地図と列の地図が<strong>表裏一体</strong>だということです。各ジャンルの座標は「そのジャンルが多い年代たちの重心（centroid）」に、各年代の座標は「その年代に多いジャンルたちの重心」に、それぞれ（軸ごとの特異値で伸縮したうえで）置かれます。ジャンルが年代を説明し、同時に年代がジャンルを説明する——この相互関係（双対性）を一枚の SVD が同時に解いているので、行と列を同じ地図に重ねられるのです。第12回のバイプロットで点（個体）と矢印（変数）を重ねられたのと、根っこは同じ発想です。</p>
+<p><strong>順序カテゴリの癖：弧（アーチ効果）</strong>　年代のように<strong>順序のあるカテゴリ</strong>を CA にかけると、点が直線ではなく<strong>ゆるやかな弧</strong>を描いて並ぶことがあります。次元1で「時代」という強い一次元の順序を捉えたあと、次元2が「両端（大昔と現代）と中間の違い」を拾うために生じる、CA で有名な<strong>アーチ効果（Guttman 効果）</strong>です。この地図の年代配置もきれいな直線には乗っておらず、その名残がうかがえます。弧はデータの欠陥ではなく強い順序性の副産物なので、次元2を無理に別の意味へ読みすぎないのが安全——この癖を知っておくと、順序尺度（ordinal scale）を CA・MCA にかけた図を落ち着いて読めます。</p>
 <p><strong>「近い＝関連」をもう少し正確に</strong>　スローガンとしての「近い点どうしは関連が強い」は、①行どうし・②列どうしについては（プロファイルが似ている、という意味で）正しく、直感的です。ただし次の節で見るとおり、③行と列のあいだでは、この一言をそのまま当てはめると足をすくわれます。地図を配ったときに「近いから関連が強いんですね」と早合点されがちなのが、まさに CA の落とし穴。だから「何と何の近さか」を必ず意識して読む——このひと呼吸が、CA を正しく使う鍵になります。</p>
 <div id="d57c99b4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ca <span class="op">=</span> prince.CA(n_components<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>).fit(ct)</span>
@@ -3547,9 +3547,9 @@ Sci-Fi  x2010: 観測/期待=1.25  座標から復元=1.25</code></pre>
 <section id="総括14回の解析フローを一枚の地図にどの場面でどの手法を選ぶか" class="level3">
 <h3 class="anchored" data-anchor-id="総括14回の解析フローを一枚の地図にどの場面でどの手法を選ぶか">総括：14回の解析フローを一枚の地図に——どの場面で、どの手法を選ぶか</h3>
 <p>最終回として、これまで歩いた道を一望します。分野は自転車・心臓病・生態・画像・自動車・国・映画とめぐりましたが、<strong>貫く背骨は一つ</strong>——「①目標を立てる → ②解析する → ③目標に立ち返る」の一周です。手法は、その②を埋める道具にすぎません。並べ直すと、全体はこう流れます。</p>
-<p><strong>教師あり学習の一周（第1〜10回）</strong> - <strong>汎化・過学習（第3回）</strong>：モデルは訓練データを丸暗記するのでなく、未知に効く形にしたい。自由度を上げるとテスト誤差がいったん下がってやがて上がる U字を描く——すべての土台になる考え方。 - <strong>前処理（第4回）</strong>：標準化で単位をそろえ、カテゴリをダミー化する。距離や罰金を使う手法（正則化・クラスタリング・CA）は、ここが崩れると結果が全部ゆがむ。 - <strong>回帰（第2回）と評価（第5回）</strong>：問いを式（回帰モデル）にし、交差検証で「正しく測る」。テストは最後に、リークを防ぐ。 - <strong>多重共線性 → 正則化（第6→7回）</strong>：そっくりな変数どうしで係数が暴れる問題を、Ridge / Lasso の罰金で鎮め、係数を「読める」形にする。 - <strong>分類とパイプライン（第8・9回）</strong>：数値の予測から、クラス分けへ。前処理〜評価を一本のパイプラインに束ね、第10回の<strong>総合演習</strong>でフローを丸ごと1周した。</p>
+<p><strong>教師あり学習の一周（第1〜10回）</strong> - <strong>汎化（generalization）・過学習（overfitting）（第3回）</strong>：モデルは訓練データを丸暗記するのでなく、未知に効く形にしたい。自由度を上げるとテスト誤差がいったん下がってやがて上がる U字を描く——すべての土台になる考え方。 - <strong>前処理（第4回）</strong>：標準化で単位をそろえ、カテゴリをダミー化する。距離や罰金を使う手法（正則化・クラスタリング・CA）は、ここが崩れると結果が全部ゆがむ。 - <strong>回帰（第2回）と評価（第5回）</strong>：問いを式（回帰モデル）にし、交差検証（cross-validation）で「正しく測る」。テストは最後に、リーク（leakage）を防ぐ。 - <strong>多重共線性（multicollinearity） → 正則化（第6→7回）</strong>：そっくりな変数どうしで係数が暴れる問題を、Ridge / Lasso の罰金で鎮め、係数を「読める」形にする。 - <strong>分類（classification）とパイプライン（第8・9回）</strong>：数値の予測から、クラス分けへ。前処理〜評価を一本のパイプライン（pipeline）に束ね、第10回の<strong>総合演習</strong>でフローを丸ごと1周した。</p>
 <p><strong>教師なし学習へ（第11〜14回）</strong>——正解ラベルがない世界。目的が「当てる」から「構造を見つける・要約する」へ変わる。 - <strong>PCA（第11・12回）</strong>：数値データの散らばりを最大に残す軸で、次元を圧縮し地図（バイプロット）にする。 - <strong>クラスタリング（第13回）</strong>：似たもの同士をグループに分ける。グループ数 K の根拠をエルボー・シルエットで測り、最後は目的で決めた。 - <strong>対応分析（第14回・今日）</strong>：カテゴリのクロス表を、カイ二乗の散らばりごと地図にして読む。いわばカテゴリ版の PCA。</p>
-<p><strong>では、どの場面でどれを選ぶか</strong>——手元のデータと問いから逆算する地図が、これです。 - <strong>予測したい正解（ラベル・数値）があるか？</strong> - <strong>ある → 教師あり</strong>。予測対象が<strong>数値</strong>なら<strong>回帰</strong>（第2〜7回）、<strong>カテゴリ（分類先）</strong>なら<strong>分類</strong>（第8・9回）。似た変数が多い・係数を安定させたいなら<strong>正則化</strong>を重ねる。 - <strong>ない → 教師なし</strong>。何をしたいかで分岐する： - <strong>変数を減らして可視化・要約したい（数値データ）→ PCA／バイプロット</strong>。 - <strong>個体をグループに分けたい → クラスタリング</strong>（丸い塊なら K-means、非球状なら DBSCAN、構造をじっくり眺めたいなら階層クラスタリング）。 - <strong>カテゴリ×カテゴリの結びつきを見たい → 対応分析（CA）</strong>、カテゴリが3つ以上なら<strong>MCA</strong>。 - どの枝を選んでも共通するのは、<strong>前処理（第4回）で土俵をそろえ、交差検証や寄与率・シルエットで「どこまで信じてよいか」を測り、関連と因果を混同しない</strong>こと。手法は違っても、確かめる作法は同じです。</p>
+<p><strong>では、どの場面でどれを選ぶか</strong>——手元のデータと問いから逆算する地図が、これです。 - <strong>予測したい正解（ラベル・数値）があるか？</strong> - <strong>ある → 教師あり</strong>。予測対象が<strong>数値</strong>なら<strong>回帰</strong>（第2〜7回）、<strong>カテゴリ（分類先）</strong>なら<strong>分類</strong>（第8・9回）。似た変数が多い・係数を安定させたいなら<strong>正則化（regularization）</strong>を重ねる。 - <strong>ない → 教師なし</strong>。何をしたいかで分岐する： - <strong>変数を減らして可視化・要約したい（数値データ）→ PCA／バイプロット</strong>。 - <strong>個体をグループに分けたい → クラスタリング（clustering）</strong>（丸い塊なら K-means、非球状なら DBSCAN、構造をじっくり眺めたいなら階層クラスタリング）。 - <strong>カテゴリ×カテゴリの結びつきを見たい → 対応分析（CA）</strong>、カテゴリが3つ以上なら<strong>MCA</strong>。 - どの枝を選んでも共通するのは、<strong>前処理（第4回）で土俵をそろえ、交差検証や寄与率・シルエットで「どこまで信じてよいか」を測り、関連と因果を混同しない</strong>こと。手法は違っても、確かめる作法は同じです。</p>
 <p><strong>変わらなかった四つの心構え</strong>　手法が変わっても、これだけは全14回で一度も変わりませんでした。<strong>(1)</strong> 目標から始め、目標に立ち返る。<strong>(2)</strong> 正しく測る（テストは最後・リーク防止・指標は複数で）。<strong>(3)</strong> 手を動かして、仕組みを自分で確かめる。<strong>(4)</strong> 当てるだけでなく「なぜ」を語り、限界も正直に書く。道具はいつか古びても、この姿勢は古びません。14回、お疲れさまでした——学んだこの地図を手に、次はあなた自身のデータへ。</p>
 <p><strong>一枚の早見表</strong></p>
 <table class="caption-top table">
@@ -3568,7 +3568,7 @@ Sci-Fi  x2010: 観測/期待=1.25  座標から復元=1.25</code></pre>
 <tbody>
 <tr class="odd">
 <td>数値を予測したい</td>
-<td>数値の説明変数＋数値の正解</td>
+<td>数値の説明変数（explanatory variable）＋数値の正解</td>
 <td>回帰・正則化（第2〜7回）</td>
 </tr>
 <tr class="even">

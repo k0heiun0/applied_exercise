@@ -3248,7 +3248,7 @@ window.Quarto = {
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
 <p><strong>何が利用台数を動かすのか、根拠をもって説明したい。</strong></p>
-<p>この演習では、学習済みモデルから標準化係数を取り出して影響の向きと大きさを読み、並べ替え重要度で裏を取り、そして双子の変数（気温 temp と体感温度 atemp）が引き起こす多重共線性を実験で暴きます。係数の取り出しから日本語への翻訳、重要度による裏取り、そして多重共線性の実験までを自分の手で動かします。TODOに取り組みながら、最後の「目標に答えられたか」で振り返りましょう。</p>
+<p>この演習では、学習済みモデルから標準化（standardization）係数を取り出して影響の向きと大きさを読み、並べ替え重要度で裏を取り、そして双子の変数（気温 temp と体感温度 atemp）が引き起こす多重共線性（multicollinearity）を実験で暴きます。係数の取り出しから日本語への翻訳、重要度による裏取り、そして多重共線性の実験までを自分の手で動かします。TODOに取り組みながら、最後の「目標に答えられたか」で振り返りましょう。</p>
 </section>
 <section id="学習ゴール" class="level2">
 <h2 class="anchored" data-anchor-id="学習ゴール">学習ゴール</h2>
@@ -3287,7 +3287,7 @@ window.Quarto = {
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="6e1c0004" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3317,17 +3317,17 @@ window.Quarto = {
 </section>
 <section id="標準化係数を取り出して図にする" class="level2">
 <h2 class="anchored" data-anchor-id="標準化係数を取り出して図にする">1. 標準化係数を取り出して図にする</h2>
-<p>「モデルの中身を読む」第一歩です。パイプラインは標準化を含んでいるので、取り出した係数はそのまま比べられます。</p>
+<p>「モデルの中身を読む」第一歩です。パイプライン（pipeline）は標準化を含んでいるので、取り出した係数はそのまま比べられます。</p>
 <section id="todo①係数の取り出しと棒グラフ" class="level3">
 <h3 class="anchored" data-anchor-id="todo①係数の取り出しと棒グラフ">TODO①：係数の取り出しと棒グラフ</h3>
-<p>学習済みの <code>pipe</code> から線形回帰の係数を取り出し、変数名付きの横向き棒グラフにしてください。</p>
+<p>学習済みの <code>pipe</code> から線形（linear）回帰の係数を取り出し、変数名付きの横向き棒グラフにしてください。</p>
 </section>
 <section id="深掘り標準化係数は他をそろえたうえでの効きそして早くも忍び寄る双子の影" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り標準化係数は他をそろえたうえでの効きそして早くも忍び寄る双子の影">深掘り：標準化係数は「他をそろえたうえでの効き」——そして早くも忍び寄る双子の影</h3>
 <p>いま取り出した係数を、影響の大きい順に並べるとこうなります（<code>coef_</code> の実行値）：<strong>年 <code>yr</code> +1020</strong>、<strong>体感温度 <code>atemp</code> +582</strong>、<strong>季節 <code>season</code> +566</strong>、<strong>気温 <code>temp</code> +371</strong>、<strong>天気 <code>weathersit</code> −333</strong>、風速 <code>windspeed</code> −198、湿度 <code>hum</code> −145……。標準化ずみのパイプラインなので、この数字はそのまま横並びで比べられます。棒グラフにすると、上位3本（年・体感温度・季節）が飛び抜けて長く、残りを引き離しているのが見えるはずです。</p>
 <p><strong>「標準化係数」が意味すること</strong>　これは「その変数が<strong>ばらつき1つぶん（＝1標準偏差）大きくなると、利用台数が何台動くか</strong>」を表します。単位（気温は0〜1、月は1〜12）のちがいを標準化で消したので、範囲の広い変数が不当に小さく見える／狭い変数が大きく見える、という不公平が起きません。だから「係数が大きい＝影響が大きい」を、ここではじめて胸を張って言えます。</p>
 <p><strong>符号は「向き」、絶対値は「大きさ」</strong>　解釈の第一歩は、符号が常識に合うかの確認です。<code>weathersit</code>（天気・悪いほど数字が大きい）が <strong>−333</strong> でマイナス、<code>windspeed</code> も <code>hum</code> もマイナス——悪天候・強風・蒸し暑さで自転車が敬遠される、という直感どおり。符号が常識と合っていれば、モデルが変な学習をしていないと安心できます。逆に、常識に反する符号が出たら、そこは共線性などを疑って読むべきサインです。</p>
-<p><strong>係数は「他の変数をそろえたうえでの効き」</strong>　ここが重回帰の係数の肝で、後の共線性の話にも直結します。重回帰の各係数は、単独の相関とはちがい、<strong>「他の変数をすべて同じ値に固定したまま、その変数だけを1標準偏差動かしたときの効き」</strong>（偏回帰係数）を表しています。第1回で見た単なる相関が「他をごちゃ混ぜにしたままの一緒の動き」だったのに対し、係数は「他を差し引いた、その変数固有の取り分」です。だからこそ交絡をある程度ならして読める——のですが、この「他を固定して1つだけ動かす」が<strong>そもそも成り立たない</strong>変数の組があると、話が崩れます。</p>
+<p><strong>係数は「他の変数をそろえたうえでの効き」</strong>　ここが重回帰（multiple regression）の係数の肝で、後の共線性の話にも直結します。重回帰の各係数は、単独の相関とはちがい、<strong>「他の変数をすべて同じ値に固定したまま、その変数だけを1標準偏差（standard deviation）動かしたときの効き」</strong>（偏回帰係数）を表しています。第1回で見た単なる相関が「他をごちゃ混ぜにしたままの一緒の動き」だったのに対し、係数は「他を差し引いた、その変数固有の取り分」です。だからこそ交絡（confounding）をある程度ならして読める——のですが、この「他を固定して1つだけ動かす」が<strong>そもそも成り立たない</strong>変数の組があると、話が崩れます。</p>
 <p><strong>早くも引っかかる点</strong>　一番効きそうな気温 <code>temp</code> が <strong>+371</strong> と、体感温度 <code>atemp</code>（+582）に負けています。気温と体感温度は、いわば同じ「暑さ・寒さ」を測った双子の列（第1回で相関 <strong>0.99</strong> を確認ずみ）。「他を固定して temp だけ動かす」といっても、temp が動けば atemp もほぼ一緒に動いてしまい、二つを別々に固定できません。この宙ぶらりんこそ、5節で正体を暴く<strong>多重共線性</strong>の最初の兆候です。いまは「上位3変数は年・気温まわり・季節」「temp が意外と小さいのが引っかかる」と押さえておけば十分です。</p>
 <div id="8239de83" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: pipe から係数を取り出して、変数名付きの横向き棒グラフを描いてください</span></span>
@@ -3370,7 +3370,7 @@ workingday   56.0</code></pre>
 <section id="深掘り係数を日本語にするときの作法と非有意効果なしではないという落とし穴" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り係数を日本語にするときの作法と非有意効果なしではないという落とし穴">深掘り：係数を日本語にするときの作法と、「非有意＝効果なし」ではないという落とし穴</h3>
 <p><strong>翻訳の型を、実データで</strong>　標準化係数は「ばらつき1つぶん動くと、利用台数が何台動くか」でした。年 <code>yr</code> の係数 <strong>+1020</strong> をそのまま訳すと「年がばらつき1つぶん大きいと、およそ1020台多い」。ただし <code>yr</code> は 0（一年目）か 1（二年目）の2値で、その標準偏差はおよそ 0.5。つまり「一年目→二年目」という<strong>実際の1段の変化は約2標準偏差ぶん</strong>に相当し、効きは 1020×2 ≈ <strong>およそ2000台</strong>になります。だから「二年目は、サービスの普及を反映して実質およそ2000台多い」と訳すのが正確です。標準化係数を素の変化に訳し戻すときは、この「1標準偏差が現実の何段ぶんか」を一度はさむ、と覚えておくと安全です。天気 <code>weathersit</code>（−333）なら「天気の区分が1段悪くなるほど、利用は数百台ずつ減る」といった具合。数字を文にできて、はじめて「解釈した」と言えます。</p>
-<p><strong>つまずき：係数が小さい／非有意＝効果なし、ではない</strong>　ここが今回いちばんの落とし穴です。気温 <code>temp</code> の係数は <strong>+371</strong> と、いかにも控えめ。もし有意性の検定（係数がゼロと区別できるか）にかければ、<code>temp</code> も <code>atemp</code> も<strong>「有意でない」と判定されかねません</strong>。ですが、これを「気温は効いていない」と読むのは<strong>重大な誤り</strong>です。5節で見るとおり、双子の <code>atemp</code> を外せば <code>temp</code> の係数は <strong>+943</strong> へ跳ね上がる——気温まわりは明らかに強く効いています。効いていないのではなく、<strong>双子で手柄を奪い合った結果、片方ずつの係数が小さく・不安定に見えているだけ</strong>なのです。</p>
+<p><strong>つまずき：係数が小さい／非有意＝効果なし、ではない</strong>　ここが今回いちばんの落とし穴です。気温 <code>temp</code> の係数は <strong>+371</strong> と、いかにも控えめ。もし有意性（significance）の検定（係数がゼロと区別できるか）にかければ、<code>temp</code> も <code>atemp</code> も<strong>「有意でない」と判定されかねません</strong>。ですが、これを「気温は効いていない」と読むのは<strong>重大な誤り</strong>です。5節で見るとおり、双子の <code>atemp</code> を外せば <code>temp</code> の係数は <strong>+943</strong> へ跳ね上がる——気温まわりは明らかに強く効いています。効いていないのではなく、<strong>双子で手柄を奪い合った結果、片方ずつの係数が小さく・不安定に見えているだけ</strong>なのです。</p>
 <p><strong>なぜそうなるのか（さわりだけ）</strong>　共線性があると、個々の係数の「推定のぶれ幅（標準誤差）」が大きく膨らみます。ぶれ幅が大きいほど「ゼロと区別できない＝非有意」と出やすい。だから<strong>非有意は「効果がない」ではなく「この1変数だけでは効きを切り分けられない」の合図</strong>と読むのが正解です。判断を誤らないコツは、双子を<strong>個別に</strong>見ず、<code>temp+atemp</code> の<strong>合計（グループ）として</strong>「気温まわりは効く」と読むこと。個別係数の額面や有意・非有意に飛びつかない——これが共線性下の解釈の作法です。膨らむぶれ幅の正体は、次の5節で <span class="math inline">\((X^\top X)^{-1}\)</span> と VIF を使って数値で突き止めます。</p>
 <p><strong>もうひとつの落とし穴：係数は「関連」であって「因果」ではない</strong>　翻訳のときに最も踏み外しやすいのがここです。「体感温度の係数が +582 と大きい」を、「<strong>気温を上げれば利用が増える</strong>」と読んではいけません。係数が語るのは、あくまで<strong>データ上でどう一緒に動いていたか（関連）</strong>であって、その変数をこちらが操作したら結果がどう変わるか（因果）ではありません。暖かい季節はお出かけも増える、といった背後の共通要因（交絡）が、気温と利用台数の関連を水増ししている可能性が残るからです。だから報告に書けるのは「<strong>気温まわりの関連が強い</strong>」まで。「気温を上げれば〜」と因果で言い切るには、交絡をそろえた別の慎重な検討が要ります。言い過ぎない勇気も、解釈の作法のうちです。</p>
 <div id="974061c9" class="cell" data-execution_count="5">
@@ -3400,8 +3400,8 @@ workingday   56.0</code></pre>
 <p><strong>なぜ別の道具で確かめるのか</strong>　係数は強力ですが、いま見たとおり共線性でぐらつきます。そこで、<strong>まったくちがう原理</strong>の物差しで裏を取ります。並べ替え重要度は、ある変数の列だけを<strong>シャッフルして情報を壊し</strong>、予測性能がどれだけ落ちるかを測ります。大きく落ちれば「その変数は効いていた」、落ちなければ「もともと効いていなかった」。係数のように連立方程式を解くのではなく、<strong>壊して性能の変化を見る</strong>——原理がちがうからこそ、独立した裏取りになります。<code>n_repeats=10</code> はシャッフルの偶然をならすための繰り返しです。</p>
 <p><strong>実データの並び</strong>　この演習で計算すると、重要度の上位は <strong>年 <code>yr</code> 0.56</strong>、<strong>体感温度 <code>atemp</code> 0.18</strong>、<strong>季節 <code>season</code> 0.17</strong>、続いて <code>temp</code> 0.07、<code>weathersit</code> 0.06……。係数の図と<strong>同じ顔ぶれ（年・気温まわり・季節）が上位</strong>に来ました。ちがう原理で同じ結論が出ると、解釈の信頼はぐっと上がります。第5回で複数の指標を並べて見たのと同じ、「一つの数字を鵜呑みにしない」姿勢です。</p>
 <p><strong>気温 <code>temp</code> だけが沈む理由</strong>　ところが <code>temp</code> は、係数では4番手（+371）だったのに、重要度では <code>season</code> にも抜かれて小さく沈みます。理由は共線性そのもの。<code>temp</code> をシャッフルで壊しても、<strong>双子の <code>atemp</code> がそっくりな情報を肩代わり</strong>するので、モデルの性能はほとんど落ちません。だから「壊しても平気＝重要でない」と出てしまう。これも、係数の跳ね上がりと並ぶ、多重共線性のはっきりした指紋です。</p>
-<p><strong>別の見方：一致は心強い、食い違いは手がかり</strong>　2つの見方が<strong>一致する部分</strong>（年・季節）は自信をもって報告でき、<strong>食い違う部分</strong>（temp が重要度で沈む）は「共線性を疑え」の警告として使えます。食い違いはノイズではなく情報なのです。ただし一つ注意——双子の場合、<strong>係数も重要度も同じ向きに <code>temp</code> を過小評価します</strong>（どちらも「atemp が肩代わりする」ことに引きずられる）。つまりこの2つは、双子に関しては完全に独立な裏取りにはなりません。だからこそ、片方を外す5節の実験や、次の第7回でのブートストラップといった、<strong>別角度の確認</strong>が要るのです。</p>
-<p><strong>重要度の数字は何の単位か</strong>　並べ替え重要度の値（<code>yr</code> の 0.56 など）は、その列を壊したときに<strong>決定係数 R² がどれだけ下がったか</strong>を表します。<code>yr</code> を壊すと R² が 0.56 も落ちる＝それだけ予測を支えていた、ということ。絶対値そのものより、<strong>変数どうしの大小関係</strong>を読む道具だと思えば十分です。報告では「係数（向きと大きさ）」と「重要度（壊すと効くか）」を並べて示すと、『どちらへ効くか』と『どれだけ効くか』の両面から根拠を語れて説得力が増します。</p>
+<p><strong>別の見方：一致は心強い、食い違いは手がかり</strong>　2つの見方が<strong>一致する部分</strong>（年・季節）は自信をもって報告でき、<strong>食い違う部分</strong>（temp が重要度で沈む）は「共線性を疑え」の警告として使えます。食い違いはノイズではなく情報なのです。ただし一つ注意——双子の場合、<strong>係数も重要度も同じ向きに <code>temp</code> を過小評価します</strong>（どちらも「atemp が肩代わりする」ことに引きずられる）。つまりこの2つは、双子に関しては完全に独立な裏取りにはなりません。だからこそ、片方を外す5節の実験や、次の第7回でのブートストラップ（bootstrap）といった、<strong>別角度の確認</strong>が要るのです。</p>
+<p><strong>重要度の数字は何の単位か</strong>　並べ替え重要度の値（<code>yr</code> の 0.56 など）は、その列を壊したときに<strong>決定係数（coefficient of determination） R² がどれだけ下がったか</strong>を表します。<code>yr</code> を壊すと R² が 0.56 も落ちる＝それだけ予測を支えていた、ということ。絶対値そのものより、<strong>変数どうしの大小関係</strong>を読む道具だと思えば十分です。報告では「係数（向きと大きさ）」と「重要度（壊すと効くか）」を並べて示すと、『どちらへ効くか』と『どれだけ効くか』の両面から根拠を語れて説得力が増します。</p>
 <div id="aac8b7d3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 並べ替え重要度を計算し、重要度の大きい順に変数名と値を表示してください</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: permutation_importance(pipe, X, y, n_repeats=10, random_state=0) の .importances_mean を使います</span></span>
@@ -3422,7 +3422,7 @@ workingday   56.0</code></pre>
 <p><span class="math display">\[
 \mathrm{Var}(\hat{\beta}) \;=\; \sigma^2\,(X^\top X)^{-1}
 \]</span></p>
-<p>という形で表せます（<span class="math inline">\(\sigma^2\)</span> は予測の残差のばらつき、<span class="math inline">\(X\)</span> は説明変数の行列）。厳密な導出は追いません。押さえるのは一点——<strong>係数 <span class="math inline">\(j\)</span> のぶれ幅は、この行列 <span class="math inline">\((X^\top X)^{-1}\)</span> の <span class="math inline">\(j\)</span> 番目の対角成分に比例する</strong>、ということです。そしてこの対角成分は、<strong>変数 <span class="math inline">\(j\)</span> が他の変数たちからどれだけ言い当てられるか</strong>で膨らみます。他と無関係な変数（<code>yr</code>）なら対角は小さく、係数は安定。双子のように他からほぼ完全に言い当てられる変数では、対角が跳ね上がり、係数が暴れるのです。</p>
+<p>という形で表せます（<span class="math inline">\(\sigma^2\)</span> は予測の残差のばらつき、<span class="math inline">\(X\)</span> は説明変数の行列）。厳密な導出は追いません。押さえるのは一点——<strong>係数 <span class="math inline">\(j\)</span> のぶれ幅は、この行列 <span class="math inline">\((X^\top X)^{-1}\)</span> の <span class="math inline">\(j\)</span> 番目の対角成分（diagonal element）に比例する</strong>、ということです。そしてこの対角成分は、<strong>変数 <span class="math inline">\(j\)</span> が他の変数たちからどれだけ言い当てられるか</strong>で膨らみます。他と無関係な変数（<code>yr</code>）なら対角は小さく、係数は安定。双子のように他からほぼ完全に言い当てられる変数では、対角が跳ね上がり、係数が暴れるのです。</p>
 <p><strong>VIF：膨張を1つの数字にした指標</strong>　この「膨張の度合い」を変数ごとに1つの数字にしたのが <strong>VIF（分散拡大係数）</strong> です。定義は</p>
 <p><span class="math display">\[
 \mathrm{VIF}_j \;=\; \frac{1}{1 - R_j^2}
@@ -3430,7 +3430,7 @@ workingday   56.0</code></pre>
 <p>で、<span class="math inline">\(R_j^2\)</span> は「<strong>他のすべての変数で変数 <span class="math inline">\(j\)</span> を回帰したときの当てはまり</strong>」。他からよく言い当てられる（<span class="math inline">\(R_j^2\)</span> が1に近い）ほど、VIF は無限大へ発散します。VIF が意味するのは、「<strong>他と無相関だった理想の場合に比べ、その係数の分散が何倍に膨らんでいるか</strong>」です。このデータで実際に計算すると、<code>temp</code> の VIF は <strong>約63</strong>、<code>atemp</code> は <strong>約64</strong>（10を超えたら黄信号、が目安）。裏を返せば <span class="math inline">\(R_j^2 = 1 - 1/63 \approx\)</span> <strong>0.984</strong>——温度まわりは他の変数（実質はもう片方の双子）から98%言い当てられる、ほぼ重複した列だということです。分散が63倍なら、標準誤差（ぶれ幅）は <span class="math inline">\(\sqrt{63}\approx\)</span> <strong>8倍</strong>。<code>temp</code> の係数が8倍も広い幅でぐらつくなら、+371 と +943 のあいだを行き来するのも当然です。ちなみに <code>yr</code> の VIF はほぼ <strong>1.0</strong>（膨張ゼロ）——だから年の係数は安心して読めるのでした。</p>
 <p>VIF と先の行列は、じつは同じものです。標準化したデータでは、<span class="math inline">\((X^\top X)^{-1}\)</span> の対角成分はちょうど <span class="math inline">\(\mathrm{VIF}_j / n\)</span> に等しく、実際このデータでも「<span class="math inline">\(n \times\)</span> 対角成分」を計算すると temp で <strong>63.3</strong> と、VIF に一致します。<strong>「対角が膨らむ＝VIF が大きい＝係数が暴れる」は、ぜんぶ一つの現象の言い換え</strong>なのです。（別の見方をすれば、双子があると説明変数の相関行列の固有値の一つが 0 に近づき、その方向＝平らな谷になっている、とも言えます。）</p>
 <p><strong>つまずきの総まとめ</strong>　だから共線性の下では——(1) <strong>個々の係数を額面どおり読まない</strong>（+371 は「効きが弱い」ではなく「双子と分け合った取り分」）。(2) <strong>小さい係数・非有意を「効果なし」と早合点しない</strong>（ぶれ幅が膨らんで有意に見えないだけ）。(3) 双子は<strong>合計（グループ）として</strong> 「気温まわりは強く効く」と読む。(4) 予測の精度自体はほとんど落ちない（合計は安定なので）——<strong>精度は出るのに解釈だけが信用できない</strong>、これが多重共線性のいちばん厄介な顔です。</p>
-<p><strong>次への橋渡し</strong>　対策は大きく2つ。素朴には<strong>双子の片方を落とす</strong>（合計が安定なので予測はほぼ変わらない）。もう一つが、平らな谷にわずかな傾きを与えて底を一点に定める<strong>正則化</strong>です。係数を安定させて解釈を守るこの道具——リッジ回帰とラッソ回帰——を、<strong>第7回の演習</strong>で自分の手で動かし、ここで暴いた双子に決着をつけます。この回は問題を<strong>暴いて診断する</strong>ところまで。分散の式 <span class="math inline">\(\sigma^2 (X^\top X)^{-1}\)</span> の導出や、VIF が「他の変数で回帰したときの当てはまり」から出てくる筋道に踏み込みたい人は、共線性の診断を体系立てた古典的な文献（Belsley・Kuh・Welsch『Regression Diagnostics』）に譲ります。</p>
+<p><strong>次への橋渡し</strong>　対策は大きく2つ。素朴には<strong>双子の片方を落とす</strong>（合計が安定なので予測はほぼ変わらない）。もう一つが、平らな谷にわずかな傾きを与えて底を一点に定める<strong>正則化（regularization）</strong>です。係数を安定させて解釈を守るこの道具——リッジ回帰とラッソ回帰——を、<strong>第7回の演習</strong>で自分の手で動かし、ここで暴いた双子に決着をつけます。この回は問題を<strong>暴いて診断する</strong>ところまで。分散の式 <span class="math inline">\(\sigma^2 (X^\top X)^{-1}\)</span> の導出や、VIF が「他の変数で回帰したときの当てはまり」から出てくる筋道に踏み込みたい人は、共線性の診断を体系立てた古典的な文献（Belsley・Kuh・Welsch『Regression Diagnostics』）に譲ります。</p>
 <div id="c737600c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temp_coef(cols):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> Pipeline([(<span class="st">&#39;s&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, LinearRegression())]).fit(df[cols].values, y)</span>

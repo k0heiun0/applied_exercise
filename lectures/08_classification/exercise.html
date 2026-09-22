@@ -3248,7 +3248,7 @@ window.Quarto = {
 <section id="前回からの接続" class="level2">
 <h2 class="anchored" data-anchor-id="前回からの接続">前回からの接続</h2>
 <p>第7回で係数に手綱をつけ、双子の暴れを抑えるところまで来ました。第2回からの回帰の道具はこれでひととおりそろっています。ただし、そこで当てていたのはつねに「何台か」という数値でした。</p>
-<p>今日から問いの形が変わります。当てる相手は数値ではなくラベル——「心臓病あり／なし」の二択で、データも自転車から医療に移ります。そして第7回の最後で予告したとおり、二種類の間違いは重みが違う。正解率という一つの数字では見えないものを、混同行列としきい値で開いていきます。</p>
+<p>今日から問いの形が変わります。当てる相手は数値ではなくラベル——「心臓病あり／なし」の二択で、データも自転車から医療に移ります。そして第7回の最後で予告したとおり、二種類の間違いは重み（weight）が違う。正解率という一つの数字では見えないものを、混同行列（confusion matrix）としきい値で開いていきます。</p>
 </section>
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
@@ -3259,7 +3259,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="学習ゴール">学習ゴール</h2>
 <p>この回を終えると、次のことができるようになります。</p>
 <ul>
-<li>線形スコアをシグモイドで確率に写すというロジスティック回帰の骨組みを説明でき、直線で 0/1 を予測してはいけない理由を言える</li>
+<li>線形（linear）スコアをシグモイドで確率に写すというロジスティック回帰（logistic regression）の骨組みを説明でき、直線で 0/1 を予測してはいけない理由を言える</li>
 <li>係数が最尤法で決まる理由を、二乗誤差を使ったときの困りごとと対比して説明できる</li>
 <li>混同行列の四つのマスを「陽性＝心臓病」の向きで読み分け、見逃しと誤検出のどちらを重く見るかを目的から論じられる</li>
 <li>適合率・再現率・F1 を四つのマスの数から自分で計算し、正解率だけを見る危険を具体例で説明できる</li>
@@ -3299,7 +3299,7 @@ window.Quarto = {
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="8c1a0003" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3329,7 +3329,7 @@ window.Quarto = {
 </section>
 <section id="モデルを比べる" class="level2">
 <h2 class="anchored" data-anchor-id="モデルを比べる">1. モデルを比べる</h2>
-<p>LogisticRegression と LDA を、交差検証の正解率で比べます。</p>
+<p>LogisticRegression と LDA を、交差検証（cross-validation）の正解率で比べます。</p>
 <section id="深掘りなぜ回帰の直線ではダメか線形スコアをシグモイドで確率に写す" class="level3">
 <h3 class="anchored" data-anchor-id="深掘りなぜ回帰の直線ではダメか線形スコアをシグモイドで確率に写す">深掘り：なぜ「回帰の直線」ではダメか——線形スコアをシグモイドで確率に写す</h3>
 <p>当てたいのは <code>target</code>＝「心臓病あり(1)／なし(0)」の二択です。第2回からの回帰をそのまま使い、<span class="math inline">\(\hat y = \beta_0 + \sum_j \beta_j x_j\)</span> という<strong>直線</strong>で 0/1 を予測してはいけないのでしょうか。試すと、うまくいかない理由がはっきり出ます。この心臓病データで普通の線形回帰を当てはめ、テストの61人を予測させると、出てくる値は最小 <strong>−0.18</strong>・最大 <strong>1.34</strong> まで散らばり、<strong>61人中9人が 0〜1 の外</strong>にはみ出します。確率が「マイナス」や「1超え」になるのは意味をなしません。直線は上にも下にも限りなく伸びるので、そもそも<strong>確率の器（0〜1）に収まらない</strong>のです。しかも二乗誤差で当てはめる直線は、遠くの点に引っぱられて境目がずれやすい、という弱点もあります。</p>
@@ -3338,16 +3338,16 @@ window.Quarto = {
 p = \sigma(z) = \frac{1}{1 + e^{-z}}, \qquad z = \beta_0 + \sum_{j=1}^{p} \beta_j x_j
 \]</span></p>
 <p><span class="math inline">\(\sigma(z)\)</span> は、どんな <span class="math inline">\(z\)</span> を入れても必ず <strong>0 と 1 のあいだ</strong>の値を返します。記号をほどくと——<span class="math inline">\(z\)</span> が大きくプラスなら <span class="math inline">\(e^{-z}\to 0\)</span> で <span class="math inline">\(\sigma \to 1\)</span>（ほぼ確実に病気）、大きくマイナスなら <span class="math inline">\(e^{-z}\to\infty\)</span> で <span class="math inline">\(\sigma \to 0\)</span>（ほぼ健康）、ちょうど <span class="math inline">\(z=0\)</span> のとき <span class="math inline">\(\sigma = 1/2 = 0.5\)</span>。こうして<strong>青天井の線形スコアを、確率という器へ写す</strong>のがシグモイドの役目です。<span class="math inline">\(p = \sigma(z)\)</span> は「この患者が心臓病である確率」と読めます。各検査値 <span class="math inline">\(x_j\)</span> にかかる係数 <span class="math inline">\(\beta_j\)</span> の意味も回帰と地続きで、<span class="math inline">\(\beta_j\)</span> が正ならその検査値が上がるほどスコア <span class="math inline">\(z\)</span> が上がって病気側へ、負なら健康側へ、確率を押します。</p>
-<p><strong>判定と決定境界</strong>　確率が出たら、<span class="math inline">\(p &gt; 0.5\)</span> なら「心臓病あり」と判定します。<span class="math inline">\(\sigma(z) &gt; 0.5\)</span> は <span class="math inline">\(z &gt; 0\)</span> と同じことなので、判定が切り替わる境目 <span class="math inline">\(p = 0.5\)</span> は <span class="math inline">\(z = 0\)</span>、すなわち <span class="math inline">\(\beta_0 + \sum_j \beta_j x_j = 0\)</span> という<strong>まっすぐな線（面）</strong>になります。これが<strong>決定境界</strong>で、LogisticRegression が「線形」の分類器と呼ばれる理由です。名前に「回帰」とありますが、中身は<strong>分類</strong>の手法だ、という点に注意してください。</p>
+<p><strong>判定と決定境界</strong>　確率が出たら、<span class="math inline">\(p &gt; 0.5\)</span> なら「心臓病あり」と判定します。<span class="math inline">\(\sigma(z) &gt; 0.5\)</span> は <span class="math inline">\(z &gt; 0\)</span> と同じことなので、判定が切り替わる境目 <span class="math inline">\(p = 0.5\)</span> は <span class="math inline">\(z = 0\)</span>、すなわち <span class="math inline">\(\beta_0 + \sum_j \beta_j x_j = 0\)</span> という<strong>まっすぐな線（面）</strong>になります。これが<strong>決定境界</strong>で、LogisticRegression が「線形」の分類（classification）器と呼ばれる理由です。名前に「回帰」とありますが、中身は<strong>分類</strong>の手法だ、という点に注意してください。</p>
 <p><strong>この節の実データ</strong>　1節では LogisticRegression と LDA を交差検証の正解率で比べます。結果はそれぞれ <strong>0.828</strong> と <strong>0.832</strong>——どちらも約 0.83 で、ほぼ互角です。LDA（線形判別分析）も理屈は違えど、まっすぐな境界で分ける線形分類器で、「2つのクラスがいちばんよく分かれて見える軸」を探すという別の考え方から出発しますが、結果は似ることが多いのが特徴です。なお 8割強という<strong>程よい難しさ</strong>は大事なポイントで、これから見るしきい値や見逃しの話は、正解率がほぼ 1.0 になる易しすぎるデータでは成り立ちません。この心臓病データが「そこそこ間違える」からこそ、見逃しを数え、しきい値で調整する意味が出てきます。</p>
-<p><strong>つまずき：なぜ先に標準化するのか</strong>　この演習の <code>pipe()</code> は、補完のあと <code>StandardScaler</code>（平均0・ばらつき1に揃える）をはさんでからモデルに渡しています。省くとどうなるか。線形スコア <span class="math inline">\(z = \sum_j \beta_j x_j\)</span> は各検査値の<strong>単位のスケール</strong>に左右されます。年齢（数十のオーダー）とコレステロール（数百のオーダー）を生のまま混ぜると、値の大きい変数だけがスコアを支配しがちで、係数の読みも学習の収束も不安定になります。スケールを揃えておけば各検査値が対等な土俵に乗り、係数どうしを見比べられます。標準化を忘れる——これは分類でありがちな落とし穴の一つです。</p>
+<p><strong>つまずき：なぜ先に標準化（standardization）するのか</strong>　この演習の <code>pipe()</code> は、補完（imputation）のあと <code>StandardScaler</code>（平均0・ばらつき1に揃える）をはさんでからモデルに渡しています。省くとどうなるか。線形スコア <span class="math inline">\(z = \sum_j \beta_j x_j\)</span> は各検査値の<strong>単位のスケール</strong>に左右されます。年齢（数十のオーダー）とコレステロール（数百のオーダー）を生のまま混ぜると、値の大きい変数だけがスコアを支配しがちで、係数の読みも学習の収束（convergence）も不安定になります。スケールを揃えておけば各検査値が対等な土俵に乗り、係数どうしを見比べられます。標準化を忘れる——これは分類でありがちな落とし穴の一つです。</p>
 <p><strong>もっと踏み込みたい人へ</strong>　直線回帰が予測の外れの二乗和（最小二乗）で係数を決めたのに対し、ロジスティック回帰の係数は「観測された 0/1 がいちばん起こりやすくなるように」——<strong>最尤法</strong>で決めます。なぜ二乗誤差ではいけないのか、なぜ尤度そのものではなく対数尤度を最大にするのかは、この節の深掘り『最尤法——起こりやすさで係数を決める』で扱います。ここでは「線形スコアをシグモイドで確率に写す」骨組みをつかめば十分です。</p>
 </section>
 <section id="深掘り最尤法起こりやすさで係数を決める" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り最尤法起こりやすさで係数を決める">深掘り：最尤法——起こりやすさで係数を決める</h3>
 <p><strong>なぜ二乗誤差ではないのか</strong>　回帰では「予測の外れを二乗して足した合計」を最小にしました。同じものさしを 0/1 の当たり外れに当てるとどうなるか。健康な人（真値 0）に <span class="math inline">\(p = 0.999\)</span> と言い切って外しても、二乗誤差は <span class="math inline">\((0 - 0.999)^2 = 0.998\)</span>——<strong>どれだけ自信満々に外しても、罰は 1 で頭打ち</strong>です。「たぶん病気」と言って外すのと「絶対に病気」と言い切って外すのを、ほとんど同じ重さで扱ってしまう。確率を出す手法なのに、確率の言い切りに責任を取らせられないのです。しかも二乗誤差をシグモイドと組み合わせると、係数を動かしたときの誤差の地形はすり鉢が一つの形になるとは限らず、くぼみが複数できて<strong>どこが底かが出発点しだいで変わりえます</strong>。第7回まで「誤差の谷の底を探す」と言い切れたのは、最小二乗の地形が下に凸で、いくつものくぼみに分かれる心配がなかったからです（双子の変数があると底は平らに伸びましたが、別のくぼみができるわけではありませんでした）。</p>
 <p><strong>代わりに「起こりやすさ」を最大にする</strong>　そこで発想を変えます。係数を一組決めると、患者一人ひとりに確率 <span class="math inline">\(p\)</span> が付きます。実際に心臓病だった人については <span class="math inline">\(p\)</span>、健康だった人については <span class="math inline">\(1-p\)</span> が「その人について、観測されたとおりのことが起こる確率」です。これを全員ぶん掛け合わせた値が<strong>尤度</strong>——手元のこの 0/1 の並びが、その係数のもとでどれくらい起こりやすいかを表す一つの数です。最尤法とは、<strong>観測された 0/1 がいちばん起こりやすくなるように係数を選ぶ</strong>こと。病気の人に高い <span class="math inline">\(p\)</span>、健康な人に低い <span class="math inline">\(p\)</span> が付いたときに尤度が大きくなるので、自然と「よく当てる係数」が選ばれます。言い切って外すと 0 に近い数を掛けることになって尤度が一気に潰れる——さきほど二乗誤差に欠けていた重い罰が、掛け算の形からひとりでに出てきます。</p>
-<p><strong>なぜ対数尤度なのか</strong>　ただし掛け算のままでは実務が回りません。このデータは 303 人ぶん。仮に全員に 0.9 が付いたとしても <span class="math inline">\(0.9^{303} \approx 1.4 \times 10^{-14}\)</span>、0.8 なら <span class="math inline">\(4.3 \times 10^{-30}\)</span> です。掛けるほど値は 0 へ落ちていき、計算機の中では桁が溶けて（アンダーフロー）係数どうしの優劣が見えなくなります。そこで<strong>対数を取ります</strong>。対数は掛け算を足し算に変えるので、尤度の積は一人ひとりの <span class="math inline">\(\log p\)</span>（または <span class="math inline">\(\log(1-p)\)</span>）の<strong>和</strong>になり、桁が溶けません。しかも対数は単調増加なので、対数尤度を最大にする係数は尤度を最大にする係数と<strong>同じ</strong>です。得しかない置き換えなので、実装はつねに対数尤度のほうを最大化しています。</p>
+<p><strong>なぜ対数尤度なのか</strong>　ただし掛け算のままでは実務が回りません。このデータは 303 人ぶん。仮に全員に 0.9 が付いたとしても <span class="math inline">\(0.9^{303} \approx 1.4 \times 10^{-14}\)</span>、0.8 なら <span class="math inline">\(4.3 \times 10^{-30}\)</span> です。掛けるほど値は 0 へ落ちていき、計算機の中では桁が溶けて（アンダーフロー）係数どうしの優劣が見えなくなります。そこで<strong>対数を取ります</strong>。対数は掛け算を足し算に変えるので、尤度の積は一人ひとりの <span class="math inline">\(\log p\)</span>（または <span class="math inline">\(\log(1-p)\)</span>）の<strong>和</strong>になり、桁が溶けません。しかも対数は単調（monotonic）増加なので、対数尤度を最大にする係数は尤度を最大にする係数と<strong>同じ</strong>です。得しかない置き換えなので、実装はつねに対数尤度のほうを最大化しています。</p>
 <p><strong>ロジット：確率の世界を線形の世界へ戻す</strong>　<span class="math inline">\(p = \sigma(z)\)</span> を <span class="math inline">\(z\)</span> について解き直すと、次の一本が出ます。</p>
 <p><span class="math display">\[
 \log\frac{p}{1-p} = z = \beta_0 + \sum_{j} \beta_j x_j
@@ -3369,7 +3369,7 @@ LDA                 : 正解率 0.832</code></pre>
 <h2 class="anchored" data-anchor-id="混同行列で見逃しを数える">2. 混同行列で「見逃し」を数える</h2>
 <section id="todo①テストデータで混同行列を作る" class="level3">
 <h3 class="anchored" data-anchor-id="todo①テストデータで混同行列を作る">TODO①：テストデータで混同行列を作る</h3>
-<p><code>Xtr, Xte, ytr, yte</code>（下で用意済み）を使い、LogisticRegression のパイプラインを学習して、テストデータの混同行列を作ってください。見逃し（本当は病気なのに健康と判定）が何件かを確認しましょう。</p>
+<p><code>Xtr, Xte, ytr, yte</code>（下で用意済み）を使い、LogisticRegression のパイプライン（pipeline）を学習して、テストデータの混同行列を作ってください。見逃し（本当は病気なのに健康と判定）が何件かを確認しましょう。</p>
 </section>
 <section id="深掘り混同行列の四つのマスと医療で重い見逃し" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り混同行列の四つのマスと医療で重い見逃し">深掘り：混同行列の四つのマスと、医療で重い「見逃し」</h3>
@@ -3382,7 +3382,7 @@ LDA                 : 正解率 0.832</code></pre>
 </ul>
 <p>対角線（TP と TN）が正解、非対角のマス（FP と FN）が二種類の間違いです。TODO① をテストデータ（61人、内訳は心臓病 <strong>28人</strong>・健康 <strong>33人</strong>）で解くと、しきい値 0.5 での混同行列は次の数になります——<strong>TN=27, FP=6, FN=2, TP=26</strong>。つまり心臓病を正しく拾えた人が <strong>26人</strong>、誤検出（健康を病気と誤り）が <strong>6人</strong>、そして<strong>見逃し（左下）が 2人</strong>です。TODO①のヒートマップで、左下のマスに 2 が立つのを確かめてください。行が真値・列が予測、という向きを取り違えると見逃しと誤検出が入れ替わってしまうので、軸ラベルを必ず確認する癖をつけましょう。</p>
 <p><strong>なぜ医療では左下が重いのか</strong>　同じ「1件の間違い」でも、二種類の重みはまるで違います。<strong>見逃し（FN）</strong>は、本当に病気の患者を「健康」と帰してしまうこと——治療の機会を失い、命に関わりかねません。いっぽう<strong>誤検出（FP）</strong>は、健康な人を「病気かも」と拾ってしまうこと——多くは再検査で済みます。<strong>間違いのコストが非対称</strong>なのです。だから医療では、四つのマスのうち<strong>左下の見逃しにいちばん注目</strong>し、これをどう減らすかを考えます。ここが「正解率という一つの数字」では絶対に見えない部分で、混同行列を起点にする理由そのものです。どちらを陽性に置くかで指標の意味が丸ごと変わるので、以降つねに「陽性＝心臓病」を軸に読み進めてください。</p>
-<p><strong>別の見方：この四マスはどんな分類器でも同じ</strong>　混同行列は LogisticRegression 専用の道具ではありません。1節で比べた LDA でも、あるいは今回は使わない決定木・ランダムフォレスト・サポートベクターマシンといった<strong>曲がった境界を引く手法</strong>でも、出てくるのは結局「病気を病気と当てたか／健康を病気と誤ったか」の四マスです。モデルの中身がどれだけ複雑でも、それを測る<strong>ものさし（混同行列・適合率・再現率・後で出る ROC）は共通</strong>なのです。だからこの節で身につける読み方は、この先どんな分類器に持ち替えてもそのまま効きます。</p>
+<p><strong>別の見方：この四マスはどんな分類器でも同じ</strong>　混同行列は LogisticRegression 専用の道具ではありません。1節で比べた LDA でも、あるいは今回は使わない決定木（decision tree）・ランダムフォレスト（random forest）・サポートベクターマシンといった<strong>曲がった境界を引く手法</strong>でも、出てくるのは結局「病気を病気と当てたか／健康を病気と誤ったか」の四マスです。モデルの中身がどれだけ複雑でも、それを測る<strong>ものさし（混同行列・適合率・再現率・後で出る ROC）は共通</strong>なのです。だからこの節で身につける読み方は、この先どんな分類器に持ち替えてもそのまま効きます。</p>
 <div id="03d94dbe" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Xtr, Xte, ytr, yte <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> pipe(LogisticRegression(max_iter<span class="op">=</span><span class="dv">5000</span>)).fit(Xtr, ytr)</span>
@@ -3411,7 +3411,7 @@ LDA                 : 正解率 0.832</code></pre>
 <p>同じ TP を使っても<strong>何で割るか</strong>が違うので、見ている中身が別物だという点が肝心です。前節の実数（TP=26, FP=6, FN=2）を入れると、適合率 $= 26/(26+6) = 26/32 = $ <strong>0.81</strong>、再現率 $= 26/(26+2) = 26/28 = $ <strong>0.93</strong>。3節の <code>classification_report</code> の心臓病の行がこの値（適合率 0.81・再現率 0.93）と一致します。再現率 0.93 は「真の病気の 93% を拾えた」＝残り 7%（＝見逃し2人）を取りこぼした、と読めます。医療の目標は見逃しを避けることなので、ここでは<strong>再現率を重く見ます</strong>。逆に「誤って病気と騒ぎたくない」場面（たとえば高額な追加検査が伴うとき）なら適合率を重く見る、と目的しだいで軸が変わります。</p>
 <p>適合率と再現率は両立しにくく（片方を上げると片方が下がりがち）、その総合点が <strong>F1</strong> です。二つの<strong>調和平均</strong>で、<span class="math inline">\(F_1 = \dfrac{2 \cdot \text{適合率} \cdot \text{再現率}}{\text{適合率} + \text{再現率}}\)</span>。ふつうの平均でなく調和平均を使うのは、<strong>どちらか一方だけ高くてもスコアが伸びない</strong>ようにするためです（片方が 0 に近いと F1 も 0 に近づく）。両方そろって高いときだけ F1 も高くなる。今回は約 <strong>0.87</strong> で、適合率 0.81 と再現率 0.93 のあいだのバランス点に落ち着いています。</p>
 <p><strong><code>classification_report</code> を全部読む</strong>　3節の表は心臓病の行だけでなく、<strong>健康の行</strong>も出しています。健康クラスの適合率は <strong>0.93</strong>、再現率は <strong>0.82</strong>——心臓病クラス（適合率 0.81・再現率 0.93）と、ちょうど<strong>鏡写し</strong>になっているのが分かります。これは偶然ではありません。心臓病の見逃し（FN=2）は健康側から見れば「健康と当てた中の取りこぼし」ではなく、逆に心臓病の誤検出（FP=6）は健康側から見れば「健康なのに拾えなかった」分にあたるため、一方の適合率が他方の再現率と絡み合うのです。表の下にある <code>macro avg</code>（二クラスの単純平均）や <code>accuracy</code>（0.87）も一緒に見ると、モデルが片方のクラスだけ得意になっていないかを確かめられます。どの一行を見るかは、けっきょく「どちらの間違いを重く見るか」という目標しだいです。</p>
-<p><strong>つまずき：正解率だけを見る危険</strong>　いちばん素朴な指標は正解率 <span class="math inline">\(=(TP+TN)/\text{全体}\)</span> で、今回は $(26+27)/61 = $ <strong>0.87</strong>。悪くない数字ですが、正解率は<strong>クラスが偏ると簡単にだまされます</strong>。たとえば病気が全体の 1% しかいないデータで、「<strong>全員健康</strong>」と答えるだけの、何も考えていないモデルを考えると、正解率は <strong>0.99</strong> になります。ところがこのモデルの再現率は <strong>0.00</strong>——病気を<strong>1件も拾えていません</strong>。正解率だけ見ていれば「99%の名医」に見えるのに、肝心の病気は全滅、というわけです。だからこそ混同行列を起点に、再現率・適合率・F1 で多角的に見ます。幸い今回の心臓病データは病気 139・健康 164 とほぼ半々（陽性が約46%）なので正解率もそれなりに使えますが、不正検知・故障予測・レアな病気の診断など<strong>珍しい事象を当てる不均衡データ</strong>では、この罠がつねに口を開けています。「数字一つにだまされない」——第5回・第6回と同じ教訓が、分類でもそのまま効いています。</p>
+<p><strong>つまずき：正解率だけを見る危険</strong>　いちばん素朴な指標は正解率 <span class="math inline">\(=(TP+TN)/\text{全体}\)</span> で、今回は $(26+27)/61 = $ <strong>0.87</strong>。悪くない数字ですが、正解率は<strong>クラスが偏ると簡単にだまされます</strong>。たとえば病気が全体の 1% しかいないデータで、「<strong>全員健康</strong>」と答えるだけの、何も考えていないモデルを考えると、正解率は <strong>0.99</strong> になります。ところがこのモデルの再現率は <strong>0.00</strong>——病気を<strong>1件も拾えていません</strong>。正解率だけ見ていれば「99%の名医」に見えるのに、肝心の病気は全滅、というわけです。だからこそ混同行列を起点に、再現率・適合率・F1 で多角的に見ます。幸い今回の心臓病データは病気 139・健康 164 とほぼ半々（陽性が約46%）なので正解率もそれなりに使えますが、不正検知・故障予測・レアな病気の診断など<strong>珍しい事象を当てる不均衡（imbalance）データ</strong>では、この罠がつねに口を開けています。「数字一つにだまされない」——第5回・第6回と同じ教訓が、分類でもそのまま効いています。</p>
 <div id="7b3476c8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yte, clf.predict(Xte), target_names<span class="op">=</span>[<span class="st">&#39;健康&#39;</span>, <span class="st">&#39;心臓病&#39;</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3582,7 +3582,7 @@ weighted avg       0.88      0.87      0.87        61
 <section id="次回へ" class="level2">
 <h2 class="anchored" data-anchor-id="次回へ">次回へ</h2>
 <p>数値を当てる問題から、どちらかを当てる問題へ。今日は確率を出し、四つのマスに開き、しきい値というつまみを回すところまで来ました。同時に、工程はずいぶん増えています——欠損を中央値で埋め、標準化し、学習し、確率を出し、しきい値で切り、混同行列と ROC で測る。それを <code>pipe()</code> という小さな関数にまとめて、なんとか一本に保っていたことに気づいたでしょうか。</p>
-<p>次回はその「一本にまとめる」こと自体が主題です。列によってふさわしい前処理が違う（数値は標準化、カテゴリはワンホット）となると、工程はさらに枝分かれします。それを <code>ColumnTransformer</code> と <code>Pipeline</code> で一つの部品に束ね、<code>GridSearchCV</code> で設定選びまで内側に閉じ込める。束ねるのは横着のためではなく、第4回で見たリークを<strong>構造として</strong>防ぐためです。同じ心臓病データを、今度は組み立ての目で見直します。</p>
+<p>次回はその「一本にまとめる」こと自体が主題です。列によってふさわしい前処理が違う（数値は標準化、カテゴリはワンホット）となると、工程はさらに枝分かれします。それを <code>ColumnTransformer</code> と <code>Pipeline</code> で一つの部品に束ね、<code>GridSearchCV</code> で設定選びまで内側に閉じ込める。束ねるのは横着のためではなく、第4回で見たリーク（leakage）を<strong>構造として</strong>防ぐためです。同じ心臓病データを、今度は組み立ての目で見直します。</p>
 </section>
 <section id="課題提出" class="level2">
 <h2 class="anchored" data-anchor-id="課題提出">課題（提出）</h2>

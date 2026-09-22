@@ -3242,8 +3242,8 @@ window.Quarto = {
 
 <section id="前回からの接続" class="level2">
 <h2 class="anchored" data-anchor-id="前回からの接続">前回からの接続</h2>
-<p>第11回では、400枚の顔画像を PCA にかけ、平均顔と固有顔という共通の辞書に分解しました。主成分がそのまま絵になったので、「この軸は明るさらしい」「この軸は向きらしい」と、目で見て意味を当てられました。</p>
-<p>今日の相手は自動車の表データです。6つの変数を並べた表の主成分は、顔のようには絵になりません。作った軸に意味を読むには別の見せ方が要る——個体の座標（点）と変数の重み（矢印）を一枚に重ねた<strong>バイプロット</strong>が、それです。前回の最後で予告した「軸を言葉にする」作業を、ここでやります。</p>
+<p>第11回では、400枚の顔画像を PCA にかけ、平均顔と固有顔という共通の辞書に分解しました。主成分（principal component）がそのまま絵になったので、「この軸は明るさらしい」「この軸は向きらしい」と、目で見て意味を当てられました。</p>
+<p>今日の相手は自動車の表データです。6つの変数を並べた表の主成分は、顔のようには絵になりません。作った軸に意味を読むには別の見せ方が要る——個体の座標（点）と変数の重み（矢印）を一枚に重ねた<strong>バイプロット（biplot）</strong>が、それです。前回の最後で予告した「軸を言葉にする」作業を、ここでやります。</p>
 </section>
 <section id="今日の分析目標" class="level2">
 <h2 class="anchored" data-anchor-id="今日の分析目標">今日の分析目標</h2>
@@ -3286,7 +3286,7 @@ window.Quarto = {
 </div>
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
-<p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
+<p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
 <div id="c2b10003" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
@@ -3319,16 +3319,16 @@ window.Quarto = {
 <p>各変数が第1・第2主成分にどう効くか（矢印の向き）を、数値で見ます。</p>
 <section id="深掘り負荷量矢印とスコア点は別物同じ主成分空間の裏と表" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り負荷量矢印とスコア点は別物同じ主成分空間の裏と表">深掘り：負荷量（矢印）とスコア（点）は別物——同じ主成分空間の裏と表</h3>
-<p>このあと描くバイプロットには、<strong>矢印</strong>と<strong>点</strong>の二種類が同居します。ここでつまずく人がとても多いので、まず「何がいくつあるのか」から丁寧にほどきます。前回（第11回）の固有顔で言えば、負荷量は<strong>固有顔そのもの</strong>、スコアは<strong>各顔がその固有顔をどれだけ含むかの重み</strong>でした。今日はそれを、表データの言葉で言い直します。</p>
+<p>このあと描くバイプロットには、<strong>矢印</strong>と<strong>点</strong>の二種類が同居します。ここでつまずく人がとても多いので、まず「何がいくつあるのか」から丁寧にほどきます。前回（第11回）の固有顔で言えば、負荷量は<strong>固有顔そのもの</strong>、スコアは<strong>各顔がその固有顔をどれだけ含むかの重み（weight）</strong>でした。今日はそれを、表データの言葉で言い直します。</p>
 <p><strong>数がそもそも違う</strong>　この演習の変数は6個（<code>mpg, cylinders, displacement, horsepower, weight, acceleration</code>）、車は392台です。1節のコードセルで確認する<strong>負荷量（loading）は変数ごとに1本</strong>——だから矢印は6本。いっぽう<strong>スコア（score）は車ごとに1点</strong>——だから点は392個あります。「6本の矢印」と「392個の点」。この個数の違いが、そのまま両者の正体の違いです。矢印は<strong>変数</strong>の性質を、点は<strong>個体（車）</strong>の居場所を表します。</p>
-<p><strong>式の骨子（1行で）</strong>　標準化した車 <span class="math inline">\(i\)</span> のデータ <span class="math inline">\(\tilde{x}_i\)</span>（6個の数字の並び）を、第 <span class="math inline">\(k\)</span> 主成分の向き <span class="math inline">\(v_k\)</span>（負荷量を並べた単位ベクトル）に射影した値が、その車のスコアです。</p>
+<p><strong>式の骨子（1行で）</strong>　標準化（standardization）した車 <span class="math inline">\(i\)</span> のデータ <span class="math inline">\(\tilde{x}_i\)</span>（6個の数字の並び）を、第 <span class="math inline">\(k\)</span> 主成分の向き <span class="math inline">\(v_k\)</span>（負荷量を並べた単位ベクトル）に射影（projection）した値が、その車のスコアです。</p>
 <p><span class="math display">\[
 \text{スコア}\;s_{ik} \;=\; \tilde{x}_i \cdot v_k \;=\; \sum_{j} \tilde{x}_{ij}\, v_{k}[j]
 \]</span></p>
 <p>ここで <span class="math inline">\(v_k[j]\)</span> が「変数 <span class="math inline">\(j\)</span> が第 <span class="math inline">\(k\)</span> 主成分にどれだけ効くか」＝<strong>負荷量</strong>で、1節の負荷量の表の1マスです。点の座標は <span class="math inline">\((s_{i1}, s_{i2})\)</span>、矢印の座標は <span class="math inline">\((v_1[j], v_2[j])\)</span>。<strong>同じ主成分の平面 <span class="math inline">\((\text{PC1}, \text{PC2})\)</span> の上に、片や個体、片や変数を置いている</strong>——だから一枚に重ねられる。これがバイプロットが成り立つ理由です（主成分の直交性やスペクトル分解を使って、点と矢印を同じ図に置いてよい条件まで厳密に詰めた議論は、バイプロットという図法そのものを提案した Gabriel の原論文（1971）に譲ります）。逆向きにたどれば <span class="math inline">\(\tilde{x}_{ij} \approx \sum_k s_{ik}\, v_k[j]\)</span>、つまり「スコア×負荷量を足し戻すと元のデータに近づく」という、第11回の再構成と同じ関係がここにも生きています。</p>
-<p><strong>この実データの数字で確かめる</strong>　2成分での寄与率は <strong>PC1 79.8%、PC2 12.1%、合わせて91.9%</strong>（セットアップのセルの実行値）。6変数の情報の9割超が、たった2軸に乗っています。負荷量の表（次のセル）を読むと、PC1 は <code>displacement 0.44 / horsepower 0.43 / weight 0.43 / cylinders 0.43</code> が正、<code>mpg -0.40 / acceleration -0.29</code> が負。<strong>排気量・馬力・重さ・気筒数が同じ向きに束</strong>になり、燃費が逆向き——これが「大きさ・パワーの軸」の中身です。いっぽうスコアの例として、1台目の車（8気筒・排気量307・重さ3504lb の大型車）のスコアは PC1 が <strong>約 +2.3</strong>。大きく重い車なので、大きさ・パワーの正の側に置かれる、と読めます。製造国別の PC1 平均で見ても、アメリカ <strong>+1.03</strong>、ヨーロッパ <strong>−1.58</strong>、日本 <strong>−1.82</strong> と、大型のアメリカ車が正、小型の日本・欧州車が負にきれいに分かれます。</p>
+<p><strong>この実データの数字で確かめる</strong>　2成分での寄与率（proportion of variance explained）は <strong>PC1 79.8%、PC2 12.1%、合わせて91.9%</strong>（セットアップのセルの実行値）。6変数の情報の9割超が、たった2軸に乗っています。負荷量の表（次のセル）を読むと、PC1 は <code>displacement 0.44 / horsepower 0.43 / weight 0.43 / cylinders 0.43</code> が正、<code>mpg -0.40 / acceleration -0.29</code> が負。<strong>排気量・馬力・重さ・気筒数が同じ向きに束</strong>になり、燃費が逆向き——これが「大きさ・パワーの軸」の中身です。いっぽうスコアの例として、1台目の車（8気筒・排気量307・重さ3504lb の大型車）のスコアは PC1 が <strong>約 +2.3</strong>。大きく重い車なので、大きさ・パワーの正の側に置かれる、と読めます。製造国別の PC1 平均で見ても、アメリカ <strong>+1.03</strong>、ヨーロッパ <strong>−1.58</strong>、日本 <strong>−1.82</strong> と、大型のアメリカ車が正、小型の日本・欧州車が負にきれいに分かれます。</p>
 <p><strong>点と矢印を一緒に読む——射影で車の値を当てる</strong>　バイプロットの真価は、点と矢印を<strong>別々にではなく重ねて</strong>読むところにあります。ある車の点から、ある変数の矢印の向きへ<strong>垂線を下ろした足の位置</strong>（射影）が、その車のその変数の大小のめやすになります。矢印の指す先にある点ほど、その変数が大きい。たとえば右のほうに離れて座る大型のアメリカ車は、右向きの <code>weight</code>・<code>displacement</code> の矢印に深く射影されるので「重く排気量が大きい」、左向きの <code>mpg</code> にはマイナス側へ射影されるので「燃費が悪い」と一目で読めます。点だけでは「どの車が似ているか」しか分からず、矢印だけでは「どの変数が効くか」しか分からない。重ねてはじめて「<strong>この車はこの特徴に富む</strong>」が言えるのです。</p>
-<p><strong>用語のひとこと（角度の話への布石）</strong>　<code>sklearn</code> の <code>components_</code> が返すのは<strong>長さ1に正規化した固有ベクトル</strong>で、厳密には「負荷量」というより主成分の<strong>係数（重み）</strong>です。因子分析でいう本来の負荷量＝「変数と主成分の相関」は、これに <span class="math inline">\(\sqrt{\text{固有値}}\)</span> を掛けたもの。ふだんは向きだけ見れば十分なのでこの区別は気にしなくてよいのですが、<strong>次の節の「矢印の角度＝相関」を厳密に言うときだけ</strong>この <span class="math inline">\(\sqrt{\text{固有値}}\)</span> スケーリングが効いてきます。頭の隅に置いておいてください。</p>
+<p><strong>用語のひとこと（角度の話への布石）</strong>　<code>sklearn</code> の <code>components_</code> が返すのは<strong>長さ1に正規化（normalization）した固有ベクトル（eigenvector）</strong>で、厳密には「負荷量」というより主成分の<strong>係数（重み）</strong>です。因子分析でいう本来の負荷量＝「変数と主成分の相関」は、これに <span class="math inline">\(\sqrt{\text{固有値}}\)</span> を掛けたもの。ふだんは向きだけ見れば十分なのでこの区別は気にしなくてよいのですが、<strong>次の節の「矢印の角度＝相関」を厳密に言うときだけ</strong>この <span class="math inline">\(\sqrt{\text{固有値}}\)</span> スケーリング（scaling）が効いてきます。頭の隅に置いておいてください。</p>
 <div id="2f022eb2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>load <span class="op">=</span> pd.DataFrame(pca2.components_.T, index<span class="op">=</span>feat, columns<span class="op">=</span>[<span class="st">&#39;PC1&#39;</span>, <span class="st">&#39;PC2&#39;</span>])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(load.<span class="bu">round</span>(<span class="dv">2</span>).to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3435,7 +3435,7 @@ acceleration -0.29  0.89</code></pre>
 <section id="深掘りなぜ矢印の角度が相関になるのか厳密なのは全次元2次元は近似" class="level3">
 <h3 class="anchored" data-anchor-id="深掘りなぜ矢印の角度が相関になるのか厳密なのは全次元2次元は近似">深掘り：なぜ矢印の角度が相関になるのか——厳密なのは「全次元」、2次元は近似</h3>
 <p>バイプロットの醍醐味は、<strong>矢印どうしの角度</strong>から変数間の相関まで読めることでした——同じ向きなら正の相関、反対向きなら負の相関、直角ならほぼ無相関。TODO② はこれを数値で裏づける作業です。ただしこの「角度＝相関」、<strong>厳密に成り立つのは全次元のときだけ</strong>で、私たちが描く2次元の図では<strong>近似</strong>にすぎません。ここを正しく線引きしておかないと、図を読みすぎて足をすくわれます。</p>
-<p><strong>なぜ角度が相関になるのか（骨子）</strong>　データは標準化済みなので、変数どうしの関係は<strong>相関行列</strong> <span class="math inline">\(R\)</span> にまとまっています。<span class="math inline">\(R\)</span> は対称行列なので固有値分解でき、<span class="math inline">\(R = V \Lambda V^{\top}\)</span>。各変数に <span class="math inline">\(\sqrt{\Lambda}\)</span> を掛けた<strong>変数ベクトル</strong> <span class="math inline">\(g_j = \sqrt{\Lambda}\,(V \text{の第}j\text{行})\)</span> を割り当てると、二つの変数ベクトルの内積は</p>
+<p><strong>なぜ角度が相関になるのか（骨子）</strong>　データは標準化済みなので、変数どうしの関係は<strong>相関行列（correlation matrix）</strong> <span class="math inline">\(R\)</span> にまとまっています。<span class="math inline">\(R\)</span> は対称行列なので固有値分解（eigendecomposition）でき、<span class="math inline">\(R = V \Lambda V^{\top}\)</span>。各変数に <span class="math inline">\(\sqrt{\Lambda}\)</span> を掛けた<strong>変数ベクトル</strong> <span class="math inline">\(g_j = \sqrt{\Lambda}\,(V \text{の第}j\text{行})\)</span> を割り当てると、二つの変数ベクトルの内積は</p>
 <p><span class="math display">\[
 g_i \cdot g_j \;=\; \sum_{k} \lambda_k\, v_k[i]\, v_k[j] \;=\; R_{ij} \;=\; \text{相関}(i, j),
 \qquad \lVert g_j \rVert = \sqrt{R_{jj}} = 1
@@ -3515,13 +3515,13 @@ mpg-acceleration          +0.423      +0.423          -0.232</code></pre>
 <p>上位いくつの主成分で、製造国がどれだけ当たるかを見ます。</p>
 <section id="深掘り主成分を材料にするpcr-とスクリープロットそして意味づけの罠" class="level3">
 <h3 class="anchored" data-anchor-id="深掘り主成分を材料にするpcr-とスクリープロットそして意味づけの罠">深掘り：主成分を材料にする——PCR とスクリープロット、そして意味づけの罠</h3>
-<p>このあとのセルは、見た目より深いことをしています。<strong>元の6変数ではなく、PCAで作った上位 <span class="math inline">\(n\)</span> 個の主成分スコアを材料にして、製造国を当てる</strong>——これは回帰でいう<strong>主成分回帰（PCR, principal component regression）</strong>の分類版です。元の変数を直接使わず、いったんPCで座標を組み替えてから予測に回す、その発想を体験しています。</p>
-<p><strong>なぜPCを材料にすると嬉しいのか</strong>　第7回で見た双子（<code>temp</code> と <code>atemp</code>、相関0.99）を思い出してください。このデータでも <code>displacement</code>・<code>weight</code>・<code>cylinders</code>・<code>horsepower</code> はおおむね0.84〜0.95と互いにべったりで、そのまま回帰に入れると係数が暴れる<strong>多重共線性</strong>の温床です。ところが主成分は<strong>互いに直交（無相関）</strong>に作られるので、PCスコアを材料にすれば共線性が原理的に消え、しかも本数も減らせます。下のセルの結果は、<strong>PC1だけで正解率0.678、6個すべてでも0.722</strong>。たった1軸（大きさ・パワーの軸）で製造国の見分けの大半が付き、軸を足しても伸びはわずか。「国ごとの車づくりの違い」は、ほぼこの1本に凝縮されているわけです。</p>
-<p><strong>発展：何本残すか——スクリープロットで決める</strong>　主成分を何本使うかの目安が<strong>スクリープロット</strong>（がれ場の図）です。各主成分の寄与率を大きい順に並べると、このデータでは <strong>0.80, 0.12, 0.04, 0.02, 0.01, 0.01</strong>。PC1 で崖のように落ち、PC2 のあたりで<strong>肘（elbow）</strong>を折り、その先は小石（scree）のように平ら——この「急落→平坦」の肘までを残す、という読み方です。累積では2本で92%に届くので、可視化には2軸で十分。PCR のように予測が目的なら、肘を目安にしつつ最後は交差検証（第5回）で本数を選ぶのが実務です（PCR を回帰手法の一つとして定式化し、成分数の選び方まで含めて扱った議論は、次元削減を使った回帰を章立てで解説した統計的学習の入門書——James ら『An Introduction to Statistical Learning』の「次元削減法」の節に譲ります）。</p>
-<p><strong>PCR の落とし穴もひとつ</strong>　主成分は<strong>目的変数を見ずに</strong>、分散の大きさだけで選ばれます。だから「分散は小さいが予測には効く方向」があると、上位成分だけ残す PCR はそれを取りこぼす恐れがあります。今回は幸い、最大分散の大きさ・パワー軸（PC1）が製造国とも強く結びついていたので PC1 がそのまま効きました。でも<strong>分散の大きさと予測への効きは別物</strong>——いつも上位成分が効くとは限りません。PCR を使うときは、成分を分散順に足すだけでなく、交差検証で「本当に効く成分か」を見張るのが安全です。</p>
+<p>このあとのセルは、見た目より深いことをしています。<strong>元の6変数ではなく、PCAで作った上位 <span class="math inline">\(n\)</span> 個の主成分スコアを材料にして、製造国を当てる</strong>——これは回帰でいう<strong>主成分回帰（PCR, principal component regression）</strong>の分類（classification）版です。元の変数を直接使わず、いったんPCで座標を組み替えてから予測に回す、その発想を体験しています。</p>
+<p><strong>なぜPCを材料にすると嬉しいのか</strong>　第7回で見た双子（<code>temp</code> と <code>atemp</code>、相関0.99）を思い出してください。このデータでも <code>displacement</code>・<code>weight</code>・<code>cylinders</code>・<code>horsepower</code> はおおむね0.84〜0.95と互いにべったりで、そのまま回帰に入れると係数が暴れる<strong>多重共線性（multicollinearity）</strong>の温床です。ところが主成分は<strong>互いに直交（orthogonal、無相関）</strong>に作られるので、PCスコアを材料にすれば共線性が原理的に消え、しかも本数も減らせます。下のセルの結果は、<strong>PC1だけで正解率0.678、6個すべてでも0.722</strong>。たった1軸（大きさ・パワーの軸）で製造国の見分けの大半が付き、軸を足しても伸びはわずか。「国ごとの車づくりの違い」は、ほぼこの1本に凝縮されているわけです。</p>
+<p><strong>発展：何本残すか——スクリープロット（scree plot）で決める</strong>　主成分を何本使うかの目安が<strong>スクリープロット</strong>（がれ場の図）です。各主成分の寄与率を大きい順に並べると、このデータでは <strong>0.80, 0.12, 0.04, 0.02, 0.01, 0.01</strong>。PC1 で崖のように落ち、PC2 のあたりで<strong>肘（elbow）</strong>を折り、その先は小石（scree）のように平ら——この「急落→平坦」の肘までを残す、という読み方です。累積では2本で92%に届くので、可視化には2軸で十分。PCR のように予測が目的なら、肘を目安にしつつ最後は交差検証（第5回）で本数を選ぶのが実務です（PCR を回帰手法の一つとして定式化し、成分数の選び方まで含めて扱った議論は、次元削減を使った回帰を章立てで解説した統計的学習の入門書——James ら『An Introduction to Statistical Learning』の「次元削減法」の節に譲ります）。</p>
+<p><strong>PCR の落とし穴もひとつ</strong>　主成分は<strong>目的変数（response variable）を見ずに</strong>、分散の大きさだけで選ばれます。だから「分散は小さいが予測には効く方向」があると、上位成分だけ残す PCR はそれを取りこぼす恐れがあります。今回は幸い、最大分散の大きさ・パワー軸（PC1）が製造国とも強く結びついていたので PC1 がそのまま効きました。でも<strong>分散の大きさと予測への効きは別物</strong>——いつも上位成分が効くとは限りません。PCR を使うときは、成分を分散順に足すだけでなく、交差検証（cross-validation）で「本当に効く成分か」を見張るのが安全です。</p>
 <p><strong>つまずきどころ：主成分に「意味」を読み込みすぎない</strong>　私たちは PC1 に「大きさ・パワー」、PC2 に「加速の軸」と名前を付けました。解釈の助けになる一方で、これは<strong>行き過ぎると危険</strong>な操作です。三つ、釘を刺しておきます。</p>
 <ul>
-<li><strong>符号に絶対的な意味はない</strong>　固有値方程式は <span class="math inline">\(v\)</span> でも <span class="math inline">\(-v\)</span> でも成り立つので、主成分の向きの符号はライブラリの都合で決まっているだけ。実行環境が変われば図が左右反転し、「正が大型」が「負が大型」に化けます。読むべきは<strong>軸（向き）であって符号ではない</strong>。</li>
+<li><strong>符号に絶対的な意味はない</strong>　固有値（eigenvalue）方程式は <span class="math inline">\(v\)</span> でも <span class="math inline">\(-v\)</span> でも成り立つので、主成分の向きの符号はライブラリの都合で決まっているだけ。実行環境が変われば図が左右反転し、「正が大型」が「負が大型」に化けます。読むべきは<strong>軸（向き）であって符号ではない</strong>。</li>
 <li><strong>PC1 は5変数の混ぜ物であって「大きさ」という実体ではない</strong>　PC1 の負荷量は <code>0.44, 0.43, 0.43, 0.43, −0.40, −0.29</code> と6変数の重み付き和。「大きさ・パワー」はその混合物に人間が付けた<strong>あだ名</strong>で、世界のどこかに「大きさ変数」が実在するわけではありません。</li>
 <li><strong>きれいな軸ほど疑う</strong>　PC2 は <code>acceleration</code> の負荷量が 0.89 とほぼ単独で、いかにも「加速の軸」に見えます。でもこれは、加速が大きさクラスタとの相関が弱いために、PCA が<strong>余った軸に自動で置いただけ</strong>。データの相関構造の副産物であって、「加速という法則」を発見したわけではありません。</li>
 </ul>
@@ -3567,8 +3567,8 @@ PC 6個: 製造国の正解率 0.722</code></pre>
 </section>
 <section id="次回へ" class="level2">
 <h2 class="anchored" data-anchor-id="次回へ">次回へ</h2>
-<p>たくさんの変数を少数の軸に束ね、その軸に意味を読む——第11回と今日で、次元削減という道具を一周しました。6つの変数の情報が2本の軸で 91.9% まで説明でき、その2本に「大きさ・パワー」「加速」という名前まで付けられました。<strong>列（変数）の方向にデータを要約する道具</strong>、と言い換えてもよいでしょう。</p>
-<p>次回は、要約する向きが変わります。列ではなく<strong>行</strong>——一つひとつの個体を、似た者どうしの群れに分ける。これがクラスタリングです。データも自動車から142か国の統計に移ります。正解ラベルがないのは今日と同じですが、悩みどころは新しくなります。当てる相手がないのに「うまく分かれた」とどうやって判定するのか。そして、群れはいくつに分ければよいのか。教師なし学習でいちばん厄介な問いが、そこで出てきます。</p>
+<p>たくさんの変数を少数の軸に束ね、その軸に意味を読む——第11回と今日で、次元削減（dimensionality reduction）という道具を一周しました。6つの変数の情報が2本の軸で 91.9% まで説明でき、その2本に「大きさ・パワー」「加速」という名前まで付けられました。<strong>列（変数）の方向にデータを要約する道具</strong>、と言い換えてもよいでしょう。</p>
+<p>次回は、要約する向きが変わります。列ではなく<strong>行</strong>——一つひとつの個体を、似た者どうしの群れに分ける。これがクラスタリング（clustering）です。データも自動車から142か国の統計に移ります。正解ラベルがないのは今日と同じですが、悩みどころは新しくなります。当てる相手がないのに「うまく分かれた」とどうやって判定するのか。そして、群れはいくつに分ければよいのか。教師なし学習でいちばん厄介な問いが、そこで出てきます。</p>
 </section>
 <section id="課題提出" class="level2">
 <h2 class="anchored" data-anchor-id="課題提出">課題（提出）</h2>
