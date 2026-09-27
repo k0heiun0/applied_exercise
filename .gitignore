@@ -14,3 +14,6 @@ lectures/*/*/slide_files/
 
 # SDD 作業用スクラッチ（実行台帳・ブリーフ・レビュー資材）
 .superpowers/
+
+# 配布用の書き出し（tools/export_pptx.sh など）
+/dist/

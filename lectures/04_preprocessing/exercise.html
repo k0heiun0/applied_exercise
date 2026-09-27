@@ -3480,7 +3480,7 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p>なぜ「一直線」がまずいか、実データで一目です。季節ごとの平均利用台数を並べると、区分1 <strong>2604</strong> → 区分2 <strong>4992</strong> → 区分3 <strong>5644</strong> → 区分4 <strong>4728</strong> と、<strong>いったん上がってまた下がる山型</strong>で、番号の順にまっすぐ増えてはいません（そもそも <code>season</code> の番号は寒暖の順ですらなく、平均気温が最も高いのは区分3 です）。生の数値で入れると、回帰はこの山型を無理やり 1 本の直線で近似しようとして、山のてっぺんも下り坂も取りこぼします。番号の大小に意味がないカテゴリを、大小のある数として食べさせてしまう危うさが、この山型に表れています。</p>
 <p><strong>なぜ数値化が必要で、one-hot がその答えか</strong>　モデルは数しか食べられないので、カテゴリは何らかの形で数値化せねばなりません。でも番号をそのまま入れれば上の架空順序が混じる。そこで<strong>ワンホットエンコーディング</strong>——値ごとに 0/1 の列を作り、該当する区分の列だけ 1、ほかは 0 にします。順序を持ち込まず、各区分を独立に扱えます。実データでは <code>season</code> と <code>weathersit</code> を展開すると <code>season_1〜season_4</code>・<code>weathersit_1〜weathersit_3</code> の<strong>7 列</strong>ができます。</p>
 <p><strong>ダミー変数（dummy variable）の罠と基準カテゴリ</strong>　ここに落とし穴があります。切片（定数項）を持つモデルに、あるカテゴリの<strong>全</strong>ダミー列を入れると、それらの合計が常に 1（<code>season_1+season_2+season_3+season_4=1</code>）となり、<strong>切片の列とぴったり重なって</strong>しまいます。列同士に完全な一次従属ができ、係数が一意に決まらない——これが<strong>ダミー変数の罠</strong>（多重共線性）です。回避は簡単で、各カテゴリから<strong>1 列だけ落とす</strong>（<code>drop_first=True</code>）。落とした水準が<strong>基準カテゴリ（baseline）</strong>になり、残った列の係数は「基準からの差」を表します。実データでは <code>drop_first</code> すると <code>season_2, season_3, season_4, weathersit_2, weathersit_3</code> の<strong>5 列</strong>になり、基準は <code>season_1</code>（季節の区分1）と <code>weathersit_1</code>（天気の区分1）。たとえば <code>season_4</code> の係数は「基準の区分1に対して、区分4 の日は利用がどれだけ多い／少ないか」を意味します。</p>
-<p>正直に補足すると、<code>sklearn</code> の線形回帰は擬似逆行列（pseudoinverse）で解くので、フル（全列）でも <code>drop_first</code> でも<strong>テスト R² は同じ 0.844</strong>——予測としては壊れません（設計行列で見ると、フルは切片込み 34 列でもランクは 29 で、罠のぶんだけ縮退しています）。それでも <code>drop_first</code> を勧めるのは、<strong>係数を一意に、しかも「基準からの差」として読めるようにする</strong>ためです。精度ではなく解釈のための作法だ、という点は正則化の回の教訓とも通じます。</p>
+<p>正直に補足すると、<code>sklearn</code> の線形回帰は擬似逆行列（pseudoinverse）で解くので、フル（全列）でも <code>drop_first</code> でも<strong>テスト R² は同じ 0.843</strong>——予測としては壊れません（設計行列で見ると、フルは切片込み 34 列でもランクは 29 で、罠のぶんだけ縮退しています）。それでも <code>drop_first</code> を勧めるのは、<strong>係数を一意に、しかも「基準からの差」として読めるようにする</strong>ためです。精度ではなく解釈のための作法だ、という点は正則化の回の教訓とも通じます。</p>
 <p><strong>発展：順序尺度（ordinal scale） vs 名義尺度（nominal scale）</strong>　カテゴリにも二種類あります。<code>season</code>（春夏秋冬）は本質的な順序の薄い<strong>名義尺度</strong>で、one-hot が素直な選択。いっぽう「低・中・高」のように<strong>本来の順序</strong>を持つもの（順序尺度）は、<code>0,1,2</code> と順序を保った整数に写す（ラベルエンコーディング）ほうが、順序という情報を活かせることもあります。名義を無理に整数化しない／順序を無理に捨てない——この使い分けが勘所です。</p>
 <p><strong>発展：ターゲットエンコーディングという一手</strong>　カテゴリの水準数が多いと、one-hot は列が爆発します。代わりに各水準を「その水準での<strong>目的変数の平均</strong>」で置きかえる手（ターゲットエンコーディング）もあります。強力ですが、目的変数を使うぶん<strong>リークしやすい</strong>のが弱点。必ず訓練データだけで平均を学ぶ・交差検証（cross-validation）の内側で計算するといった用心が要ります。深入りはしませんが、「カテゴリの数値化は one-hot だけではない」と知っておくと引き出しが増えます。</p>
 <div id="75445d8e" class="cell" data-execution_count="8">
@@ -3547,7 +3547,7 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p>カテゴリの扱い方だけを変えて、線形回帰のテストR²がどう変わるかを見ます。</p>
 <section id="深掘りr²の差の読み方係数の意味こそ本質リークを防ぐ正しい順序" class="level3">
 <h3 class="anchored" data-anchor-id="深掘りr²の差の読み方係数の意味こそ本質リークを防ぐ正しい順序">深掘り：R²の差の読み方／係数の意味こそ本質／リークを防ぐ正しい順序</h3>
-<p><strong>R² の差をどう読むか</strong>　下のセルでは、カテゴリの扱い方<strong>だけ</strong>を変えて線形回帰を比べます。結果は生の数値扱い <strong>0.829</strong> → ワンホット <strong>0.844</strong>。改善はささやか（+0.015 ほど）で、予測の当たり具合だけを見れば「誤差なら大差ない」と言えます。でも、この回の要点はそこではありません。</p>
+<p><strong>R² の差をどう読むか</strong>　下のセルでは、カテゴリの扱い方<strong>だけ</strong>を変えて線形回帰を比べます。結果は生の数値扱い <strong>0.829</strong> → ワンホット <strong>0.843</strong>。改善はささやか（+0.014 ほど）で、予測の当たり具合だけを見れば「誤差なら大差ない」と言えます。でも、この回の要点はそこではありません。</p>
 <p><strong>係数の意味が正しくなる、が本質</strong>　生の数値のままだと、たとえば <code>mnth</code>（月）を 1 増やすと台数が一定だけ増える、という<strong>直線</strong>を仮定してしまいます。ところが利用台数は冬に少なく夏・秋に多い<strong>山なり</strong>で、1 月から 12 月へまっすぐ増えたりはしません。ワンホットにすれば、各月・各季節が<strong>それぞれ独立の効き目</strong>を持てて、山なりの関係も素直に表せます。R² の小さな差の裏で、<strong>係数の解釈が正しくなる</strong>——これがワンホットの本当の収穫です。第1・2回で「数値の顔をしたカテゴリ」を生のまま入れて宙づりにしていた係数の、ここが後始末にあたります。</p>
 <p><strong>つまずきどころ：リークを防ぐ正しい順序</strong>　三点セット（補完・標準化・ワンホット）を通すときの順序が、この回いちばんの勘所です。正しくは、</p>
 <ol type="1">
@@ -3563,20 +3563,18 @@ z \;=\; \frac{x - \mu}{\sigma}
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;cnt&#39;</span>].values</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>, <span class="st">&#39;yr&#39;</span>, <span class="st">&#39;holiday&#39;</span>, <span class="st">&#39;workingday&#39;</span>]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cat <span class="op">=</span> [<span class="st">&#39;season&#39;</span>, <span class="st">&#39;mnth&#39;</span>, <span class="st">&#39;weekday&#39;</span>, <span class="st">&#39;weathersit&#39;</span>]</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>dfi <span class="op">=</span> df.copy()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>dfi[num] <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>).fit_transform(dfi[num])</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>X_raw <span class="op">=</span> dfi[num <span class="op">+</span> cat].values  <span class="co"># カテゴリを生の数値のまま</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>X_oh <span class="op">=</span> pd.concat([dfi[num],</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    pd.get_dummies(dfi[cat].astype(<span class="st">&#39;category&#39;</span>), drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>)], axis<span class="op">=</span><span class="dv">1</span>).values</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, Xd <span class="kw">in</span> [(<span class="st">&#39;生の数値扱い&#39;</span>, X_raw), (<span class="st">&#39;ワンホット&#39;</span>, X_oh)]:</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    Xtr, Xte, ytr, yte <span class="op">=</span> train_test_split(Xd, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> LinearRegression().fit(Xtr, ytr).score(Xte, yte)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>name<span class="sc">:12s}</span><span class="ss"> テストR²: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_raw <span class="op">=</span> df[num <span class="op">+</span> cat].values.astype(<span class="bu">float</span>)  <span class="co"># カテゴリを生の数値のまま</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>X_oh <span class="op">=</span> pd.concat([df[num],</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    pd.get_dummies(df[cat].astype(<span class="st">&#39;category&#39;</span>), drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>)], axis<span class="op">=</span><span class="dv">1</span>).values</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, Xd <span class="kw">in</span> [(<span class="st">&#39;生の数値扱い&#39;</span>, X_raw), (<span class="st">&#39;ワンホット&#39;</span>, X_oh)]:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    Xtr, Xte, ytr, yte <span class="op">=</span> train_test_split(Xd, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    imp <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>).fit(Xtr)  <span class="co"># 補完の中央値は訓練だけで学ぶ（先に分割してから）</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> LinearRegression().fit(imp.transform(Xtr), ytr).score(imp.transform(Xte), yte)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>name<span class="sc">:12s}</span><span class="ss"> テストR²: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>生の数値扱い       テストR²: 0.829
-ワンホット        テストR²: 0.844</code></pre>
+ワンホット        テストR²: 0.843</code></pre>
 </div>
 </div>
 </section>
@@ -3606,7 +3604,7 @@ z \;=\; \frac{x - \mu}{\sigma}
 <section id="次回へ" class="level2">
 <h2 class="anchored" data-anchor-id="次回へ">次回へ</h2>
 <p>穴を埋め、土俵をそろえ、カテゴリを開く。第3回で組んだ「分けて測る」足場の上に、今日はその手前の工程を積みました。これで、現場から届いたままのデータをひととおり解析できる形に直し、しかもリークを踏まずに評価まで持っていけます。</p>
-<p>ただし、今日ずっと物差しに使ってきたのは R² ひとつでした。生の数値扱い 0.829 とワンホット 0.844 のどちらがましかは言えても、「この予測は 1 日あたり何台ぶん外しているのか」「たまに大外しするのと、毎日少しずつ外すのと、どちらが困るのか」には何も答えていません。整え終わった次は、<strong>測り方そのもの</strong>を詰める段です。第5回では RMSE・MAE といった誤差の物差しを並べ、目的に合った一本を選べるようにします。</p>
+<p>ただし、今日ずっと物差しに使ってきたのは R² ひとつでした。生の数値扱い 0.829 とワンホット 0.843 のどちらがましかは言えても、「この予測は 1 日あたり何台ぶん外しているのか」「たまに大外しするのと、毎日少しずつ外すのと、どちらが困るのか」には何も答えていません。整え終わった次は、<strong>測り方そのもの</strong>を詰める段です。第5回では RMSE・MAE といった誤差の物差しを並べ、目的に合った一本を選べるようにします。</p>
 </section>
 <section id="課題提出" class="level2">
 <h2 class="anchored" data-anchor-id="課題提出">課題（提出）</h2>
@@ -3627,7 +3625,7 @@ z \;=\; \frac{x - \mu}{\sigma}
 </section>
 <section id="応用②判断" class="level3">
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
-<p>応用①で <code>mnth</code> を外したときの<strong>テストR²</strong>を、小数第3位まで（例: 0.812）で答えてください。 あわせて、4節のワンホット（0.844）からどれだけ変わったかも見ておきましょう。</p>
+<p>応用①で <code>mnth</code> を外したときの<strong>テストR²</strong>を、小数第3位まで（例: 0.812）で答えてください。 あわせて、4節のワンホット（0.843）からどれだけ変わったかも見ておきましょう。</p>
 <div id="96e9e72b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
