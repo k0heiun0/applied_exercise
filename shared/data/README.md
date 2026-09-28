@@ -8,6 +8,8 @@
 
 | ファイル | 内容 | 規模 | 原データのライセンス |
 |---|---|---|---|
+| `airbnb_tokyo.csv` | 東京の Airbnb 掲載の部屋の条件と1泊の料金 | 32,361行 × 16列 | CC BY 4.0（Inside Airbnb） |
+| `ames_housing.csv` | 米国エイムズ市の住宅の条件と売買価格 | 2,930行 × 80列 | 文献引用（De Cock 2011） |
 | `bike_day.csv` | シェアサイクルの日別利用台数と気象条件 | 731行 × 16列 | UCI（文献引用を要求） |
 | `bike_hour.csv` | 同、時間別 | 17,379行 × 17列 | UCI（文献引用を要求） |
 | `gapminder.csv` | 国・年ごとの平均寿命、人口、一人当たりGDP | 1,704行 × 8列 | CC-BY（Gapminder Foundation） |
@@ -21,6 +23,15 @@
 ## 出典と引用
 
 再利用する場合は、以下の引用要件に従ってください。
+
+- **Inside Airbnb: Tokyo**（`airbnb_tokyo.csv`）
+  Inside Airbnb, "Tokyo, Kantō, Japan"（2026-06-30 取得）— CC BY 4.0。
+  <http://insideairbnb.com/>　教材用の16列に絞り、ホスト・物件を特定できる列は外した。
+
+- **Ames Housing**（`ames_housing.csv`）
+  De Cock, D. (2011). *Ames, Iowa: Alternative to the Boston Housing Data as an End of
+  Semester Regression Project*. Journal of Statistics Education, 19(3).
+  <https://jse.amstat.org/v19n3/decock/AmesHousing.txt>
 
 - **Bike Sharing**（`bike_day.csv`, `bike_hour.csv`）
   Fanaee-T, H. and Gama, J. (2013). *Event labeling combining ensemble detectors
