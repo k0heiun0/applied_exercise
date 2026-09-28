@@ -3299,23 +3299,7 @@ window.Quarto = {
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="3f20c004" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">2</span>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3f20c004" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3338,10 +3322,10 @@ window.Quarto = {
 <p><strong>「当てはまりの物差し」R² のおさらい</strong>。R²（決定係数）は、目的変数（response variable）のばらつきのうちモデルが説明できた割合で、1に近いほどよく当たっています。同じ R² でも、訓練データで測れば<strong>訓練R²（見かけの性能）</strong>、未知データで測れば<strong>汎化性能（generalization performance）の見積もり</strong>——同じ計算式でも、どのデータで測るかで意味がまるで変わることに注意してください。</p>
 <p><strong>複雑なモデルほど自己採点が甘くなる理由</strong>。モデルに与える自由度（調整できるつまみの数）が多いほど、訓練データの細部——本質ではないたまたまのノイズ——にまで合わせ込めます。合わせ込んだぶん訓練R²は上がりますが、それは実力ではなく暗記。だから自由度の大きいモデルほど、自己採点と本番の落差は開きます。線形回帰でこの落差が小さかったのは「たまたま良いモデルだった」からではなく、「自由度が低くて暗記しにくいモデルだった」から、と理解しておくと応用が利きます。</p>
 <div id="f2ee3c2e" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model_all <span class="op">=</span> LinearRegression().fit(X, y)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>r2_no_split <span class="op">=</span> r2_score(y, model_all.predict(X))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;全データ学習・全データ評価 → R²=</span><span class="sc">{</span>r2_no_split<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;これは学習データでの自己採点（線形回帰では控えめだが、複雑なモデルほど楽観に振れる）&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model_all <span class="op">=</span> LinearRegression().fit(X, y)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>r2_no_split <span class="op">=</span> r2_score(y, model_all.predict(X))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;全データ学習・全データ評価 → R²=</span><span class="sc">{</span>r2_no_split<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;これは学習データでの自己採点（線形回帰では控えめだが、複雑なモデルほど楽観に振れる）&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>全データ学習・全データ評価 → R²=0.8002
 これは学習データでの自己採点（線形回帰では控えめだが、複雑なモデルほど楽観に振れる）</code></pre>
@@ -3360,31 +3344,7 @@ window.Quarto = {
 <p><strong>割合の綱引き</strong>。テスト2割で、訓練584日・テスト147日に分かれます。テストを増やすほど採点は安定しますが、そのぶん学習に回せるデータが減ってモデルが弱くなります。逆にテストが小さすぎると、採点自体が数件の運で揺れます。定番の 8:2 や 7:3 は、この綱引きの落としどころです。</p>
 <p><strong>分割は「未知」の代役にすぎない</strong>。テストデータは、あくまで手元にある既知のデータを未知に見立てた<strong>代役</strong>です。だから一つ暗黙の前提があります——テストデータが、これから相手にする本番のデータと<strong>同じ素性（同じ母集団）</strong>であること。もし本番だけ事情が違えば（たとえば新しい駐輪場、需要構造の変化など）、どれだけ公正に分割してもテストR²は本番を言い当てられません。「テストで良かった＝本番でも安心」が成り立つのは、両者が似た世界から来ているとき、という但し書きを頭の隅に置いてください。</p>
 <p><strong>なお回帰では層化（stratified）しない</strong>。分類（classification）問題では、まれなクラスがテストに偏らないよう割合をそろえて分ける「層化抽出」を使いますが、今回の回帰では素直にシャッフルするだけで足ります。分割の作法も、扱う問題によって少しずつ変わることだけ覚えておきましょう。</p>
-<div id="3f20c005" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：Train/Test 分割のイメージ（手元の全データを訓練とテストに切り分ける）</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(y)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>n_te <span class="op">=</span> <span class="bu">int</span>(np.ceil(n <span class="op">*</span> <span class="fl">0.2</span>))     <span class="co"># test_size=0.2 のときテストに回る日数</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>n_tr <span class="op">=</span> n <span class="op">-</span> n_te</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> <span class="fl">0.96</span> <span class="op">*</span> n_tr <span class="op">/</span> n              <span class="co"># 訓練の帯の幅（8:2 の比をそのまま図の幅にする）</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="fl">3.0</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax.add_patch(plt.Rectangle((<span class="fl">0.02</span>, <span class="fl">0.70</span>), <span class="fl">0.96</span>, <span class="fl">0.22</span>, facecolor<span class="op">=</span><span class="st">&#39;#888&#39;</span>, alpha<span class="op">=</span><span class="fl">0.35</span>))</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.5</span>, <span class="fl">0.81</span>, <span class="ss">f&#39;手元の全データ </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> 日&#39;</span>, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.50</span>), xytext<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.66</span>),</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax.add_patch(plt.Rectangle((<span class="fl">0.02</span>, <span class="fl">0.20</span>), w, <span class="fl">0.28</span>, facecolor<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, alpha<span class="op">=</span><span class="fl">0.85</span>))</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax.add_patch(plt.Rectangle((<span class="fl">0.03</span> <span class="op">+</span> w, <span class="fl">0.20</span>), <span class="fl">0.95</span> <span class="op">-</span> w, <span class="fl">0.28</span>, facecolor<span class="op">=</span><span class="st">&#39;#e76f51&#39;</span>, alpha<span class="op">=</span><span class="fl">0.9</span>))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.02</span> <span class="op">+</span> w <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.34</span>, <span class="ss">f&#39;訓練データ </span><span class="sc">{</span>n_tr<span class="sc">}</span><span class="ss"> 日（学習に使う）&#39;</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;white&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.02</span> <span class="op">+</span> w <span class="op">+</span> (<span class="fl">0.97</span> <span class="op">-</span> w) <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.34</span>, <span class="ss">f&#39;テスト </span><span class="sc">{</span>n_te<span class="sc">}</span><span class="ss"> 日</span><span class="ch">\n</span><span class="ss">（評価用）&#39;</span>,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;white&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.02</span> <span class="op">+</span> w <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.08</span>, <span class="st">&#39;係数はここだけを見て決める&#39;</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.02</span> <span class="op">+</span> w <span class="op">+</span> (<span class="fl">0.97</span> <span class="op">-</span> w) <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.08</span>, <span class="st">&#39;最後まで開けない&#39;</span>,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">&#39;#e76f51&#39;</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3f20c005" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3395,9 +3355,9 @@ window.Quarto = {
 </div>
 <p><strong>この図の読み方</strong>　上の灰色の帯が手元の全データ 731 日、下の二つがそれを切り分けたところです。青が訓練データ 584 日で、モデルの係数はこの帯の中だけを見て決めます。オレンジがテスト 147 日で、こちらは最後の答え合わせまで開けません。帯の幅の比はそのまま 8:2 で、オレンジを広げれば採点は安定し、そのぶん青が痩せてモデルが弱くなる——この節の「割合の綱引き」で書いたことが、帯の幅の取り合いとして見えています。</p>
 <div id="e9e7cc83" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: train_test_split を使って、X と y を訓練8割・テスト2割に分割し、それぞれの件数を表示してください</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 戻り値は「訓練用X・テスト用X・訓練用y・テスト用y」の4つ。分け方を固定する引数（毎回同じ分割にするためのもの）も指定しましょう</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: train_test_split を使って、X と y を訓練8割・テスト2割に分割し、それぞれの件数を表示してください</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 戻り値は「訓練用X・テスト用X・訓練用y・テスト用y」の4つ。分け方を固定する引数（毎回同じ分割にするためのもの）も指定しましょう</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3413,12 +3373,12 @@ window.Quarto = {
 <p><strong>健全な差の目安</strong>。ざっくりした読み方はこうです——訓練R²とテストR²が<strong>どちらも高くて近い</strong>なら理想（今回がこれ）。訓練R²は高いのにテストR²だけ<strong>大きく低い</strong>なら過学習。両方とも<strong>低い</strong>なら、そもそもモデルが単純すぎる未学習を疑います。差そのものより、「二つの水準の組み合わせ」で状態を診断するのがコツです。</p>
 <p><strong>負の差は「狙えない」</strong>。今回テストがわずかに上回りましたが、これを「良いこと」として狙いにいくことはできません。どちらが上に出るかは分割の運まかせで、こちらから操作できないからです。もし操作できてしまったら、それはテストを覗いて調整している——つまり5節で扱うデータリークが起きている合図です。</p>
 <div id="9f11b905" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(X_tr, y_tr)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r2_tr <span class="op">=</span> r2_score(y_tr, model.predict(X_tr))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>r2_te <span class="op">=</span> r2_score(y_te, model.predict(X_te))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;訓練R²  : </span><span class="sc">{</span>r2_tr<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;テストR²: </span><span class="sc">{</span>r2_te<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(X_tr, y_tr)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>r2_tr <span class="op">=</span> r2_score(y_tr, model.predict(X_tr))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>r2_te <span class="op">=</span> r2_score(y_te, model.predict(X_te))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;訓練R²  : </span><span class="sc">{</span>r2_tr<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;テストR²: </span><span class="sc">{</span>r2_te<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>訓練R²  : 0.7911
 テストR²: 0.8277</code></pre>
@@ -3429,9 +3389,9 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="todo②訓練とテストの差を計算する">TODO②：訓練とテストの差を計算する</h3>
 <p>訓練R²とテストR²の差を計算して表示してください。この差が小さいほど「過去問と本番の落差が小さい」＝過学習していないサインです。分割なしのR²（<code>r2_no_split</code>）とテストR²の差も見てみましょう。</p>
 <div id="9981a79f" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 「過去問と本番の落差」を数字にしてみましょう</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 訓練R²とテストR²の引き算。自己採点（r2_no_split）とテストR²の間でも同じ計算をしてみる</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 「過去問と本番の落差」を数字にしてみましょう</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 訓練R²とテストR²の引き算。自己採点（r2_no_split）とテストR²の間でも同じ計算をしてみる</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3492,28 +3452,7 @@ window.Quarto = {
 <p><strong>バイアス（<span class="math inline">\(\text{Bias}\)</span>）</strong> は、モデルの形が単純すぎて本当の構造を取り逃す分です。気温と利用台数の関係が曲がっているのに直線を当てれば、データをどれだけ増やしても、平均的にずれたまま残ります。1次の当てはめでテストR²が 0.4037 止まりだったのは、この取り逃しが効いているからです。バイアスは「データ不足」ではなく「仮定の狭さ」から来る誤差だ、と押さえてください。</p>
 <p><strong>バリアンス（<span class="math inline">\(\text{Var}\)</span>）</strong> は、訓練データの揺れに振り回される分です。同じ仕組みから採り直した別の584日を渡されたら、モデルはどれくらい違う予測を返すか——その散らばりの大きさを指します。次数を上げるほどモデルは訓練データの細部に追随できるようになり、データがわずかに変わるだけで曲線が形を変えます。15次で訓練R²だけが 0.4863 まで伸び、テストR²が 0.4057 と離れていったのは、この振れ幅が育った現れです。</p>
 <p><strong>ノイズ（<span class="math inline">\(\sigma^2\)</span>）</strong> は、どんなモデルにも消せない下限です。同じ気温・同じ曜日・同じ天気の日でも、利用台数はぴったり同じにはなりません。イベント、事故、その日の気まぐれ——説明変数（explanatory variable）に入っていない何かが必ず残ります。だからテスト誤差はゼロにできず、R²が1に届かないのはモデルの失敗ではありません。この三つに分けて考える利点は、<strong>どれが効いているかで打つ手が変わる</strong>ことです。バイアスが大きければモデルを複雑にする・変数を足す。バリアンスが大きければデータを増やす・モデルを単純にする・係数に手綱をつける（第7回の正則化がこれです）。ノイズが支配的なら、それ以上は追わずに引き際を決める。なお、この分解を導く計算——訓練データの取り方について期待値を取り、交差項が消えることを確かめるところ——は、機械学習の標準的な教科書のモデル選択の章に譲ります。ここでは「三つに分かれる」という形だけ持ち帰れば十分です。</p>
-<div id="3f20c008" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：誤差の内訳（概念図）。バイアス²は下がり、バリアンスは上がり、その和がU字になる</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">15</span>, <span class="dv">200</span>)          <span class="co"># モデルの複雑さ（多項式の次数のイメージ）</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>bias2 <span class="op">=</span> <span class="fl">3.0</span> <span class="op">/</span> c                      <span class="co"># 単純すぎて構造を取り逃す分</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>var <span class="op">=</span> <span class="fl">0.012</span> <span class="op">*</span> c <span class="op">**</span> <span class="dv">2</span>                 <span class="co"># 訓練データの揺れに振り回される分</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> np.full_like(c, <span class="fl">0.3</span>)         <span class="co"># どんなモデルでも消せない下限</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>tot <span class="op">=</span> bias2 <span class="op">+</span> var <span class="op">+</span> noise            <span class="co"># 三つの合計＝テスト誤差</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> tot.argmin()</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">4.4</span>))</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>ax.plot(c, bias2, label<span class="op">=</span><span class="st">&#39;バイアス²（単純すぎて外す分）&#39;</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>ax.plot(c, var, label<span class="op">=</span><span class="st">&#39;バリアンス（データの揺れに振られる分）&#39;</span>, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>ax.plot(c, noise, label<span class="op">=</span><span class="st">&#39;ノイズ（誰にも消せない下限）&#39;</span>, color<span class="op">=</span><span class="st">&#39;#999&#39;</span>, ls<span class="op">=</span><span class="st">&#39;:&#39;</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>ax.plot(c, tot, label<span class="op">=</span><span class="st">&#39;合計＝テスト誤差&#39;</span>, color<span class="op">=</span><span class="st">&#39;#1a1a2e&#39;</span>, lw<span class="op">=</span><span class="fl">2.4</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>ax.axvline(c[k], color<span class="op">=</span><span class="st">&#39;#2a9d8f&#39;</span>, ls<span class="op">=</span><span class="st">&#39;--&#39;</span>, lw<span class="op">=</span><span class="fl">1.2</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>ax.plot(c[k], tot[k], <span class="st">&#39;o&#39;</span>, color<span class="op">=</span><span class="st">&#39;#2a9d8f&#39;</span>, ms<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">&#39;ちょうどよい複雑さ&#39;</span>, (c[k], tot[k]), textcoords<span class="op">=</span><span class="st">&#39;offset points&#39;</span>,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">26</span>), color<span class="op">=</span><span class="st">&#39;#2a9d8f&#39;</span>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">&#39;モデルの複雑さ →&#39;</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">&#39;誤差&#39;</span>)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="fl">3.6</span>)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">10</span>, loc<span class="op">=</span><span class="st">&#39;upper center&#39;</span>)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3f20c008" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3525,25 +3464,25 @@ window.Quarto = {
 <p><strong>この図の読み方</strong>　これは<strong>概念図</strong>であって、実際に測った値ではありません（縦軸の目盛りそのものに意味はなく、三つの曲線は形を見せるために置いた式です）。青が下がっていくバイアス²、赤が上がっていくバリアンス、点線が消せないノイズの下限、太い黒がその三つの合計＝テスト誤差です。左端では青が、右端では赤が合計を押し上げていて、押し上げ役が入れ替わっていく途中——緑の破線と丸で示した位置——で黒がいちばん低くなります。底は青と赤が交わる点（この図では横軸6のあたり）ではなく、<strong>青の下がり方と赤の上がり方が釣り合うところ</strong>です。単純すぎても複雑すぎても損をする、というU字の正体がこの綱引きです。</p>
 <p>この節で実際に測るU字は、この絵よりずっと浅くなります。次数15でもパラメータは16個で、訓練584日に対してまだ少なく、赤い曲線が跳ね上がる領域まで届いていないからです。<strong>形の由来をつかむのはこの概念図、深さを測るのは実データ</strong>——と役割を分けて読んでください。</p>
 <div id="ed77bfee" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>X1d_tr <span class="op">=</span> X_tr[:, [<span class="dv">0</span>]]   <span class="co"># temp（気温）だけ</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>X1d_te <span class="op">=</span> X_te[:, [<span class="dv">0</span>]]</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">15</span>]</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>x_plot <span class="op">=</span> np.linspace(X1d_tr.<span class="bu">min</span>(), X1d_tr.<span class="bu">max</span>(), <span class="dv">200</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, d <span class="kw">in</span> <span class="bu">zip</span>(axes, degrees):</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    pipe <span class="op">=</span> Pipeline([(<span class="st">&#39;poly&#39;</span>, PolynomialFeatures(d)), (<span class="st">&#39;lr&#39;</span>, LinearRegression())])</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    pipe.fit(X1d_tr, y_tr)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X1d_tr, y_tr, s<span class="op">=</span><span class="dv">6</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    ax.plot(x_plot, np.clip(pipe.predict(x_plot), <span class="op">-</span><span class="dv">2000</span>, <span class="dv">11000</span>), color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f&#39;</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">次&#39;</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="dv">9000</span>)</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">&#39;多項式の次数と当てはまり（気温→利用台数）&#39;</span>)</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>X1d_tr <span class="op">=</span> X_tr[:, [<span class="dv">0</span>]]   <span class="co"># temp（気温）だけ</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>X1d_te <span class="op">=</span> X_te[:, [<span class="dv">0</span>]]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">15</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>x_plot <span class="op">=</span> np.linspace(X1d_tr.<span class="bu">min</span>(), X1d_tr.<span class="bu">max</span>(), <span class="dv">200</span>).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, d <span class="kw">in</span> <span class="bu">zip</span>(axes, degrees):</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    pipe <span class="op">=</span> Pipeline([(<span class="st">&#39;poly&#39;</span>, PolynomialFeatures(d)), (<span class="st">&#39;lr&#39;</span>, LinearRegression())])</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    pipe.fit(X1d_tr, y_tr)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X1d_tr, y_tr, s<span class="op">=</span><span class="dv">6</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    ax.plot(x_plot, np.clip(pipe.predict(x_plot), <span class="op">-</span><span class="dv">2000</span>, <span class="dv">11000</span>), color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f&#39;</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">次&#39;</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="dv">9000</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">&#39;多項式の次数と当てはまり（気温→利用台数）&#39;</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3557,9 +3496,9 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="todo③次数を変えて過学習を観察する">TODO③：次数を変えて過学習を観察する</h3>
 <p><code>degrees = [1, 3, 8, 15]</code> のそれぞれについて、訓練R²とテストR²を計算して表示してください。次数を上げると訓練R²とテストR²はそれぞれどう動くでしょうか。</p>
 <div id="cf38a515" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 次数ごとに訓練R²とテストR²を計算し、次数を上げると2つがどう動くか観察してください</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: for文で degrees の各次数を回し、その次数のモデルを学習 → 訓練とテストのそれぞれで R² を計算して表示</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 次数ごとに訓練R²とテストR²を計算し、次数を上げると2つがどう動くか観察してください</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: for文で degrees の各次数を回し、その次数のモデルを学習 → 訓練とテストのそれぞれで R² を計算して表示</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3576,10 +3515,10 @@ window.Quarto = {
 <p><strong>コスト</strong>。交差検証は学習を5回繰り返すぶん計算が重くなります。迷ったらまず Train/Test、モデルを比較・選択する大事な場面では交差検証、と使い分けます。データが何百万件もある場面では、1回の分割でも十分に安定します。</p>
 <p><strong>交差検証も万能ではない</strong>。5回の採点は、訓練データを大きく共有しています（どの回も全体の8割が訓練）。そのため5つのスコアは完全には独立でなく、標準偏差（standard deviation）はほんとうの揺れをやや<strong>小さめに</strong>見積もる傾向があります。それでも、1回の分割よりはるかに信頼できる目安です。分割数 K を増やすほど採点は安定しますが計算は重くなり、極端に K をデータ件数まで増やしたものが Leave-One-Out（1件だけテスト）です。時系列やグループ構造があるデータでは、専用の分け方（時系列分割・グループ分割）を使う——これも「問題に合わせて分割を選ぶ」話の延長です。</p>
 <div id="d67fdcb1" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_val_score(LinearRegression(), X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;各回のR²: </span><span class="sc">{</span>scores<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;平均R²: </span><span class="sc">{</span>scores<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> / ばらつき(標準偏差): </span><span class="sc">{</span>scores<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_val_score(LinearRegression(), X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;各回のR²: </span><span class="sc">{</span>scores<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;平均R²: </span><span class="sc">{</span>scores<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> / ばらつき(標準偏差): </span><span class="sc">{</span>scores<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>各回のR²: [0.828 0.746 0.813 0.722 0.808]
 平均R²: 0.783 / ばらつき(標準偏差): 0.042</code></pre>
@@ -3601,23 +3540,23 @@ window.Quarto = {
 <p><strong>順序を仕組みで守る</strong>。前処理の順序を毎回手で守るのはミスのもとです。scikit-learn の<strong>パイプライン（pipeline）</strong>は「標準化→学習」をひとまとめにして、交差検証の各分割の中で自動的に正しい順序（訓練だけで fit）を守ってくれます。仕組みで縛ってしまえば、うっかりリークを構造的に防げます。この道具は第9回の演習で本格的に扱います。</p>
 <p><strong>落とし穴の三点まとめ</strong>。①訓練データで評価して喜ぶ——必ずテストで測る。②前処理を分割の前にやる——リークの典型。③テストを何度も見て調整する——見るたびに少しずつ漏れる。この三つを避け、「テストは最後の答え合わせ」を徹底することが、正しく測る力の土台になります。</p>
 <div id="fdbbfdc8" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NG: 全データで標準化してから分割（テストの平均・分散が漏れる）</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>scaler_leak <span class="op">=</span> StandardScaler()</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>X_scaled_all <span class="op">=</span> scaler_leak.fit_transform(X)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>X_tr_l, X_te_l, y_tr_l, y_te_l <span class="op">=</span> train_test_split(X_scaled_all, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>r2_leak <span class="op">=</span> r2_score(y_te_l, LinearRegression().fit(X_tr_l, y_tr_l).predict(X_te_l))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># OK: 先に分割 → 訓練だけで前処理を学習 → テストには適用のみ</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>scaler_ok <span class="op">=</span> StandardScaler()</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>X_tr_s <span class="op">=</span> scaler_ok.fit_transform(X_tr)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>X_te_s <span class="op">=</span> scaler_ok.transform(X_te)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>r2_ok <span class="op">=</span> r2_score(y_te, LinearRegression().fit(X_tr_s, y_tr).predict(X_te_s))</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame({<span class="st">&#39;手法&#39;</span>: [<span class="st">&#39;分割なし（自己採点）&#39;</span>, <span class="st">&#39;Train/Test分割&#39;</span>, <span class="st">&#39;リークあり&#39;</span>, <span class="st">&#39;正しい順序&#39;</span>],</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;R²&#39;</span>: [r2_no_split, r2_te, r2_leak, r2_ok]})</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;※ 線形回帰には標準化で予測が変わらない性質があるため今回は差が出ない。&#39;</span>)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;   ただし多くの手法では前処理の順序が結果を直接左右する。手順は常に正しく守ること&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NG: 全データで標準化してから分割（テストの平均・分散が漏れる）</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>scaler_leak <span class="op">=</span> StandardScaler()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_scaled_all <span class="op">=</span> scaler_leak.fit_transform(X)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_tr_l, X_te_l, y_tr_l, y_te_l <span class="op">=</span> train_test_split(X_scaled_all, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>r2_leak <span class="op">=</span> r2_score(y_te_l, LinearRegression().fit(X_tr_l, y_tr_l).predict(X_te_l))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># OK: 先に分割 → 訓練だけで前処理を学習 → テストには適用のみ</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>scaler_ok <span class="op">=</span> StandardScaler()</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>X_tr_s <span class="op">=</span> scaler_ok.fit_transform(X_tr)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>X_te_s <span class="op">=</span> scaler_ok.transform(X_te)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>r2_ok <span class="op">=</span> r2_score(y_te, LinearRegression().fit(X_tr_s, y_tr).predict(X_te_s))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame({<span class="st">&#39;手法&#39;</span>: [<span class="st">&#39;分割なし（自己採点）&#39;</span>, <span class="st">&#39;Train/Test分割&#39;</span>, <span class="st">&#39;リークあり&#39;</span>, <span class="st">&#39;正しい順序&#39;</span>],</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;R²&#39;</span>: [r2_no_split, r2_te, r2_leak, r2_ok]})</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;※ 線形回帰には標準化で予測が変わらない性質があるため今回は差が出ない。&#39;</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;   ただし多くの手法では前処理の順序が結果を直接左右する。手順は常に正しく守ること&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          手法       R²
   分割なし（自己採点） 0.800244
@@ -3664,8 +3603,8 @@ Train/Test分割 0.827667
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>2節では <code>random_state=42</code> で1回だけ分割し、テストR²を測りました。今度は分け方を変えて、同じことを5回くり返します。 <code>random_state</code> を 0, 1, 2, 3, 4 の5通りに変えて <code>X</code>, <code>y</code> を訓練8割・テスト2割に分割し、それぞれで <code>LinearRegression</code> を学習して、テストR²を5つ表示してください。</p>
 <div id="56c1ff3b" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3678,8 +3617,8 @@ Train/Test分割 0.827667
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①で得た5つのテストR²のうち、最大と最小の<strong>差</strong>は幾つですか。丸めていない5つの値で差を計算し、その差を小数第2位に丸めて答えてください（例: 0.12）。先に各値を丸めてから引くと答えがずれることがあります。</p>
 <div id="a843d147" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3701,25 +3640,25 @@ Train/Test分割 0.827667
 <p>bike_day は 2011年1月1日から2012年12月31日まで、日付順に並んだ時系列データです。2節や4節のランダムな分割は行をよく混ぜてから分けるので、「2012年の日を訓練に使って2011年の日を当てる」ことが普通に起きます。本番では逆です。手元にあるのは過去だけで、当てたいのはまだ来ていない未来です。未来の情報を訓練に混ぜた評価は、5節のリークと同じで成績を甘く見せます。</p>
 <p>売上・気象・電力など時間順のデータは世の中に多く、この落とし穴はどこにでもあります。<code>TimeSeriesSplit</code> は「過去の区間で学び、その直後の区間で採点する」をくり返す分割で、この順序を守ってくれます。</p>
 <div id="561dd966" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> TimeSeriesSplit</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>kf  <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)   <span class="co"># 4節と同じランダム分割</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>tss <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">5</span>)                        <span class="co"># 過去 → 未来の順で分割</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>s_kf  <span class="op">=</span> cross_val_score(LinearRegression(), X, y, cv<span class="op">=</span>kf,  scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>s_tss <span class="op">=</span> cross_val_score(LinearRegression(), X, y, cv<span class="op">=</span>tss, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;ランダム分割: </span><span class="sc">{</span>s_kf<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">  平均=</span><span class="sc">{</span>s_kf<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;時系列分割  : </span><span class="sc">{</span>s_tss<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">  平均=</span><span class="sc">{</span>s_tss<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> TimeSeriesSplit</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>kf  <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)   <span class="co"># 4節と同じランダム分割</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>tss <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">5</span>)                        <span class="co"># 過去 → 未来の順で分割</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>s_kf  <span class="op">=</span> cross_val_score(LinearRegression(), X, y, cv<span class="op">=</span>kf,  scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>s_tss <span class="op">=</span> cross_val_score(LinearRegression(), X, y, cv<span class="op">=</span>tss, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;ランダム分割: </span><span class="sc">{</span>s_kf<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">  平均=</span><span class="sc">{</span>s_kf<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;時系列分割  : </span><span class="sc">{</span>s_tss<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">  平均=</span><span class="sc">{</span>s_tss<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ランダム分割: [0.828 0.746 0.813 0.722 0.808]  平均=0.783
 時系列分割  : [-4.526  0.249 -0.425 -0.182  0.6  ]  平均=-0.857</code></pre>
 </div>
 </div>
 <div id="b61a2475" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 時系列分割の各回で「どの期間で学び、どの期間を当てたか」を見る</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (tr, te) <span class="kw">in</span> <span class="bu">enumerate</span>(tss.split(X), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">回目: 訓練 </span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[tr[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss">〜</span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[tr[<span class="op">-</span><span class="dv">1</span>]]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="bu">len</span>(tr)<span class="sc">}</span><span class="ss">日)&#39;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f&#39; → テスト </span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[te[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss">〜</span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[te[<span class="op">-</span><span class="dv">1</span>]]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="bu">len</span>(te)<span class="sc">}</span><span class="ss">日)&#39;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f&#39;  R²=</span><span class="sc">{</span>s_tss[i<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 時系列分割の各回で「どの期間で学び、どの期間を当てたか」を見る</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (tr, te) <span class="kw">in</span> <span class="bu">enumerate</span>(tss.split(X), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">回目: 訓練 </span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[tr[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss">〜</span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[tr[<span class="op">-</span><span class="dv">1</span>]]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="bu">len</span>(tr)<span class="sc">}</span><span class="ss">日)&#39;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f&#39; → テスト </span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[te[<span class="dv">0</span>]]<span class="sc">}</span><span class="ss">〜</span><span class="sc">{</span>df[<span class="st">&quot;dteday&quot;</span>]<span class="sc">.</span>iloc[te[<span class="op">-</span><span class="dv">1</span>]]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span><span class="bu">len</span>(te)<span class="sc">}</span><span class="ss">日)&#39;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f&#39;  R²=</span><span class="sc">{</span>s_tss[i<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1回目: 訓練 2011-01-01〜2011-05-06 (126日) → テスト 2011-05-07〜2011-09-04 (121日)  R²=-4.526
 2回目: 訓練 2011-01-01〜2011-09-04 (247日) → テスト 2011-09-05〜2012-01-03 (121日)  R²=0.249

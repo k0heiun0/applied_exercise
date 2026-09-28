@@ -3298,23 +3298,7 @@ window.Quarto = {
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="6e1c0004" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">3</span>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6e1c0004" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3340,10 +3324,10 @@ window.Quarto = {
 <p><strong>係数は「他の変数をそろえたうえでの効き」</strong>　ここが重回帰（multiple regression）の係数の肝で、後の共線性の話にも直結します。重回帰の各係数は、単独の相関とはちがい、<strong>「他の変数をすべて同じ値に固定したまま、その変数だけを1標準偏差（standard deviation）動かしたときの効き」</strong>（偏回帰係数）を表しています。第1回で見た単なる相関が「他をごちゃ混ぜにしたままの一緒の動き」だったのに対し、係数は「他を差し引いた、その変数固有の取り分」です。だからこそ交絡（confounding）をある程度ならして読める——のですが、この「他を固定して1つだけ動かす」が<strong>そもそも成り立たない</strong>変数の組があると、話が崩れます。</p>
 <p><strong>早くも引っかかる点</strong>　一番効きそうな気温 <code>temp</code> が <strong>+371</strong> と、体感温度 <code>atemp</code>（+582）に負けています。気温と体感温度は、いわば同じ「暑さ・寒さ」を測った双子の列（第1回で相関 <strong>0.99</strong> を確認ずみ）。「他を固定して temp だけ動かす」といっても、temp が動けば atemp もほぼ一緒に動いてしまい、二つを別々に固定できません。この宙ぶらりんこそ、5節で正体を暴く<strong>多重共線性</strong>の最初の兆候です。いまは「上位3変数は年・気温まわり・季節」「temp が意外と小さいのが引っかかる」と押さえておけば十分です。</p>
 <div id="8239de83" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: pipe から係数を取り出して、変数名付きの横向き棒グラフを描いてください</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: パイプラインの中のモデルは named_steps[&#39;model&#39;] で指定できます。係数はモデルの coef_ 属性です</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 横向きの棒グラフには barh が使えます。変数名は feature_names に入っています</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: pipe から係数を取り出して、変数名付きの横向き棒グラフを描いてください</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: パイプラインの中のモデルは named_steps[&#39;model&#39;] で指定できます。係数はモデルの coef_ 属性です</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 横向きの棒グラフには barh が使えます。変数名は feature_names に入っています</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3351,9 +3335,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="答え合わせ係数の一覧">2. 答え合わせ：係数の一覧</h2>
 <p>答え合わせも兼ねて、係数を数字の一覧でも確認しておきます。この値を次のTODOで使います。</p>
 <div id="7cbc019e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>coefs <span class="op">=</span> pipe.named_steps[<span class="st">&#39;model&#39;</span>].coef_</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>coef_df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;変数&#39;</span>: feature_names, <span class="st">&#39;標準化係数&#39;</span>: coefs.<span class="bu">round</span>(<span class="dv">0</span>)})</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(coef_df.sort_values(<span class="st">&#39;標準化係数&#39;</span>, key<span class="op">=</span><span class="bu">abs</span>, ascending<span class="op">=</span><span class="va">False</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>coefs <span class="op">=</span> pipe.named_steps[<span class="st">&#39;model&#39;</span>].coef_</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>coef_df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;変数&#39;</span>: feature_names, <span class="st">&#39;標準化係数&#39;</span>: coefs.<span class="bu">round</span>(<span class="dv">0</span>)})</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(coef_df.sort_values(<span class="st">&#39;標準化係数&#39;</span>, key<span class="op">=</span><span class="bu">abs</span>, ascending<span class="op">=</span><span class="va">False</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        変数  標準化係数
         yr 1020.0
@@ -3384,14 +3368,14 @@ workingday   56.0</code></pre>
 <p><strong>なぜそうなるのか（さわりだけ）</strong>　共線性があると、個々の係数の「推定のぶれ幅（標準誤差）」が大きく膨らみます。ぶれ幅が大きいほど「ゼロと区別できない＝非有意」と出やすい。だから<strong>非有意は「効果がない」ではなく「この1変数だけでは効きを切り分けられない」の合図</strong>と読むのが正解です。判断を誤らないコツは、双子を<strong>個別に</strong>見ず、<code>temp+atemp</code> の<strong>合計（グループ）として</strong>「気温まわりは効く」と読むこと。個別係数の額面や有意・非有意に飛びつかない——これが共線性下の解釈の作法です。膨らむぶれ幅の正体は、次の5節で <span class="math inline">\((X^\top X)^{-1}\)</span> と VIF を使って数値で突き止めます。</p>
 <p><strong>もうひとつの落とし穴：係数は「関連」であって「因果」ではない</strong>　翻訳のときに最も踏み外しやすいのがここです。「体感温度の係数が +582 と大きい」を、「<strong>気温を上げれば利用が増える</strong>」と読んではいけません。係数が語るのは、あくまで<strong>データ上でどう一緒に動いていたか（関連）</strong>であって、その変数をこちらが操作したら結果がどう変わるか（因果）ではありません。暖かい季節はお出かけも増える、といった背後の共通要因（交絡）が、気温と利用台数の関連を水増ししている可能性が残るからです。だから報告に書けるのは「<strong>気温まわりの関連が強い</strong>」まで。「気温を上げれば〜」と因果で言い切るには、交絡をそろえた別の慎重な検討が要ります。言い過ぎない勇気も、解釈の作法のうちです。</p>
 <div id="974061c9" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 係数の一覧を見て、??? の部分を自分の言葉で埋めてください</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 定番の型「ばらつき1つぶん大きいと、利用台数がおよそ◯◯台（符号にも注意）」に当てはめます</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ・年（yr）の係数は +1020。</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   → 二年目は、実質およそ ??? 台多い（サービスの普及の効果）</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ・天気（weathersit）の係数はマイナス。</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   → 天気が悪くなるほど、利用台数は ???</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;コメントを埋めてください&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 係数の一覧を見て、??? の部分を自分の言葉で埋めてください</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 定番の型「ばらつき1つぶん大きいと、利用台数がおよそ◯◯台（符号にも注意）」に当てはめます</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ・年（yr）の係数は +1020。</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   → 二年目は、実質およそ ??? 台多い（サービスの普及の効果）</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ・天気（weathersit）の係数はマイナス。</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   → 天気が悪くなるほど、利用台数は ???</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;コメントを埋めてください&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>コメントを埋めてください</code></pre>
 </div>
@@ -3414,10 +3398,10 @@ workingday   56.0</code></pre>
 <p><strong>一致をどう読むか</strong>　線形モデルでは、重要度は係数の大きさを<strong>性能の言葉に言い換えたもの</strong>と読むのが正確です。一致は当然で、とくに双子の <code>temp</code> については、係数も重要度も同じ「重みの分け合い」を映すので、独立な裏取りにはなりません。だからこそ、片方を外す5節の実験や、次の第7回でのブートストラップ（bootstrap）といった、<strong>別角度の確認</strong>が要るのです。並べ替え重要度が本領を発揮するのは、<strong>係数を持たないモデル</strong>（第8回以降のランダムフォレストなど）でも、同じ物差しで変数を比べられるところです。</p>
 <p><strong>重要度の数字は何の単位か</strong>　並べ替え重要度の値（<code>yr</code> の 0.56 など）は、その列を壊したときに<strong>決定係数（coefficient of determination） R² がどれだけ下がったか</strong>を表します。<code>yr</code> を壊すと R² が 0.56 も落ちる＝それだけ予測を支えていた、ということ。絶対値そのものより、<strong>変数どうしの大小関係</strong>を読む道具だと思えば十分です。報告では「係数（向きと大きさ）」と「重要度（壊すと効くか）」を並べて示すと、『どちらへ効くか』と『どれだけ効くか』の両面から根拠を語れて説得力が増します。</p>
 <div id="aac8b7d3" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 並べ替え重要度を計算し、重要度の大きい順に変数名と値を表示してください</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: permutation_importance(pipe, X, y, n_repeats=10, random_state=0) の .importances_mean を使います</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: np.argsort で並べ替えたインデックスが得られます（大きい順にするには [::-1]）</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 並べ替え重要度を計算し、重要度の大きい順に変数名と値を表示してください</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: permutation_importance(pipe, X, y, n_repeats=10, random_state=0) の .importances_mean を使います</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: np.argsort で並べ替えたインデックスが得られます（大きい順にするには [::-1]）</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3443,13 +3427,13 @@ workingday   56.0</code></pre>
 <p><strong>つまずきの総まとめ</strong>　だから共線性の下では——(1) <strong>個々の係数を額面どおり読まない</strong>（+371 は「効きが弱い」ではなく「双子と分け合った取り分」）。(2) <strong>小さい係数・非有意を「効果なし」と早合点しない</strong>（ぶれ幅が膨らんで有意に見えないだけ）。(3) 双子は<strong>合計（グループ）として</strong> 「気温まわりは強く効く」と読む。(4) 予測の精度自体はほとんど落ちない（合計は安定なので）——<strong>精度は出るのに解釈だけが信用できない</strong>、これが多重共線性のいちばん厄介な顔です。</p>
 <p><strong>次への橋渡し</strong>　対策は大きく2つ。素朴には<strong>双子の片方を落とす</strong>（合計が安定なので予測はほぼ変わらない）。もう一つが、平らな谷にわずかな傾きを与えて底を一点に定める<strong>正則化（regularization）</strong>です。係数を安定させて解釈を守るこの道具——リッジ回帰とラッソ回帰——を、<strong>第7回の演習</strong>で自分の手で動かし、ここで暴いた双子に決着をつけます。この回は問題を<strong>暴いて診断する</strong>ところまで。分散の式 <span class="math inline">\(\sigma^2 (X^\top X)^{-1}\)</span> の導出や、VIF が「他の変数で回帰したときの当てはまり」から出てくる筋道に踏み込みたい人は、共線性の診断を体系立てた古典的な文献（Belsley・Kuh・Welsch『Regression Diagnostics』）に譲ります。</p>
 <div id="c737600c" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temp_coef(cols):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> Pipeline([(<span class="st">&#39;s&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, LinearRegression())]).fit(df[cols].values, y)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p.named_steps[<span class="st">&#39;m&#39;</span>].coef_[cols.index(<span class="st">&#39;temp&#39;</span>)]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;全変数のとき  temp の係数: </span><span class="sc">{</span>temp_coef(feature_names)<span class="sc">:+.0f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;atemp を外すと temp の係数: </span><span class="sc">{</span>temp_coef([c <span class="cf">for</span> c <span class="kw">in</span> feature_names <span class="cf">if</span> c<span class="op">!=</span><span class="st">&#39;atemp&#39;</span>])<span class="sc">:+.0f}</span><span class="ss">&quot;</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;→ 双子の atemp を外すと、temp の係数が跳ね上がる（多重共線性）&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> temp_coef(cols):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> Pipeline([(<span class="st">&#39;s&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, LinearRegression())]).fit(df[cols].values, y)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p.named_steps[<span class="st">&#39;m&#39;</span>].coef_[cols.index(<span class="st">&#39;temp&#39;</span>)]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;全変数のとき  temp の係数: </span><span class="sc">{</span>temp_coef(feature_names)<span class="sc">:+.0f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;atemp を外すと temp の係数: </span><span class="sc">{</span>temp_coef([c <span class="cf">for</span> c <span class="kw">in</span> feature_names <span class="cf">if</span> c<span class="op">!=</span><span class="st">&#39;atemp&#39;</span>])<span class="sc">:+.0f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;→ 双子の atemp を外すと、temp の係数が跳ね上がる（多重共線性）&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>全変数のとき  temp の係数: +371
 atemp を外すと temp の係数: +943
@@ -3492,8 +3476,8 @@ atemp を外すと temp の係数: +943
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>1節では、標準化を含むパイプライン <code>pipe</code> の係数（標準化係数）を棒グラフにしました。今度は標準化を外します。 <code>LinearRegression()</code> を生の <code>X</code> にそのまま学習させ、その係数（生係数）を、TODO①と同じ変数名付きの横向き棒グラフにしてください。</p>
 <div id="22c78b68" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3506,8 +3490,8 @@ atemp を外すと temp の係数: +943
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①の生係数で、<strong>絶対値が最大</strong>の変数はどれですか。変数名（<code>feature_names</code> にある英語の列名）で答えてください。</p>
 <div id="29287998" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3536,23 +3520,23 @@ atemp を外すと temp の係数: +943
 <p>SHAP（シャープリー加法的説明）は、1件ごとの予測を「全体の平均予測 ＋ 各変数の寄与」に<strong>分配</strong>する枠組みです。線形回帰なら寄与は「係数 × その日の値のずれ（平均から標準偏差の何倍か）」で、係数の話とぴったりつながります。</p>
 <p>そして同じ枠組みが、ランダムフォレストやニューラルネットのような、係数を持たないモデルにも使えます。「1件を説明する」道具として、一度手を動かしておく価値があります。</p>
 <div id="bfd85493" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていないので、なければインストールする</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;shap&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q shap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていないので、なければインストールする</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;shap&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q shap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="a82f6295" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>X_s <span class="op">=</span> pipe.named_steps[<span class="st">&#39;scaler&#39;</span>].transform(X)                   <span class="co"># 標準化ずみの X（モデルが実際に見ている値）</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>masker <span class="op">=</span> shap.maskers.Independent(X_s, max_samples<span class="op">=</span><span class="bu">len</span>(X_s))   <span class="co"># 全731日を「基準」にする（既定だと100日の標本になる）</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>explainer <span class="op">=</span> shap.Explainer(pipe.named_steps[<span class="st">&#39;model&#39;</span>], masker)  <span class="co"># 線形モデルなので LinearExplainer が選ばれる</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>sv <span class="op">=</span> explainer(X_s)                                             <span class="co"># 全日ぶんの SHAP 値（731行 × 11変数）</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="bu">int</span>(np.argmax(y))                                           <span class="co"># 利用台数が最大だった日</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>df[<span class="st">&#39;dteday&#39;</span>][i]<span class="sc">}</span><span class="ss">：実測 </span><span class="sc">{</span>y[i]<span class="sc">}</span><span class="ss"> 台、予測 </span><span class="sc">{</span>pipe<span class="sc">.</span>predict(X[[i]])[<span class="dv">0</span>]<span class="sc">:.0f}</span><span class="ss"> 台、全日の平均予測 </span><span class="sc">{</span>sv<span class="sc">.</span>base_values[i]<span class="sc">:.0f}</span><span class="ss"> 台&quot;</span>)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> np.argsort(<span class="op">-</span>np.<span class="bu">abs</span>(sv.values[i])):</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>feature_names[j]<span class="sc">:12s}</span><span class="ss"> 値=</span><span class="sc">{</span>X[i, j]<span class="sc">:7.3f}</span><span class="ss">  寄与=</span><span class="sc">{</span>sv<span class="sc">.</span>values[i, j]<span class="sc">:+8.1f}</span><span class="ss"> 台&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>X_s <span class="op">=</span> pipe.named_steps[<span class="st">&#39;scaler&#39;</span>].transform(X)                   <span class="co"># 標準化ずみの X（モデルが実際に見ている値）</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>masker <span class="op">=</span> shap.maskers.Independent(X_s, max_samples<span class="op">=</span><span class="bu">len</span>(X_s))   <span class="co"># 全731日を「基準」にする（既定だと100日の標本になる）</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>explainer <span class="op">=</span> shap.Explainer(pipe.named_steps[<span class="st">&#39;model&#39;</span>], masker)  <span class="co"># 線形モデルなので LinearExplainer が選ばれる</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>sv <span class="op">=</span> explainer(X_s)                                             <span class="co"># 全日ぶんの SHAP 値（731行 × 11変数）</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="bu">int</span>(np.argmax(y))                                           <span class="co"># 利用台数が最大だった日</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>df[<span class="st">&#39;dteday&#39;</span>][i]<span class="sc">}</span><span class="ss">：実測 </span><span class="sc">{</span>y[i]<span class="sc">}</span><span class="ss"> 台、予測 </span><span class="sc">{</span>pipe<span class="sc">.</span>predict(X[[i]])[<span class="dv">0</span>]<span class="sc">:.0f}</span><span class="ss"> 台、全日の平均予測 </span><span class="sc">{</span>sv<span class="sc">.</span>base_values[i]<span class="sc">:.0f}</span><span class="ss"> 台&quot;</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> np.argsort(<span class="op">-</span>np.<span class="bu">abs</span>(sv.values[i])):</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>feature_names[j]<span class="sc">:12s}</span><span class="ss"> 値=</span><span class="sc">{</span>X[i, j]<span class="sc">:7.3f}</span><span class="ss">  寄与=</span><span class="sc">{</span>sv<span class="sc">.</span>values[i, j]<span class="sc">:+8.1f}</span><span class="ss"> 台&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2012-09-15：実測 8714 台、予測 6675 台、全日の平均予測 4504 台
 yr           値=  1.000  寄与= +1019.0 台
@@ -3569,10 +3553,10 @@ holiday      値=  0.000  寄与=   +14.9 台</code></pre>
 </div>
 </div>
 <div id="8921b638" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1日ぶんの寄与を、平均予測から積み上げる滝グラフ（waterfall）にする</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>one <span class="op">=</span> shap.Explanation(values<span class="op">=</span>sv.values[i], base_values<span class="op">=</span>sv.base_values[i],</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                       data<span class="op">=</span>X[i], feature_names<span class="op">=</span>feature_names)   <span class="co"># data に生の値を渡すと、図の左に元の値が出る</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>shap.plots.waterfall(one, max_display<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1日ぶんの寄与を、平均予測から積み上げる滝グラフ（waterfall）にする</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>one <span class="op">=</span> shap.Explanation(values<span class="op">=</span>sv.values[i], base_values<span class="op">=</span>sv.base_values[i],</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                       data<span class="op">=</span>X[i], feature_names<span class="op">=</span>feature_names)   <span class="co"># data に生の値を渡すと、図の左に元の値が出る</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>shap.plots.waterfall(one, max_display<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

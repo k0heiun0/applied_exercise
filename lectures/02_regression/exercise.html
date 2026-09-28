@@ -3294,23 +3294,7 @@ window.Quarto = {
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="c0ba6d9e" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">2</span>}          <span class="co"># ← 回ごとに変える（下の表を参照）</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c0ba6d9e" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3335,12 +3319,12 @@ window.Quarto = {
 <p>第1回の演習で、利用台数と最も強く関係していたのが気温（相関 <strong>0.63</strong>）でした。関係がプラス向きなので、当てはめる直線の傾き a もプラスになるはず——右上がりの直線を1本引く、というのがこの回の主題です。</p>
 <p>問題は、a と b の組み合わせが無数にあること。「点の真ん中を通る感じ」では人によって答えが変わり、他人に説明もできません。そこで、直線の良し悪しを<strong>数字で測る物差し</strong>を用意し、その物差しが最も良くなる一点を選びます。<code>fit()</code> に丸投げすれば一行で答えは出ますが、この演習ではその一行の中身——物差しを決めて最小の点を選ぶ、という手続き——を自分の手で組み立てます。次の節でその物差し（<strong>残差の二乗和</strong>）を作ります。</p>
 <div id="2ed694a0" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/k0heiun0/applied_exercise/main/shared/data&#39;</span>   <span class="co"># データはこのリポジトリから読み込む</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="ss">f&#39;</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/bike_day.csv&#39;</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df[<span class="st">&#39;temp&#39;</span>].values</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;cnt&#39;</span>].values</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;日数: </span><span class="sc">{</span><span class="bu">len</span>(x)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;cnt&#39;</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/k0heiun0/applied_exercise/main/shared/data&#39;</span>   <span class="co"># データはこのリポジトリから読み込む</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="ss">f&#39;</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/bike_day.csv&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df[<span class="st">&#39;temp&#39;</span>].values</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;cnt&#39;</span>].values</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;日数: </span><span class="sc">{</span><span class="bu">len</span>(x)<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;cnt&#39;</span>]].head(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>日数: 731</code></pre>
 </div>
@@ -3402,19 +3386,19 @@ window.Quarto = {
 <p><strong>谷底が一つだけになる</strong>　この SSE を、a・b を軸にした地形として思い浮かべてください。SSE は a・b について<strong>二次式（下に凸の放物面・お椀の形）</strong>なので、くぼみは<strong>ただ一つ</strong>。あちこちに落とし穴があるのではなく、最も低い一点へ向かってするすると下る形をしています。b を各 a に対して最良の値（直線が平均の点を通る値）に合わせて a だけ動かすと、この地形の断面がきれいな<strong>U字</strong>になります。傾きが小さすぎても大きすぎても二乗和は大きく、真ん中の一点で最小——だから「いちばん良い直線」が迷いなく1つに決まります。総当たりで a を細かく振ってU字の底を探すこともできますが、次の節ではこの底を<strong>式一発</strong>で求めます。谷が一つしかない（凸である）という性質こそ、その近道を支える土台です。</p>
 <p><strong>別の見方とつまずき</strong>　物差しは二乗和が唯一ではありません。残差の<strong>絶対値</strong>を足す測り方（平均絶対誤差）もあり、そちらは大外れを二乗ほど重くは罰しません。二乗和を選ぶと計算が「式一発」になる利点がある反面、<strong>極端な1日（外れ値）に直線が引きずられやすい</strong>という弱点も同時に抱えます。大外れを重く数える長所と、外れ値（outlier）に弱い短所は裏表だ——物差しを選ぶとは、こうした性質ごと選ぶことだと覚えておきましょう。</p>
 <div id="d6233cbc" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sse(a, b):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    residual <span class="op">=</span> y <span class="op">-</span> (a <span class="op">*</span> x <span class="op">+</span> b)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (residual <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>()</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>a0, b0 <span class="op">=</span> <span class="dv">9000</span>, <span class="dv">0</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y, s<span class="op">=</span><span class="dv">8</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>xx <span class="op">=</span> np.linspace(x.<span class="bu">min</span>(), x.<span class="bu">max</span>(), <span class="dv">50</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.plot(xx, a0 <span class="op">*</span> xx <span class="op">+</span> b0, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, lw<span class="op">=</span><span class="fl">2.5</span>, label<span class="op">=</span><span class="ss">f&#39;a=</span><span class="sc">{</span>a0<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b0<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;temp&#39;</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;cnt&#39;</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;a=</span><span class="sc">{</span>a0<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b0<span class="sc">}</span><span class="ss"> の残差二乗和: </span><span class="sc">{</span>sse(a0, b0)<span class="sc">:,.0f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sse(a, b):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    residual <span class="op">=</span> y <span class="op">-</span> (a <span class="op">*</span> x <span class="op">+</span> b)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (residual <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>a0, b0 <span class="op">=</span> <span class="dv">9000</span>, <span class="dv">0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(x, y, s<span class="op">=</span><span class="dv">8</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>xx <span class="op">=</span> np.linspace(x.<span class="bu">min</span>(), x.<span class="bu">max</span>(), <span class="dv">50</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.plot(xx, a0 <span class="op">*</span> xx <span class="op">+</span> b0, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, lw<span class="op">=</span><span class="fl">2.5</span>, label<span class="op">=</span><span class="ss">f&#39;a=</span><span class="sc">{</span>a0<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b0<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;temp&#39;</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;cnt&#39;</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;a=</span><span class="sc">{</span>a0<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b0<span class="sc">}</span><span class="ss"> の残差二乗和: </span><span class="sc">{</span>sse(a0, b0)<span class="sc">:,.0f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3431,9 +3415,9 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="todo①自分で-a-b-を選んで二乗和を計算">TODO①：自分で a, b を選んで二乗和を計算</h3>
 <p>散布図を見ながら、<code>a=9000, b=0</code> より当たりそうな a と b を自分で選び、<code>sse()</code> で採点してください。何度か値を変えて、二乗和をどこまで小さくできるか試してみましょう。</p>
 <div id="89495149" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 自分で a と b を選んで、sse(a, b) を計算してください（9000, 0 より小さくできる？）</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 散布図の点の帯は、傾き6600前後・切片1200前後の直線に沿って見える</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 自分で a と b を選んで、sse(a, b) を計算してください（9000, 0 より小さくできる？）</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 散布図の点の帯は、傾き6600前後・切片1200前後の直線に沿って見える</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3461,10 +3445,10 @@ window.Quarto = {
 <p><strong>つまずきどころ：切片 b の意味</strong>　b = <strong>1214.64</strong> は「気温が0のときの基準台数」ですが、これを「気温0の日は約1215台」と真に受けるのは危険です。このデータの気温の最小は <strong>0.059</strong>（最も寒い日でも0より少し大きい）で、気温ちょうど0は<strong>観測の外側</strong>にあります。切片はあくまで直線を縦軸まで伸ばした先の値であって、実際に観測された台数ではない——<strong>式の守備範囲の外</strong>を額面どおり読まない、というのが切片とのつき合い方です。</p>
 <p>厳密な導出（SSE を微分してゼロと置く計算、<span class="math inline">\(X^{\top}X\)</span> に逆行列が存在するための条件など）は、線形（linear）代数の教科書の正規方程式の章に譲ります。ここでは「二乗誤差の谷底が、正射影として一発で決まる」という筋道をつかめれば十分です。</p>
 <div id="68e19e90" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a_best <span class="op">=</span> np.cov(x, y, ddof<span class="op">=</span><span class="dv">0</span>)[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">/</span> np.var(x)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b_best <span class="op">=</span> y.mean() <span class="op">-</span> a_best <span class="op">*</span> x.mean()</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;numpy の最小二乗解: a = </span><span class="sc">{</span>a_best<span class="sc">:.2f}</span><span class="ss">, b = </span><span class="sc">{</span>b_best<span class="sc">:.2f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;そのときの残差二乗和: </span><span class="sc">{</span>sse(a_best, b_best)<span class="sc">:,.0f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a_best <span class="op">=</span> np.cov(x, y, ddof<span class="op">=</span><span class="dv">0</span>)[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">/</span> np.var(x)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b_best <span class="op">=</span> y.mean() <span class="op">-</span> a_best <span class="op">*</span> x.mean()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;numpy の最小二乗解: a = </span><span class="sc">{</span>a_best<span class="sc">:.2f}</span><span class="ss">, b = </span><span class="sc">{</span>b_best<span class="sc">:.2f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;そのときの残差二乗和: </span><span class="sc">{</span>sse(a_best, b_best)<span class="sc">:,.0f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>numpy の最小二乗解: a = 6640.71, b = 1214.64
 そのときの残差二乗和: 1,660,846,807</code></pre>
@@ -3475,9 +3459,9 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="todo②numpy-解と-scikit-learn-の一致確認">TODO②：numpy 解と scikit-learn の一致確認</h3>
 <p><code>LinearRegression</code> を <code>df[[&#39;temp&#39;]]</code> と <code>y</code> で学習させ、係数 <code>coef_</code> と切片 <code>intercept_</code> が上の <code>a_best</code>, <code>b_best</code> と一致することを print で確認してください。</p>
 <div id="fdab3e9d" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: LinearRegression().fit() を実行し、coef_ と intercept_ を a_best, b_best と並べて print してください</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: model = LinearRegression() → model.fit(df[[&#39;temp&#39;]], y) → model.coef_[0] と model.intercept_</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: LinearRegression().fit() を実行し、coef_ と intercept_ を a_best, b_best と並べて print してください</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: model = LinearRegression() → model.fit(df[[&#39;temp&#39;]], y) → model.coef_[0] と model.intercept_</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3540,13 +3524,13 @@ window.Quarto = {
 <p>なお、係数の大きさを公平に比べたいなら、各変数を平均0・ばらつき1に<strong>標準化（standardization）</strong>してから当てはめ、無単位にそろえる手（標準化係数）があります。土俵をそろえれば「1増えたとき」ではなく「1ばらつきぶん動いたとき」の効きで比べられ、大きさの比較に意味が出ます。この演習では未処理のままなので係数の大きさ比べは保留で、標準化して土俵をそろえる話は第7回の演習で扱います。</p>
 <p>最後にもう一点。単回帰の R² <strong>0.394</strong> が、11変数の重回帰で <strong>0.80</strong> まで上がりました。変数を増やすと当てはまりは確かに改善します。ただしどちらも<strong>学習に使ったデータでの自己採点</strong>にすぎず、新しいデータでも同じく当たるかは別問題です（次回のテーマ）。</p>
 <div id="51981a80" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model_temp <span class="op">=</span> LinearRegression()</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>model_temp.fit(df[[<span class="st">&#39;temp&#39;</span>]], y)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model_temp.predict(pd.DataFrame({<span class="st">&#39;temp&#39;</span>: [<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>]}))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, p <span class="kw">in</span> <span class="bu">zip</span>([<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>], pred):</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;気温 </span><span class="sc">{</span>t<span class="sc">:.1f}</span><span class="ss"> → 予測台数 </span><span class="sc">{</span>p<span class="sc">:.0f}</span><span class="ss"> 台&#39;</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>r2_temp <span class="op">=</span> model_temp.score(df[[<span class="st">&#39;temp&#39;</span>]], y)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;temp 単回帰の R2: </span><span class="sc">{</span>r2_temp<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_temp <span class="op">=</span> LinearRegression()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model_temp.fit(df[[<span class="st">&#39;temp&#39;</span>]], y)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model_temp.predict(pd.DataFrame({<span class="st">&#39;temp&#39;</span>: [<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>]}))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t, p <span class="kw">in</span> <span class="bu">zip</span>([<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>], pred):</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;気温 </span><span class="sc">{</span>t<span class="sc">:.1f}</span><span class="ss"> → 予測台数 </span><span class="sc">{</span>p<span class="sc">:.0f}</span><span class="ss"> 台&#39;</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>r2_temp <span class="op">=</span> model_temp.score(df[[<span class="st">&#39;temp&#39;</span>]], y)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;temp 単回帰の R2: </span><span class="sc">{</span>r2_temp<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>気温 0.2 → 予測台数 2543 台
 気温 0.5 → 予測台数 4535 台
@@ -3559,9 +3543,9 @@ temp 単回帰の R2: 0.394</code></pre>
 <h3 class="anchored" data-anchor-id="todo③別の1変数で単回帰して-r²-を比較">TODO③：別の1変数で単回帰して R² を比較</h3>
 <p><code>temp</code> 以外の変数（例: <code>atemp</code>, <code>hum</code>, <code>windspeed</code> など）を1つ選んで単回帰し、R² を <code>temp</code> の場合と比べてください。気温より当てはまる変数はあるでしょうか？ また <code>atemp</code>（体感温度）の結果は <code>temp</code> とどう違うでしょうか？</p>
 <div id="1a26fd35" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: temp 以外の変数を1つ選んで LinearRegression で単回帰し、R2 を r2_temp と比較してください</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: model.fit(df[[&#39;変数名&#39;]], y) → model.score(df[[&#39;変数名&#39;]], y)</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: temp 以外の変数を1つ選んで LinearRegression で単回帰し、R2 を r2_temp と比較してください</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: model.fit(df[[&#39;変数名&#39;]], y) → model.score(df[[&#39;変数名&#39;]], y)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3598,8 +3582,8 @@ temp 単回帰の R2: 0.394</code></pre>
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>4節では気温 <code>temp</code> 1本で単回帰をしました。今度は説明変数を2本にします。 <code>temp</code> と <code>hum</code>（湿度）の2列で <code>LinearRegression</code> を学習し、2つの係数と切片、そして R² を表示してください。</p>
 <div id="ac06b8ad" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3612,8 +3596,8 @@ temp 単回帰の R2: 0.394</code></pre>
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①の R² は、4節の temp 単回帰の R²（<code>r2_temp</code>）から<strong>幾つ上がりました</strong>か。差を<strong>小数第3位まで</strong>答えてください（例: 0.012）。</p>
 <div id="722f79d2" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3636,25 +3620,25 @@ temp 単回帰の R2: 0.394</code></pre>
 <p>同じ最小二乗法でも、統計パッケージ <code>statsmodels</code> を使うと、係数ごとに <strong>p値</strong>（係数が本当は0なのに、これだけ以上0から離れた値が偶然出る確率）と <strong>95%信頼区間</strong>（本当の係数がありそうな幅）が出ます。</p>
 <p>論文や報告書で回帰の結果を示すときは、こちらの表が標準です。応用①と同じ <code>temp</code> と <code>hum</code> の重回帰を、<code>statsmodels</code> で当ててみます。</p>
 <div id="b76cf3c1" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていますが、なければインストールする</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;statsmodels&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q statsmodels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていますが、なければインストールする</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;statsmodels&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q statsmodels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="941e9f08" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(df[[<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>]])   <span class="co"># 切片用の「全部1」の列を先頭に足す</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ols <span class="op">=</span> sm.OLS(y, X).fit()</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ols.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(df[[<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>]])   <span class="co"># 切片用の「全部1」の列を先頭に足す</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ols <span class="op">=</span> sm.OLS(y, X).fit()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ols.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                      y   R-squared:                       0.427
 Model:                            OLS   Adj. R-squared:                  0.425
 Method:                 Least Squares   F-statistic:                     271.0
-Date:                Wed, 23 Sep 2026   Prob (F-statistic):           1.06e-88
-Time:                        01:04:03   Log-Likelihood:                -6366.3
+Date:                Mon, 28 Sep 2026   Prob (F-statistic):           1.06e-88
+Time:                        11:30:46   Log-Likelihood:                -6366.3
 No. Observations:                 731   AIC:                         1.274e+04
 Df Residuals:                     728   BIC:                         1.275e+04
 Df Model:                           2                                         

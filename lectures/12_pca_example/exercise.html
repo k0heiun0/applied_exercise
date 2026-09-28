@@ -3297,23 +3297,7 @@ window.Quarto = {
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="c2b10003" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">3</span>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c2b10003" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3340,8 +3324,8 @@ window.Quarto = {
 <p><strong>点と矢印を一緒に読む——射影で車の値を当てる</strong>　バイプロットの真価は、点と矢印を<strong>別々にではなく重ねて</strong>読むところにあります。ある車の点から、ある変数の矢印の向きへ<strong>垂線を下ろした足の位置</strong>（射影）が、その車のその変数の大小のめやすになります。矢印の指す先にある点ほど、その変数が大きい。たとえば右のほうに離れて座る大型のアメリカ車は、右向きの <code>weight</code>・<code>displacement</code> の矢印に深く射影されるので「重く排気量が大きい」、左向きの <code>mpg</code> にはマイナス側へ射影されるので「燃費が悪い」と一目で読めます。点だけでは「どの車が似ているか」しか分からず、矢印だけでは「どの変数が効くか」しか分からない。重ねてはじめて「<strong>この車はこの特徴に富む</strong>」が言えるのです。</p>
 <p><strong>用語のひとこと（角度の話への布石）</strong>　<code>sklearn</code> の <code>components_</code> が返すのは<strong>長さ1に正規化（normalization）した固有ベクトル（eigenvector）</strong>で、厳密には「負荷量」というより主成分の<strong>係数（重み）</strong>です。因子分析でいう本来の負荷量＝「変数と主成分の相関」は、これに <span class="math inline">\(\sqrt{\text{固有値}}\)</span> を掛けたもの。ふだんは向きだけ見れば十分なのでこの区別は気にしなくてよいのですが、<strong>次の節の「矢印の角度＝相関」を厳密に言うときだけ</strong>この <span class="math inline">\(\sqrt{\text{固有値}}\)</span> スケーリング（scaling）が効いてきます。頭の隅に置いておいてください。</p>
 <div id="2f022eb2" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>load <span class="op">=</span> pd.DataFrame(pca2.components_.T, index<span class="op">=</span>feat, columns<span class="op">=</span>[<span class="st">&#39;PC1&#39;</span>, <span class="st">&#39;PC2&#39;</span>])</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(load.<span class="bu">round</span>(<span class="dv">2</span>).to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>load <span class="op">=</span> pd.DataFrame(pca2.components_.T, index<span class="op">=</span>feat, columns<span class="op">=</span>[<span class="st">&#39;PC1&#39;</span>, <span class="st">&#39;PC2&#39;</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(load.<span class="bu">round</span>(<span class="dv">2</span>).to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               PC1   PC2
 mpg          -0.40 -0.24
@@ -3356,61 +3340,7 @@ acceleration -0.29  0.89</code></pre>
 <section id="図で見るなぜ点と矢印を一枚に重ねられるのか" class="level3">
 <h3 class="anchored" data-anchor-id="図で見るなぜ点と矢印を一枚に重ねられるのか">図で見る：なぜ点と矢印を一枚に重ねられるのか</h3>
 <p>1節の負荷量の表の1行が、変数1本の座標 <span class="math inline">\((v_1[j],\ v_2[j])\)</span> です。いっぽう車1台の座標は <span class="math inline">\((s_{i1},\ s_{i2})\)</span>。どちらも「PC1 の成分・PC2 の成分」という2つの数の組で、<strong>同じ平面の上の位置</strong>にほかなりません。3枚並べて確かめます。</p>
-<div id="c2b10005" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：スコア（点）と負荷量（矢印）は、どちらも同じ PC1–PC2 平面の座標</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> pca2.transform(X_s)      <span class="co"># 392台 × 2 … 個体（車）の座標</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> pca2.components_.T       <span class="co"># 6変数 × 2 … 変数の座標</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> [<span class="dv">94</span>, <span class="dv">52</span>, <span class="dv">297</span>]         <span class="co"># 大型アメリカ車・小型日本車・欧州車を1台ずつ</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>vnames <span class="op">=</span> [<span class="st">&#39;weight&#39;</span>, <span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;acceleration&#39;</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="fl">3.0</span>                      <span class="co"># ③で矢印だけに掛ける共通の倍率（見やすさのため）</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>BLUE, RED <span class="op">=</span> <span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#e63946&#39;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> frame(ax, title, xlim, ylim):</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">&#39;#bbb&#39;</span>, lw<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span> ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">&#39;#bbb&#39;</span>, lw<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">*</span>xlim)<span class="op">;</span> ax.set_ylim(<span class="op">*</span>ylim)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&#39;PC1&#39;</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">&#39;PC2&#39;</span>)<span class="op">;</span> ax.set_title(title, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="fl">4.4</span>))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ① 個体を置く</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>frame(axes[<span class="dv">0</span>], <span class="st">&#39;① 個体を置く：点の座標 $(s_</span><span class="sc">{i1}</span><span class="st">,</span><span class="ch">\\</span><span class="st"> s_</span><span class="sc">{i2}</span><span class="st">)$&#39;</span>, (<span class="op">-</span><span class="fl">4.8</span>, <span class="fl">6.6</span>), (<span class="op">-</span><span class="fl">2.6</span>, <span class="fl">4.0</span>))</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ci <span class="kw">in</span> cars:</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    px, py <span class="op">=</span> S[ci]</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].plot([px, px], [<span class="dv">0</span>, py], ls<span class="op">=</span><span class="st">&#39;:&#39;</span>, color<span class="op">=</span>BLUE, lw<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].plot([<span class="dv">0</span>, px], [py, py], ls<span class="op">=</span><span class="st">&#39;:&#39;</span>, color<span class="op">=</span>BLUE, lw<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].scatter([px], [py], s<span class="op">=</span><span class="dv">70</span>, color<span class="op">=</span>BLUE, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].annotate(<span class="ss">f&quot;</span><span class="sc">{</span><span class="st">&#39; &#39;</span><span class="sc">.</span>join(df[<span class="st">&#39;name&#39;</span>].iloc[ci].split()[:<span class="dv">2</span>])<span class="sc">}</span><span class="ch">\n</span><span class="ss">(</span><span class="sc">{</span>px<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span>py<span class="sc">:.2f}</span><span class="ss">)&quot;</span>,</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                     (px, py), textcoords<span class="op">=</span><span class="st">&#39;offset points&#39;</span>, xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                     ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>BLUE)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ② 変数を置く（目盛りが①より1桁小さいことに注意）</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>frame(axes[<span class="dv">1</span>], <span class="st">&#39;② 変数を置く：矢印の座標 $(v_1[j],</span><span class="ch">\\</span><span class="st"> v_2[j])$</span><span class="ch">\n</span><span class="st">※ 目盛りが①より1桁小さい&#39;</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>      (<span class="op">-</span><span class="fl">1.2</span>, <span class="fl">1.65</span>), (<span class="op">-</span><span class="fl">0.65</span>, <span class="fl">1.15</span>))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> vnames:</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    ax_, ay <span class="op">=</span> L[feat.index(v)]</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].plot([ax_, ax_], [<span class="dv">0</span>, ay], ls<span class="op">=</span><span class="st">&#39;:&#39;</span>, color<span class="op">=</span>RED, lw<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].plot([<span class="dv">0</span>, ax_], [ay, ay], ls<span class="op">=</span><span class="st">&#39;:&#39;</span>, color<span class="op">=</span>RED, lw<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].arrow(<span class="dv">0</span>, <span class="dv">0</span>, ax_, ay, color<span class="op">=</span>RED, width<span class="op">=</span><span class="fl">0.008</span>, head_width<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>                  length_includes_head<span class="op">=</span><span class="va">True</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].annotate(<span class="ss">f&#39;</span><span class="sc">{</span>v<span class="sc">}</span><span class="ch">\n</span><span class="ss">(</span><span class="sc">{</span>ax_<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span>ay<span class="sc">:.2f}</span><span class="ss">)&#39;</span>, (ax_, ay), textcoords<span class="op">=</span><span class="st">&#39;offset points&#39;</span>,</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>                     xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">8</span> <span class="cf">if</span> ay <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="op">-</span><span class="dv">24</span>), ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>RED)</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ③ 重ねる</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>frame(axes[<span class="dv">2</span>], <span class="ss">f&#39;③ 同じ PC1–PC2 平面だから重ねられる</span><span class="ch">\n</span><span class="ss">※ 矢印は</span><span class="sc">{</span>k<span class="sc">:.0f}</span><span class="ss">倍に伸ばして表示&#39;</span>,</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>      (<span class="op">-</span><span class="fl">5.4</span>, <span class="fl">6.6</span>), (<span class="op">-</span><span class="fl">2.6</span>, <span class="fl">4.0</span>))</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ci <span class="kw">in</span> cars:</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    px, py <span class="op">=</span> S[ci]</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">2</span>].scatter([px], [py], s<span class="op">=</span><span class="dv">70</span>, color<span class="op">=</span>BLUE, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">2</span>].annotate(<span class="st">&#39; &#39;</span>.join(df[<span class="st">&#39;name&#39;</span>].iloc[ci].split()[:<span class="dv">2</span>]), (px, py),</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>                     textcoords<span class="op">=</span><span class="st">&#39;offset points&#39;</span>, xytext<span class="op">=</span>(<span class="op">-</span><span class="dv">9</span>, <span class="op">-</span><span class="dv">4</span>), ha<span class="op">=</span><span class="st">&#39;right&#39;</span>,</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>                     fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>BLUE)</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> vnames:</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    ax_, ay <span class="op">=</span> L[feat.index(v)]</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">2</span>].arrow(<span class="dv">0</span>, <span class="dv">0</span>, k <span class="op">*</span> ax_, k <span class="op">*</span> ay, color<span class="op">=</span>RED, width<span class="op">=</span><span class="fl">0.03</span>, head_width<span class="op">=</span><span class="fl">0.18</span>,</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>                  length_includes_head<span class="op">=</span><span class="va">True</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">2</span>].annotate(v, (k <span class="op">*</span> ax_, k <span class="op">*</span> ay), textcoords<span class="op">=</span><span class="st">&#39;offset points&#39;</span>,</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>                     xytext<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span> <span class="cf">if</span> ay <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="op">-</span><span class="dv">12</span>), ha<span class="op">=</span><span class="st">&#39;left&#39;</span>, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>RED)</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c2b10005" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3426,12 +3356,12 @@ acceleration -0.29  0.89</code></pre>
 <h3 class="anchored" data-anchor-id="todo①バイプロットを描く">TODO①：バイプロットを描く</h3>
 <p>スコア（点、製造国 <code>df[&#39;origin&#39;]</code> で色分け）と、負荷量（矢印）を重ねたバイプロットを描いてください。</p>
 <div id="571ae312" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> pca2.transform(X_s)   <span class="co"># スコア（点）</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ld <span class="op">=</span> pca2.components_.T     <span class="co"># 負荷量（矢印）</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 点（scを origin で色分け）と、矢印（ldを原点から）を重ねて描いてください</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 点は plt.scatter、矢印は plt.arrow(0, 0, ld[i,0]*3, ld[i,1]*3, ...) を feat の数だけ</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 変数名は plt.text で矢印の先に添えると読みやすい</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> pca2.transform(X_s)   <span class="co"># スコア（点）</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ld <span class="op">=</span> pca2.components_.T     <span class="co"># 負荷量（矢印）</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 点（scを origin で色分け）と、矢印（ldを原点から）を重ねて描いてください</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 点は plt.scatter、矢印は plt.arrow(0, 0, ld[i,0]*3, ld[i,1]*3, ...) を feat の数だけ</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 変数名は plt.text で矢印の先に添えると読みやすい</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3492,20 +3422,20 @@ g_i \cdot g_j \;=\; \sum_{k} \lambda_k\, v_k[i]\, v_k[j] \;=\; R_{ij} \;=\; \tex
 <p><strong>「長い矢印なら安心」ではない</strong>　ここは誤解しやすい要所です。各変数が2次元の面にどれだけ乗っているか（矢印の長さの二乗＝共通性）を測ると、<code>acceleration</code> は <strong>0.99</strong> とむしろ最も長い部類、<code>mpg</code> も <strong>0.81</strong> と十分に長い。両方とも面にはよく乗っているのに、角度は当てになりませんでした。近似が崩れる原因は<strong>二つ</strong>あります——(1) 矢印が短い（面から外れて情報が落ちている）場合と、(2) 二本の矢印が<strong>ほぼ直角＝真の相関が小さい</strong>場合。後者は、わずかな射影のゆがみで直角の左右どちらにも転びうるため、<strong>長い矢印どうしでも符号が反転しうる</strong>。<code>mpg</code>–<code>acceleration</code> はまさに (2) で、真の相関 +0.42 が小さいがゆえに符号が脆いのです。「矢印が長ければ角度も信じてよい」は、半分しか正しくありません。</p>
 <p><strong>だから、こう読む</strong>　角度から相関を読んでよいのは、<strong>長くて面内に乗った矢印どうし</strong>（今回なら weight・displacement・horsepower・cylinders・mpg のような PC1 上の大物）に限ります。<strong>短い矢印や、ほぼ直角に見える矢印は要注意</strong>——<code>acceleration</code> のように、図の見かけと実際の相関が食い違うことがあります。だからこそ TODO② のように、気になったペアは<strong>必ず数値で相関を確かめる</strong>。「厳密なのは全次元、2次元は便利な近似」という一線が、バイプロットを読みすぎないための最初の歯止めです。</p>
 <div id="deep-angle-02-check" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 深掘りの数値確認：矢印の角度 ↔ 変数の相関（全次元では厳密、描いた2次元は近似）</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> norm</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pcaF <span class="op">=</span> PCA().fit(X_s)                 <span class="co"># 全6次元の主成分</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Vf, ev <span class="op">=</span> pcaF.components_.T, pcaF.explained_variance_</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>V2 <span class="op">=</span> pca2.components_.T               <span class="co"># 図に描いた2次元の矢印（単位ベクトル）</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cos <span class="op">=</span> <span class="kw">lambda</span> a, b: <span class="bu">float</span>(a <span class="op">@</span> b <span class="op">/</span> (norm(a) <span class="op">*</span> norm(b)))</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span><span class="st">&quot;変数ペア&quot;</span><span class="sc">:24s}{</span><span class="st">&quot;相関&quot;</span><span class="sc">:&gt;8}{</span><span class="st">&quot;全次元cos&quot;</span><span class="sc">:&gt;12}{</span><span class="st">&quot;描いた2次元cos&quot;</span><span class="sc">:&gt;16}</span><span class="ss">&#39;</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a, b <span class="kw">in</span> [(<span class="st">&#39;weight&#39;</span>, <span class="st">&#39;displacement&#39;</span>), (<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;weight&#39;</span>), (<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;acceleration&#39;</span>)]:</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> feat.index(a), feat.index(b)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    r  <span class="op">=</span> np.corrcoef(X_s[:, i], X_s[:, j])[<span class="dv">0</span>, <span class="dv">1</span>]</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    cf <span class="op">=</span> cos(Vf[i] <span class="op">*</span> np.sqrt(ev), Vf[j] <span class="op">*</span> np.sqrt(ev))  <span class="co"># √固有値でスケールした全次元ベクトル</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    c2 <span class="op">=</span> cos(V2[i], V2[j])                               <span class="co"># 図の矢印そのもの（2次元・単位）</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>a <span class="op">+</span> <span class="st">&quot;-&quot;</span> <span class="op">+</span> b<span class="sc">:24s}{</span>r<span class="sc">:+8.3f}{</span>cf<span class="sc">:+12.3f}{</span>c2<span class="sc">:+16.3f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># → 全次元cos は相関に厳密一致。2次元cos は mpg-acceleration で符号すら逆になる（読みすぎ注意）</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 深掘りの数値確認：矢印の角度 ↔ 変数の相関（全次元では厳密、描いた2次元は近似）</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> norm</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pcaF <span class="op">=</span> PCA().fit(X_s)                 <span class="co"># 全6次元の主成分</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Vf, ev <span class="op">=</span> pcaF.components_.T, pcaF.explained_variance_</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>V2 <span class="op">=</span> pca2.components_.T               <span class="co"># 図に描いた2次元の矢印（単位ベクトル）</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>cos <span class="op">=</span> <span class="kw">lambda</span> a, b: <span class="bu">float</span>(a <span class="op">@</span> b <span class="op">/</span> (norm(a) <span class="op">*</span> norm(b)))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span><span class="st">&quot;変数ペア&quot;</span><span class="sc">:24s}{</span><span class="st">&quot;相関&quot;</span><span class="sc">:&gt;8}{</span><span class="st">&quot;全次元cos&quot;</span><span class="sc">:&gt;12}{</span><span class="st">&quot;描いた2次元cos&quot;</span><span class="sc">:&gt;16}</span><span class="ss">&#39;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a, b <span class="kw">in</span> [(<span class="st">&#39;weight&#39;</span>, <span class="st">&#39;displacement&#39;</span>), (<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;weight&#39;</span>), (<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;acceleration&#39;</span>)]:</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    i, j <span class="op">=</span> feat.index(a), feat.index(b)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    r  <span class="op">=</span> np.corrcoef(X_s[:, i], X_s[:, j])[<span class="dv">0</span>, <span class="dv">1</span>]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    cf <span class="op">=</span> cos(Vf[i] <span class="op">*</span> np.sqrt(ev), Vf[j] <span class="op">*</span> np.sqrt(ev))  <span class="co"># √固有値でスケールした全次元ベクトル</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    c2 <span class="op">=</span> cos(V2[i], V2[j])                               <span class="co"># 図の矢印そのもの（2次元・単位）</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>a <span class="op">+</span> <span class="st">&quot;-&quot;</span> <span class="op">+</span> b<span class="sc">:24s}{</span>r<span class="sc">:+8.3f}{</span>cf<span class="sc">:+12.3f}{</span>c2<span class="sc">:+16.3f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># → 全次元cos は相関に厳密一致。2次元cos は mpg-acceleration で符号すら逆になる（読みすぎ注意）</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>変数ペア                          相関      全次元cos       描いた2次元cos
 weight-displacement       +0.933      +0.933          +0.940
@@ -3514,9 +3444,9 @@ mpg-acceleration          +0.423      +0.423          -0.232</code></pre>
 </div>
 </div>
 <div id="97997a20" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: weight と displacement、mpg と weight の相関を計算して表示してください</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: np.corrcoef(X_s[:, i], X_s[:, j])[0, 1]。i, j は feat.index(&#39;変数名&#39;) で得られます</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: weight と displacement、mpg と weight の相関を計算して表示してください</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: np.corrcoef(X_s[:, i], X_s[:, j])[0, 1]。i, j は feat.index(&#39;変数名&#39;) で得られます</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3537,14 +3467,14 @@ mpg-acceleration          +0.423      +0.423          -0.232</code></pre>
 </ul>
 <p>要は、<strong>主成分の名前は説明のための便利なラベルであって、実在する対象ではない</strong>。名付けは歓迎ですが、主張はいつも数字（負荷量・相関・寄与率）に錨を下ろす——TODO② で相関を計算して裏を取るのは、まさにこの錨のためです。控えめな解釈、これが読み解きの鉄則です。</p>
 <div id="8c65e11b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;origin&#39;</span>].values</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>]:</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> cross_val_score(Pipeline([(<span class="st">&#39;pca&#39;</span>, PCA(n_components<span class="op">=</span>n)),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                    (<span class="st">&#39;m&#39;</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">5000</span>))]), X_s, y, cv<span class="op">=</span><span class="dv">5</span>).mean()</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;PC </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">個: 製造国の正解率 </span><span class="sc">{</span>acc<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;origin&#39;</span>].values</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>]:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> cross_val_score(Pipeline([(<span class="st">&#39;pca&#39;</span>, PCA(n_components<span class="op">=</span>n)),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                                    (<span class="st">&#39;m&#39;</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">5000</span>))]), X_s, y, cv<span class="op">=</span><span class="dv">5</span>).mean()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;PC </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">個: 製造国の正解率 </span><span class="sc">{</span>acc<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>PC 1個: 製造国の正解率 0.678
 PC 2個: 製造国の正解率 0.676
@@ -3587,8 +3517,8 @@ PC 6個: 製造国の正解率 0.722</code></pre>
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>冒頭のセルでは、標準化した <code>X_s</code> で PCA をしました。今度は標準化を<strong>しません</strong>。 元の値 <code>df[feat]</code> をそのまま <code>PCA(n_components=2)</code> に学習させ、PC1・PC2 の寄与率と、1節と同じ負荷量の表（変数名つき）を表示してください。</p>
 <div id="f2e306cf" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3601,8 +3531,8 @@ PC 6個: 製造国の正解率 0.722</code></pre>
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①で学習した、標準化なしの第1主成分（PC1）の寄与率は何%ですか。<strong>%で小数第1位まで</strong>答えてください（例: 45.6）。</p>
 <div id="d42c0a1b" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3632,22 +3562,22 @@ PC 6個: 製造国の正解率 0.722</code></pre>
 <p>ただし PCR の軸は目的変数を見ずに決まります（3節の深掘りで触れた落とし穴）。そこで、<strong>目的変数との共分散が大きい向き</strong>を軸にする <strong>PLS（partial least squares, 部分的最小二乗）</strong> という手法があります。化学や計測の分野では、説明変数が数百本あるスペクトルデータの標準手法です。</p>
 <p>以下では、素の重回帰・PCR・PLS の3つを、同じ5分割交差検証の R² で比べます。</p>
 <div id="0ae3ebe0" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cross_decomposition <span class="im">import</span> PLSRegression</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> [<span class="st">&#39;cylinders&#39;</span>, <span class="st">&#39;displacement&#39;</span>, <span class="st">&#39;horsepower&#39;</span>, <span class="st">&#39;weight&#39;</span>, <span class="st">&#39;acceleration&#39;</span>]</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>Xp, yp <span class="op">=</span> df[pred].values, df[<span class="st">&#39;mpg&#39;</span>].values</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;重回帰（5変数そのまま）&#39;</span>: Pipeline([(<span class="st">&#39;sc&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, LinearRegression())]),</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;PCR（主成分2個→回帰）&#39;</span>: Pipeline([(<span class="st">&#39;sc&#39;</span>, StandardScaler()), (<span class="st">&#39;pca&#39;</span>, PCA(n_components<span class="op">=</span><span class="dv">2</span>)),</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                                       (<span class="st">&#39;m&#39;</span>, LinearRegression())]),</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;PLS（成分2個）&#39;</span>: Pipeline([(<span class="st">&#39;sc&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, PLSRegression(n_components<span class="op">=</span><span class="dv">2</span>))]),</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, m <span class="kw">in</span> models.items():</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> cross_val_score(m, Xp, yp, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>name<span class="sc">:16s}</span><span class="ss"> CV R² = </span><span class="sc">{</span>r2<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>r2<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cross_decomposition <span class="im">import</span> PLSRegression</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> [<span class="st">&#39;cylinders&#39;</span>, <span class="st">&#39;displacement&#39;</span>, <span class="st">&#39;horsepower&#39;</span>, <span class="st">&#39;weight&#39;</span>, <span class="st">&#39;acceleration&#39;</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Xp, yp <span class="op">=</span> df[pred].values, df[<span class="st">&#39;mpg&#39;</span>].values</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;重回帰（5変数そのまま）&#39;</span>: Pipeline([(<span class="st">&#39;sc&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, LinearRegression())]),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;PCR（主成分2個→回帰）&#39;</span>: Pipeline([(<span class="st">&#39;sc&#39;</span>, StandardScaler()), (<span class="st">&#39;pca&#39;</span>, PCA(n_components<span class="op">=</span><span class="dv">2</span>)),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                                       (<span class="st">&#39;m&#39;</span>, LinearRegression())]),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;PLS（成分2個）&#39;</span>: Pipeline([(<span class="st">&#39;sc&#39;</span>, StandardScaler()), (<span class="st">&#39;m&#39;</span>, PLSRegression(n_components<span class="op">=</span><span class="dv">2</span>))]),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, m <span class="kw">in</span> models.items():</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> cross_val_score(m, Xp, yp, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>name<span class="sc">:16s}</span><span class="ss"> CV R² = </span><span class="sc">{</span>r2<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>r2<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>重回帰（5変数そのまま）     CV R² = 0.689 ± 0.043
 PCR（主成分2個→回帰）    CV R² = 0.683 ± 0.033

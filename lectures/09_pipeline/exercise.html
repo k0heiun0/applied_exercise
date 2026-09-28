@@ -3162,23 +3162,7 @@ vertical-align: -.125em;
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="ced6ff9a" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ced6ff9a" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3205,68 +3189,39 @@ vertical-align: -.125em;
 <p><strong>⑤ つまずきの鉄則：<code>fit</code> をテストに適用しない</strong>　言い換えれば、前処理の<strong>素性（平均・中央値・カテゴリ一覧）を決める <code>fit</code> は、学習データだけで行う</strong>。テストや検証データに対しては、その決まった変換を当てはめる <code>transform</code> <strong>だけ</strong>を行う。<code>scaler.fit(X_test)</code> と書いた瞬間に、テストの平均でテストを標準化してしまい、テストが「未知」でなくなります。Pipeline を使えば <code>fit</code> は学習ぶん、<code>transform</code> はテストぶん、と自動で振り分けられるので、この一線を越えようがありません。この「fit は学習だけ／test には transform だけ」は、第3回・第5回演習で繰り返してきた「テストは最後まで隠す」の、前処理版の言い換えです。分割の作り方（ブートストラップや交差検証といったリサンプリング）ごとに、どんな量が漏れるとどれだけ楽観的な推定になるのかを確率の言葉で書き下す形式的な議論は、リサンプリング法を扱う統計計算の専門書に譲ります。ここでは「各分割の内側で前処理を閉じる」という骨格をつかんでください。</p>
 <p><strong>全体像：一本の流れとして</strong>　ここで組む部品は、教師あり学習の<strong>完成形ワークフロー</strong>の中核です——①データを分割（済み）→ ②<code>ColumnTransformer</code>＋<code>Pipeline</code> で列ごとの前処理とモデルを一本化 → ③次節の <code>GridSearchCV</code> で学習データの内側だけで設定を最適化（optimization） → ④選んだ設定をテストで一度だけ評価 → ⑤納得できたら全データで学習し直して本番へ。手作業なら順序ミスとリークが忍び込む①〜⑤の継ぎ目を、Pipeline が構造的に塞ぎ、GridSearchCV が探索を自動化する。バラバラだった前処理・モデル・評価が、<strong>誰がいつ回しても同じ結果になる一本の流れ</strong>にまとまる——これがこの回の目標そのものです。</p>
 <div id="0d3773e2" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pre <span class="op">=</span> ColumnTransformer([</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;num&#39;</span>, Pipeline([(<span class="st">&#39;imp&#39;</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>)),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                      (<span class="st">&#39;sc&#39;</span>, StandardScaler())]), num),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;cat&#39;</span>, Pipeline([(<span class="st">&#39;imp&#39;</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;most_frequent&#39;</span>)),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                      (<span class="st">&#39;oh&#39;</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">&#39;ignore&#39;</span>))]), cat)])</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> Pipeline([(<span class="st">&#39;pre&#39;</span>, pre), (<span class="st">&#39;model&#39;</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">5000</span>))])</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Pipeline を組みました&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pre <span class="op">=</span> ColumnTransformer([</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;num&#39;</span>, Pipeline([(<span class="st">&#39;imp&#39;</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>)),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                      (<span class="st">&#39;sc&#39;</span>, StandardScaler())]), num),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&#39;cat&#39;</span>, Pipeline([(<span class="st">&#39;imp&#39;</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;most_frequent&#39;</span>)),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                      (<span class="st">&#39;oh&#39;</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">&#39;ignore&#39;</span>))]), cat)])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> Pipeline([(<span class="st">&#39;pre&#39;</span>, pre), (<span class="st">&#39;model&#39;</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">5000</span>))])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Pipeline を組みました&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pipeline を組みました</code></pre>
 </div>
 </div>
 <div id="a09p0005" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># §④の裏取り：前処理を「全データで先に学習」しても、交差検証スコアは変わるか</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> clone</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 正しい：Pipeline を交差検証の内側で回す（前処理も各分割の学習ぶんだけで学習し直す）</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> cross_val_score(Pipeline([(<span class="st">&#39;pre&#39;</span>, clone(pre)),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                    (<span class="st">&#39;model&#39;</span>, LogisticRegression(C<span class="op">=</span><span class="fl">0.1</span>, max_iter<span class="op">=</span><span class="dv">5000</span>))]),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                          X_tr, y_tr, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).mean()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># リークあり：pre を X_tr 全体で先に fit してから交差検証（検証ぶんまで前処理に覗かせる）</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>X_all <span class="op">=</span> clone(pre).fit_transform(X_tr)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>leaky <span class="op">=</span> cross_val_score(LogisticRegression(C<span class="op">=</span><span class="fl">0.1</span>, max_iter<span class="op">=</span><span class="dv">5000</span>),</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                        X_all, y_tr, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).mean()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;正しい（Pipeline を交差検証の内側）: CV AUC = </span><span class="sc">{</span>correct<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;リークあり（全データで先に前処理） : CV AUC = </span><span class="sc">{</span>leaky<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;差: </span><span class="sc">{</span>leaky <span class="op">-</span> correct<span class="sc">:+.4f}</span><span class="ss">  ← 穏やかな前処理なのでほぼ 0。だが Pipeline なら常にタダで安全&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># §④の裏取り：前処理を「全データで先に学習」しても、交差検証スコアは変わるか</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> clone</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 正しい：Pipeline を交差検証の内側で回す（前処理も各分割の学習ぶんだけで学習し直す）</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>correct <span class="op">=</span> cross_val_score(Pipeline([(<span class="st">&#39;pre&#39;</span>, clone(pre)),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                    (<span class="st">&#39;model&#39;</span>, LogisticRegression(C<span class="op">=</span><span class="fl">0.1</span>, max_iter<span class="op">=</span><span class="dv">5000</span>))]),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                          X_tr, y_tr, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).mean()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># リークあり：pre を X_tr 全体で先に fit してから交差検証（検証ぶんまで前処理に覗かせる）</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>X_all <span class="op">=</span> clone(pre).fit_transform(X_tr)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>leaky <span class="op">=</span> cross_val_score(LogisticRegression(C<span class="op">=</span><span class="fl">0.1</span>, max_iter<span class="op">=</span><span class="dv">5000</span>),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                        X_all, y_tr, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).mean()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;正しい（Pipeline を交差検証の内側）: CV AUC = </span><span class="sc">{</span>correct<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;リークあり（全データで先に前処理） : CV AUC = </span><span class="sc">{</span>leaky<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;差: </span><span class="sc">{</span>leaky <span class="op">-</span> correct<span class="sc">:+.4f}</span><span class="ss">  ← 穏やかな前処理なのでほぼ 0。だが Pipeline なら常にタダで安全&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>正しい（Pipeline を交差検証の内側）: CV AUC = 0.8982
 リークあり（全データで先に前処理） : CV AUC = 0.8982
 差: +0.0000  ← 穏やかな前処理なのでほぼ 0。だが Pipeline なら常にタダで安全</code></pre>
 </div>
 </div>
-<div id="b0e60a77" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：Pipeline が束ねるのはどこか（②「前処理とデータ解析」の中身を手順に開く）</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyBboxPatch</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> clone</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n_in <span class="op">=</span> X_tr.shape[<span class="dv">1</span>]                                <span class="co"># 前処理に入る列数</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>n_out <span class="op">=</span> clone(pre).fit_transform(X_tr).shape[<span class="dv">1</span>]     <span class="co"># ワンホットで開いたあとの列数</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">3.2</span>))</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)<span class="op">;</span> ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>acc, gray <span class="op">=</span> <span class="st">&#39;#6741d9&#39;</span>, <span class="st">&#39;#8a8f98&#39;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>steps <span class="op">=</span> [(<span class="st">&#39;手順1</span><span class="ch">\n</span><span class="st">分割&#39;</span>, gray, <span class="fl">0.02</span>),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>         (<span class="ss">f&#39;手順2 前処理</span><span class="ch">\n</span><span class="ss">ColumnTransformer</span><span class="ch">\n</span><span class="sc">{</span>n_in<span class="sc">}</span><span class="ss">列 → </span><span class="sc">{</span>n_out<span class="sc">}</span><span class="ss">列&#39;</span>, acc, <span class="fl">0.28</span>),</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>         (<span class="st">&#39;手順3 モデル</span><span class="ch">\n</span><span class="st">ロジスティック回帰&#39;</span>, acc, <span class="fl">0.53</span>),</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>         (<span class="st">&#39;手順4 評価</span><span class="ch">\n</span><span class="st">交差検証・テスト&#39;</span>, gray, <span class="fl">0.79</span>)]</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>w, h, y0 <span class="op">=</span> <span class="fl">0.19</span>, <span class="fl">0.34</span>, <span class="fl">0.26</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, color, x <span class="kw">in</span> steps:</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(FancyBboxPatch((x, y0), w, h, boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.008&#39;</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                                facecolor<span class="op">=</span>color, edgecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>))</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    ax.text(x <span class="op">+</span> w <span class="op">/</span> <span class="dv">2</span>, y0 <span class="op">+</span> h <span class="op">/</span> <span class="dv">2</span>, label, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0 <span class="kw">in</span> [<span class="fl">0.21</span>, <span class="fl">0.47</span>, <span class="fl">0.72</span>]:</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x0 <span class="op">+</span> <span class="fl">0.055</span>, y0 <span class="op">+</span> h <span class="op">/</span> <span class="dv">2</span>), xytext<span class="op">=</span>(x0, y0 <span class="op">+</span> h <span class="op">/</span> <span class="dv">2</span>),</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#666&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>ax.add_patch(FancyBboxPatch((<span class="fl">0.265</span>, <span class="fl">0.20</span>), <span class="fl">0.485</span>, <span class="fl">0.46</span>, boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.008&#39;</span>,</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                            facecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>, edgecolor<span class="op">=</span>acc, lw<span class="op">=</span><span class="dv">2</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>))</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.508</span>, <span class="fl">0.73</span>, <span class="st">&#39;Pipeline（前処理とモデルを一つの推定器に束ねる）&#39;</span>,</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>, color<span class="op">=</span>acc)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.5</span>, <span class="fl">0.07</span>, <span class="st">&#39;手順1・4 は Pipeline の外側。分割のたびに、破線の中がまるごと学習し直される&#39;</span>,</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>)</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b0e60a77" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3292,10 +3247,10 @@ vertical-align: -.125em;
 <p><strong>発展：総当たりが重いなら「くじ引き」に</strong>　候補が増えると学習回数は掛け算で爆発します（設定Aが5通り × 設定Bが5通り × 5分割 = 125回）。そこで、全部を試さず候補空間から<strong>ランダムに何個か</strong>引く <code>RandomizedSearchCV</code> という手があります。実際、この <code>C</code> を対数一様分布から10個引かせると <code>C ≈ 0.34</code>（CV AUC 0.896）を見つけ、格子で選ばれた <code>C=0.1</code>（0.898）とほぼ同等の谷にちゃんと着地します。候補が広いときは「総当たり（grid）」より「くじ引き（random）」が費用対効果で勝つことが多い、と覚えておくと使い分けが効きます。まずは今の格子で <code>C</code> を探し、<code>best_params_</code> と <code>best_score_</code> を表示してみましょう。</p>
 <p><strong>発展：粗く探してから絞る／モデルの種類も比べる</strong>　計算が爆発するなら、段取りで抑えます。最初は <code>[0.01, 0.1, 1, 10, 100]</code> のように<strong>桁で粗く</strong>当たりをつけ、良さそうな範囲（今回なら 0.1 付近）だけを <code>[0.05, 0.1, 0.2, 0.5]</code> と<strong>細かく</strong>探り直す——この二段構えが定石です。さらに <code>GridSearchCV</code> は <code>C</code> のような数値設定だけでなく、<strong>モデルの種類そのもの</strong>も候補にできます。ロジスティック回帰・決定木（decision tree）・ランダムフォレスト（random forest）を同じ交差検証の土俵に並べれば、「どのモデルがこの問題に向くか」まで同じ手続きで、勘ではなくデータに選ばせられます。</p>
 <div id="628b1f8d" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: param_grid を用意し、GridSearchCV で最良の C を探して、best_params_ と best_score_ を表示してください</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: GridSearchCV(pipe, param_grid, cv=5, scoring=&#39;roc_auc&#39;) を作って fit(X_tr, y_tr)</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 設定名は &#39;model__C&#39;（Pipeline の model ステップの C）</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: param_grid を用意し、GridSearchCV で最良の C を探して、best_params_ と best_score_ を表示してください</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: GridSearchCV(pipe, param_grid, cv=5, scoring=&#39;roc_auc&#39;) を作って fit(X_tr, y_tr)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 設定名は &#39;model__C&#39;（Pipeline の model ステップの C）</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3310,11 +3265,11 @@ vertical-align: -.125em;
 <p><strong>発展：選ぶ手続きごと評価する「ネスト交差検証」</strong>　「<code>C</code> を選ぶ手続き自体は、どれくらいの実力なのか」を偏りなく測りたいなら、<strong>ネストした交差検証（nested CV）</strong>があります。外側の分割で本当のテスト役を取り分け、その内側でだけ <code>GridSearchCV</code> に <code>C</code> を選ばせる——これを外側の各分割で繰り返す二重構造です。選択を毎回“内側”に閉じ込めるので、<code>best_score_</code> の甘さが入りません。このデータで回すと <strong>ネスト CV AUC ≈ 0.906</strong>。楽観的な <code>best_score_</code>（0.898）とほぼ同じで、この選択手続きが安定していることを裏づけます（差が大きく開けば選びすぎを疑う）。ネスト CV は計算が重い代わりに、「モデル選択を含めた手続きの汎化性能（generalization performance）」を正直に見積もる、最も堅い方法です。どんな場面でネストを省くとどれだけ楽観に転ぶのかを数値実験で突き合わせた、モデル選択と性能評価の比較研究の論文が、深追いの入口になります。</p>
 <p><strong>「選びすぎ」は具体的にどう見えるか</strong>　もし候補を数百・数千と増やし、そのどれかがまぐれで交差検証スコアを跳ね上げたとします。すると <code>best_score_</code> は立派な数字になるのに、テストではガクッと落ちる。この<strong>交差検証は良いのにテストが悪い</strong>という食い違いこそ、ハイパーパラメータの過学習（overfitting）の顔です。予防は単純で、候補をむやみに広げない・最後は必ず独立したテスト（あるいは上のネスト CV）で答え合わせをする、の二点。「くじをたくさん引けば、まぐれ当たりも出やすい」——第5回演習の交差検証の教訓が、設定選びの層でもそのまま効いています。</p>
 <div id="6c4a1a80" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {<span class="st">&#39;model__C&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]}</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> GridSearchCV(pipe, param_grid, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).fit(X_tr, y_tr)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;選ばれた C: </span><span class="sc">{</span>gs<span class="sc">.</span>best_params_[<span class="st">&quot;model__C&quot;</span>]<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;交差検証 AUC: </span><span class="sc">{</span>gs<span class="sc">.</span>best_score_<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;テスト AUC : </span><span class="sc">{</span>gs<span class="sc">.</span>score(X_te, y_te)<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {<span class="st">&#39;model__C&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> GridSearchCV(pipe, param_grid, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).fit(X_tr, y_tr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;選ばれた C: </span><span class="sc">{</span>gs<span class="sc">.</span>best_params_[<span class="st">&quot;model__C&quot;</span>]<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;交差検証 AUC: </span><span class="sc">{</span>gs<span class="sc">.</span>best_score_<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;テスト AUC : </span><span class="sc">{</span>gs<span class="sc">.</span>score(X_te, y_te)<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>選ばれた C: 0.1
 交差検証 AUC: 0.898
@@ -3332,9 +3287,9 @@ vertical-align: -.125em;
 <p>差はどれも 0.879〜0.898 と小さく、しかも各点には交差検証の分割ごとのばらつき（<code>std_test_score</code> ≈ 0.04〜0.05）が乗っています。TODO②の図では点を打つだけですが、山の高低差（約0.02）が帯の幅（約0.05）より小さいことも意識すると、「頂上は 0.1 あたりだが、0.1〜100 のどれもそう大差はない」という現実的な読みができます。ハイパーパラメータ探索は、一点を神聖視するより<strong>なだらかな高原のどこに乗っているか</strong>を掴む作業だ、という感覚が役立ちます。</p>
 <p><strong>つまずき：端が選ばれたら範囲を疑う</strong>　もし最良が候補の<strong>端</strong>（<code>0.01</code> や <code>100</code>）だったら要注意です。それは「本当の頂上はもっと外側にあるのに、格子が狭くて途中で切れている」サインで、範囲を広げて探し直すべきです。今回は端ではなく内側の <code>C=0.1</code> で山を作っているので、探索範囲は妥当だった、と確認できます。選ばれた値がグリッドの端でないか——<code>best_params_</code> を出したら必ず目で確かめる習慣をつけてください。</p>
 <div id="4266ff0b" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 横軸C（対数）、縦軸 CV AUC の折れ線グラフを描いてください</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: Cs = [0.01, 0.1, 1, 10, 100]、plt.semilogx(Cs, gs.cv_results_[&#39;mean_test_score&#39;], &#39;o-&#39;)</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 横軸C（対数）、縦軸 CV AUC の折れ線グラフを描いてください</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: Cs = [0.01, 0.1, 1, 10, 100]、plt.semilogx(Cs, gs.cv_results_[&#39;mean_test_score&#39;], &#39;o-&#39;)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3372,8 +3327,8 @@ vertical-align: -.125em;
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>1節の <code>pipe</code> は、モデルがロジスティック回帰でした。今度はモデルだけを差し替えます。 <code>model</code> ステップを <code>RandomForestClassifier(random_state=42)</code> にした Pipeline を作り、<code>param_grid</code> を <code>{&#39;model__max_depth&#39;: [3, 5, None], &#39;model__n_estimators&#39;: [100, 300]}</code> にして、GridSearchCV（cv=5, scoring=‘roc_auc’）で設定を探してください。選ばれた設定と、交差検証 AUC を表示しましょう。 <code>max_depth</code> は木の深さの上限（<code>None</code> は制限なし）、<code>n_estimators</code> は木の本数です。前処理 <code>pre</code> はそのまま使えます。</p>
 <div id="16695792" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3386,8 +3341,8 @@ vertical-align: -.125em;
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①で選ばれたランダムフォレストのテスト AUC は、2節のロジスティック回帰のテスト AUC より<strong>上ですか、下ですか</strong>。「上」か「下」で答えてください。両方の値も小数第3位まで表示しましょう。</p>
 <div id="00d94277" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3416,26 +3371,26 @@ vertical-align: -.125em;
 <p>scikit-learn の外のライブラリですが、scikit-learn と同じ <code>fit</code> / <code>predict</code> の作法で書かれているので、1節の Pipeline の <code>model</code> ステップに<strong>そのまま差し替えられます</strong>。前処理は共通のまま、モデルだけを入れ替えられるのが Pipeline の強みです。</p>
 <p>ただし LightGBM は設定項目（木の本数・学習率・深さなど）が多く、小さなデータでは簡単に過学習します。だから交差検証で成績を確かめるのは必須です。ここでは1節の <code>pre</code> に載せて、ロジスティック回帰と同じ土俵で比べます。</p>
 <div id="167c304c" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていますが、なければインストールする</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;lightgbm&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q lightgbm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていますが、なければインストールする</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;lightgbm&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q lightgbm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="3d60c279" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMClassifier</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>pipe_lgb <span class="op">=</span> Pipeline([(<span class="st">&#39;pre&#39;</span>, pre),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                     (<span class="st">&#39;model&#39;</span>, LGBMClassifier(n_estimators<span class="op">=</span><span class="dv">200</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                              random_state<span class="op">=</span><span class="dv">42</span>, verbose<span class="op">=-</span><span class="dv">1</span>))])</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>cv_lgb <span class="op">=</span> cross_val_score(pipe_lgb, X_tr, y_tr, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).mean()</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>pipe_lgb.fit(X_tr, y_tr)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>test_lgb <span class="op">=</span> roc_auc_score(y_te, pipe_lgb.predict_proba(X_te)[:, <span class="dv">1</span>])</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;モデル                     交差検証 AUC  テスト AUC&#39;</span>)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;ロジスティック回帰 (C=0.1)   </span><span class="sc">{</span>gs<span class="sc">.</span>best_score_<span class="sc">:.3f}</span><span class="ss">        </span><span class="sc">{</span>gs<span class="sc">.</span>score(X_te, y_te)<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;LightGBM                   </span><span class="sc">{</span>cv_lgb<span class="sc">:.3f}</span><span class="ss">        </span><span class="sc">{</span>test_lgb<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMClassifier</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>pipe_lgb <span class="op">=</span> Pipeline([(<span class="st">&#39;pre&#39;</span>, pre),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                     (<span class="st">&#39;model&#39;</span>, LGBMClassifier(n_estimators<span class="op">=</span><span class="dv">200</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                              random_state<span class="op">=</span><span class="dv">42</span>, verbose<span class="op">=-</span><span class="dv">1</span>))])</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>cv_lgb <span class="op">=</span> cross_val_score(pipe_lgb, X_tr, y_tr, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">&#39;roc_auc&#39;</span>).mean()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>pipe_lgb.fit(X_tr, y_tr)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>test_lgb <span class="op">=</span> roc_auc_score(y_te, pipe_lgb.predict_proba(X_te)[:, <span class="dv">1</span>])</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;モデル                     交差検証 AUC  テスト AUC&#39;</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;ロジスティック回帰 (C=0.1)   </span><span class="sc">{</span>gs<span class="sc">.</span>best_score_<span class="sc">:.3f}</span><span class="ss">        </span><span class="sc">{</span>gs<span class="sc">.</span>score(X_te, y_te)<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;LightGBM                   </span><span class="sc">{</span>cv_lgb<span class="sc">:.3f}</span><span class="ss">        </span><span class="sc">{</span>test_lgb<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>モデル                     交差検証 AUC  テスト AUC
 ロジスティック回帰 (C=0.1)   0.898        0.965

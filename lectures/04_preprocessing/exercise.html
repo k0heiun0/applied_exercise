@@ -3300,23 +3300,7 @@ window.Quarto = {
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="4a7c1e04" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">2</span>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4a7c1e04" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3346,16 +3330,16 @@ window.Quarto = {
 <p><strong>MNAR（欠けた値そのものに依存する欠測）</strong>　欠けやすさが、<strong>見えていないその値の大きさ</strong>で決まる場合です。収入を尋ねると収入の高い人ほど答えない、風速計が強風で振り切れて記録が残らない——観測できているのは低いほうに偏った値ばかりなので、その中央値で埋めれば全体を系統的に過小評価します。補完がバイアス（bias）を持ち込む、といういちばん厄介な状況です。しかも手元のデータだけからは MNAR かどうかを確かめる術がありません（欠けた値が見えないのだから当然です）。ここは統計の技術ではなく、<strong>なぜ欠けたかについての現場の知識</strong>で補うしかない領域です。</p>
 <p><strong>多重代入という発想</strong>　もう一つ、中央値補完には MCAR でも残る弱点があります。埋めた値を観測した値と同じ確かさで扱ってしまうため、後段の分析が誤差やばらつきを実際より小さく見積もるのです。<strong>多重代入</strong>は、1 つの値で埋めきらないことでここを直します。もっともらしい値を<strong>ばらつきを持たせて複数回引き当て</strong>、埋め方の違う複数のデータセットを作り、それぞれで同じ分析を回して、最後に結果を統合する。「埋めた値には不確かさがある」ことを、答えの幅として最後まで持ち越す考え方です。この演習では扱いませんが、発想だけ覚えておいてください。どんな仮定（とくに MAR）のもとで複数の結果を統合してよいのか、その理論的な裏づけは、多重代入を最初に定式化した Rubin の原論文と、欠測データ解析の専門書に譲ります。</p>
 <div id="9a31c3a9" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/k0heiun0/applied_exercise/main/shared/data&#39;</span>   <span class="co"># データはこのリポジトリから読み込む</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="ss">f&#39;</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/bike_day.csv&#39;</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>]:</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> rng.choice(df.index, size<span class="op">=</span><span class="bu">int</span>(<span class="bu">len</span>(df) <span class="op">*</span> <span class="fl">0.1</span>), replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    df.loc[idx, col] <span class="op">=</span> np.nan</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;列ごとの欠測数:&#39;</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>, <span class="st">&#39;season&#39;</span>]].isnull().<span class="bu">sum</span>())</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="ch">\n</span><span class="ss">元の日数: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss"> / dropna後: </span><span class="sc">{</span><span class="bu">len</span>(df.dropna())<span class="sc">}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> <span class="st">&#39;https://raw.githubusercontent.com/k0heiun0/applied_exercise/main/shared/data&#39;</span>   <span class="co"># データはこのリポジトリから読み込む</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="ss">f&#39;</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/bike_day.csv&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>]:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> rng.choice(df.index, size<span class="op">=</span><span class="bu">int</span>(<span class="bu">len</span>(df) <span class="op">*</span> <span class="fl">0.1</span>), replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    df.loc[idx, col] <span class="op">=</span> np.nan</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;列ごとの欠測数:&#39;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>, <span class="st">&#39;season&#39;</span>]].isnull().<span class="bu">sum</span>())</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="ch">\n</span><span class="ss">元の日数: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss"> / dropna後: </span><span class="sc">{</span><span class="bu">len</span>(df.dropna())<span class="sc">}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>列ごとの欠測数:
 temp         73
@@ -3373,10 +3357,10 @@ dtype: int64
 <p><code>SimpleImputer</code> を使って、数値列 <code>[&#39;temp&#39;,&#39;atemp&#39;,&#39;hum&#39;,&#39;windspeed&#39;]</code> の欠測を<strong>中央値</strong>で補完し、補完後の NaN の数が 0 になったことを確認してください。</p>
 <p>外れ値（outlier）に強いのは、平均と中央値のどちらだったかを思い出しましょう。</p>
 <div id="a1013218" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: SimpleImputer で df[num_cols] の欠測を中央値で補完し、補完前後の NaN 数を表示してください</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 埋め方は strategy 引数で指定します。基準を学んで適用する、この一連の前処理で何度も出てくるメソッドを使います</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: SimpleImputer で df[num_cols] の欠測を中央値で補完し、補完前後の NaN 数を表示してください</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 埋め方は strategy 引数で指定します。基準を学んで適用する、この一連の前処理で何度も出てくるメソッドを使います</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3396,49 +3380,7 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p><strong>つまずきどころ：訓練で学び、テストに適用する順序（リーク防止）</strong>　標準化の <span class="math inline">\(\mu,\sigma\)</span> も、前節で述べたとおり<strong>データから学んだ値</strong>です。だから正しくは、<strong>訓練データだけで <span class="math inline">\(\mu,\sigma\)</span> を学び（<code>fit</code>）、テストにはその基準を当てはめるだけ（<code>transform</code>）</strong>。全データをまとめて <code>fit</code> すると、テストの情報が <span class="math inline">\(\mu,\sigma\)</span> ににじみ込む——これが<strong>リーク</strong>です。</p>
 <p>ここで正直な但し書きを一つ。この演習の主役である<strong>線形（linear）回帰（最小二乗）は、じつは特徴量（feature）のアフィンな拡大縮小に対して予測が不変</strong>です。仕組みは単純で、たとえば <code>temp</code> を標準化すると（<span class="math inline">\(\div 0.175\)</span> 相当で）列の値が約 5.7 倍に引き伸ばされますが、最小二乗はその列の<strong>係数を逆に約 <span class="math inline">\(0.175\)</span> 倍に縮める</strong>だけ。積 <span class="math inline">\(\beta_{\text{temp}}\times(\text{temp}\)</span> の列<span class="math inline">\()\)</span> は変わらないので、予測 <span class="math inline">\(X\beta\)</span> も、当てはまりも一切動きません。列ごとに引く定数（平均）は切片が丸ごと吸収します。実際、4 節で使う「整えたデータ」で試すと、<strong>標準化なし・訓練だけで学ぶ（正しい）・全データで学ぶ（リーク）の 3 通りとも、線形回帰のテスト R² は 0.8438 で小数点 4 桁まで完全に一致</strong>します。つまり線形回帰では、標準化のリークは結果にまったく出ません。標準化は線形回帰の<strong>精度を上げる操作ではなく、係数を無単位にして公平に見比べられるようにする</strong>操作なのだ、とも言えます。</p>
 <p>では油断してよいかというと、<strong>ダメ</strong>です。同じリークでも、距離や正則化を使うモデルでは <span class="math inline">\(\mu,\sigma\)</span> の違いが予測に効くので、全データで <code>fit</code> したリークはテスト性能を（見かけ上）動かします。要するに手法によって「バレるかバレないか」が違うだけで、<strong>正しい順序は手法に依存せず <code>fit</code>＝訓練・<code>transform</code>＝テストで統一</strong>しておくのが安全なのです。なぜ線形回帰だけがこのアフィン不変性を持つのか——予測は説明変数（explanatory variable）の列が張る空間へ目的変数（response variable）を直交射影（orthogonal projection）したもので、列を定数倍しても平行移動しても張る空間そのものは変わらないから——を、射影行列と正規方程式で厳密に書き下す議論は、回帰を行列と射影の言葉で書き直した専門書の付録に譲ります。</p>
-<div id="4a7c1e06" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：fit / transform の順序（左）と、テストの情報が漏れる経路（右）</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyBboxPatch</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _box(ax, x, y, w, h, text, fc, fs<span class="op">=</span><span class="dv">11</span>):</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.012&#39;</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                                facecolor<span class="op">=</span>fc, edgecolor<span class="op">=</span><span class="st">&#39;none&#39;</span>))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ax.text(x <span class="op">+</span> w <span class="op">/</span> <span class="dv">2</span>, y <span class="op">+</span> h <span class="op">/</span> <span class="dv">2</span>, text, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;white&#39;</span>, fontsize<span class="op">=</span>fs)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="fl">4.4</span>))</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, leak <span class="kw">in</span> <span class="bu">zip</span>(axes, [<span class="va">False</span>, <span class="va">True</span>]):</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">&#39;off&#39;</span>)<span class="op">;</span> ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">&#39;リーク：テストも込みで fit してしまう&#39;</span> <span class="cf">if</span> leak</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                 <span class="cf">else</span> <span class="st">&#39;正しい順序：fit は訓練だけ&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    _box(ax, <span class="fl">0.10</span>, <span class="fl">0.85</span>, <span class="fl">0.80</span>, <span class="fl">0.12</span>, <span class="st">&#39;手元の全データ&#39;</span>, <span class="st">&#39;#888888&#39;</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.30</span>, <span class="fl">0.72</span>), xytext<span class="op">=</span>(<span class="fl">0.40</span>, <span class="fl">0.845</span>),</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="fl">1.6</span>))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.80</span>, <span class="fl">0.72</span>), xytext<span class="op">=</span>(<span class="fl">0.62</span>, <span class="fl">0.845</span>),</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="fl">1.6</span>))</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    _box(ax, <span class="fl">0.06</span>, <span class="fl">0.58</span>, <span class="fl">0.46</span>, <span class="fl">0.14</span>, <span class="st">&#39;訓練データ&#39;</span>, <span class="st">&#39;#0066cc&#39;</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    _box(ax, <span class="fl">0.62</span>, <span class="fl">0.58</span>, <span class="fl">0.32</span>, <span class="fl">0.14</span>, <span class="st">&#39;テスト&#39;</span>, <span class="st">&#39;#e76f51&#39;</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    _box(ax, <span class="fl">0.14</span>, <span class="fl">0.12</span>, <span class="fl">0.72</span>, <span class="fl">0.16</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;前処理の基準</span><span class="ch">\n</span><span class="st">中央値・平均 $</span><span class="ch">\\</span><span class="st">mu$・ばらつき $</span><span class="ch">\\</span><span class="st">sigma$・カテゴリの顔ぶれ&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>)</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.26</span>, <span class="fl">0.29</span>), xytext<span class="op">=</span>(<span class="fl">0.26</span>, <span class="fl">0.57</span>),          <span class="co"># fit：訓練 → 基準</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, lw<span class="op">=</span><span class="fl">2.4</span>))</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.245</span>, <span class="fl">0.43</span>, <span class="st">&#39;fit&#39;</span>, ha<span class="op">=</span><span class="st">&#39;right&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    c_tr <span class="op">=</span> <span class="st">&#39;#e63946&#39;</span> <span class="cf">if</span> leak <span class="cf">else</span> <span class="st">&#39;#555&#39;</span>                            <span class="co"># transform：基準 → 訓練</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.42</span>, <span class="fl">0.57</span>), xytext<span class="op">=</span>(<span class="fl">0.42</span>, <span class="fl">0.29</span>),</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span>c_tr, lw<span class="op">=</span><span class="fl">1.4</span>))</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.435</span>, <span class="fl">0.43</span>, <span class="st">&#39;transform&#39;</span>, ha<span class="op">=</span><span class="st">&#39;left&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span>c_tr, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.78</span>, <span class="fl">0.57</span>), xytext<span class="op">=</span>(<span class="fl">0.78</span>, <span class="fl">0.29</span>),           <span class="co"># transform：基準 → テスト</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="fl">1.4</span>))</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.795</span>, <span class="fl">0.43</span>, <span class="st">&#39;transform&#39;</span>, ha<span class="op">=</span><span class="st">&#39;left&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> leak:</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(<span class="fl">0.68</span>, <span class="fl">0.29</span>), xytext<span class="op">=</span>(<span class="fl">0.68</span>, <span class="fl">0.57</span>),       <span class="co"># fit：テスト → 基準（漏れ）</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, lw<span class="op">=</span><span class="fl">2.4</span>))</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>        ax.text(<span class="fl">0.665</span>, <span class="fl">0.43</span>, <span class="st">&#39;fit&#39;</span>, ha<span class="op">=</span><span class="st">&#39;right&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>        ax.text(<span class="fl">0.5</span>, <span class="fl">0.035</span>, <span class="st">&#39;テストの値が基準に混ざり、訓練側へ戻る＝リーク&#39;</span>,</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        ax.text(<span class="fl">0.5</span>, <span class="fl">0.035</span>, <span class="st">&#39;テストは transform を受け取るだけ&#39;</span>,</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4a7c1e06" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3450,12 +3392,12 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p><strong>この図の読み方</strong>　左が正しい順序、右がリークです。どちらも上の灰色が手元の全データ、青が訓練データ、オレンジがテスト、下の緑が前処理の基準——補完の中央値、標準化の <span class="math inline">\(\mu\)</span> と <span class="math inline">\(\sigma\)</span>、カテゴリの顔ぶれ——を入れる箱です。下向きの太い矢印が <code>fit</code>（基準を学ぶ向き）、上向きの細い矢印が <code>transform</code>（学んだ基準を当てはめる向き）。左では緑の箱へ入る矢印が<strong>訓練からの青い1本だけ</strong>で、テストは transform を受け取るだけ。だからテストの値は基準に一切入りません。</p>
 <p>右で増えているのは<strong>赤い矢印2本</strong>です。1本目はテストから緑の箱へ下りる <code>fit</code>——分割の前に全データへ <code>fit_transform</code> を呼ぶのは、この矢印を足すのと同じことです。2本目はそこから訓練へ戻る <code>transform</code> で、これが<strong>漏れの経路</strong>。テストの値が混ざった基準が訓練側の変換に使われ、モデルは前処理を通じてテストを間接的に覗いています。左右の図は形がほとんど同じで、違いは赤い矢印の有無だけ——コードの上でも、<code>fit</code> を分割の前に呼ぶか後に呼ぶかという一行の差でしかありません。だから目で見て気づけず、順序を機械的に守るしかないのです。</p>
 <div id="d3472c39" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X_imputed <span class="op">=</span> imputer.fit_transform(df[num_cols])</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X_imputed)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;補完＋標準化 完了&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X_imputed <span class="op">=</span> imputer.fit_transform(df[num_cols])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X_imputed)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;補完＋標準化 完了&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>補完＋標準化 完了</code></pre>
 </div>
@@ -3465,9 +3407,9 @@ z \;=\; \frac{x - \mu}{\sigma}
 <h3 class="anchored" data-anchor-id="todo②標準化の前後で平均とばらつきを確かめる">TODO②：標準化の前後で平均とばらつきを確かめる</h3>
 <p><code>X_imputed</code>（標準化前）と <code>X_scaled</code>（標準化後）のそれぞれについて、各列の<strong>平均</strong>と<strong>標準偏差</strong>を計算して比べてください。標準化後は平均がほぼ0・標準偏差がほぼ1になっているでしょうか。</p>
 <div id="91736109" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 標準化前（X_imputed）と標準化後（X_scaled）の各列について、平均と標準偏差を表示してください</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 「列ごと」に計算するには axis の指定が必要です</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 標準化前（X_imputed）と標準化後（X_scaled）の各列について、平均と標準偏差を表示してください</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 「列ごと」に計算するには axis の指定が必要です</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3484,8 +3426,8 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p><strong>発展：順序尺度（ordinal scale） vs 名義尺度（nominal scale）</strong>　カテゴリにも二種類あります。<code>season</code>（春夏秋冬）は本質的な順序の薄い<strong>名義尺度</strong>で、one-hot が素直な選択。いっぽう「低・中・高」のように<strong>本来の順序</strong>を持つもの（順序尺度）は、<code>0,1,2</code> と順序を保った整数に写す（ラベルエンコーディング）ほうが、順序という情報を活かせることもあります。名義を無理に整数化しない／順序を無理に捨てない——この使い分けが勘所です。</p>
 <p><strong>発展：ターゲットエンコーディングという一手</strong>　カテゴリの水準数が多いと、one-hot は列が爆発します。代わりに各水準を「その水準での<strong>目的変数の平均</strong>」で置きかえる手（ターゲットエンコーディング）もあります。強力ですが、目的変数を使うぶん<strong>リークしやすい</strong>のが弱点。必ず訓練データだけで平均を学ぶ・交差検証（cross-validation）の内側で計算するといった用心が要ります。深入りはしませんが、「カテゴリの数値化は one-hot だけではない」と知っておくと引き出しが増えます。</p>
 <div id="75445d8e" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cat_cols <span class="op">=</span> [<span class="st">&#39;season&#39;</span>, <span class="st">&#39;weathersit&#39;</span>]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df[cat_cols].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cat_cols <span class="op">=</span> [<span class="st">&#39;season&#39;</span>, <span class="st">&#39;weathersit&#39;</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df[cat_cols].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -3536,9 +3478,9 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p><code>df[cat_cols]</code> をワンホットエンコーディングして、season・weathersit の値ごとの 0/1 の列に展開してください。</p>
 <p>pandas に、カテゴリ列を一発で展開してくれる関数があります。結果が True/False ではなく 0/1 の数値になるようにしてみましょう。</p>
 <div id="fdf9f21d" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: df[cat_cols] をワンホットエンコーディングして表示してください</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: pandas の関数を使います。カテゴリとして扱うため .astype(&#39;category&#39;)、0/1 にする引数（dtype=int）も使えます</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: df[cat_cols] をワンホットエンコーディングして表示してください</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: pandas の関数を使います。カテゴリとして扱うため .astype(&#39;category&#39;)、0/1 にする引数（dtype=int）も使えます</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3560,18 +3502,18 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p><strong>カテゴリの顔ぶれも訓練から学んだ基準</strong>　もしテストに、訓練で見なかった水準（たとえば豪雨のような未知の <code>weathersit</code>）が現れると、ワンホットで作られる<strong>列の顔ぶれがズレて</strong>モデルに渡せなくなります。「どんなカテゴリが存在するか」も、じつは訓練データから学んだ基準の一つ。逆に、テストにしか出ない水準は列として用意できないので、未知カテゴリをどう扱うか（無視するか、専用の「その他」列を設けるか）まで含めて設計が要ります。この列ぞろえの管理を、手作業のミス（列の付け忘れ・順序違い）ごと仕組みで安全に守る道具（ColumnTransformer やパイプライン）は、この演習シリーズの後の回で扱います。</p>
 <p><strong>締め</strong>　補完・標準化・ワンホットの三点セットを、<strong>分割 → 訓練で学ぶ（<code>fit</code>）→ テストに当てる（<code>transform</code>）</strong> の順で通せば、リークなしで評価できます。なお整えるのは説明変数だけで、目的変数（当てたい <code>cnt</code>）まで標準化しないよう注意——答えの単位を変えると解釈がややこしくなります。「<strong>前処理も学習の一部</strong>」——この一言が、この回のすべてを貫いています。</p>
 <div id="d6de7b4c" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;cnt&#39;</span>].values</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>, <span class="st">&#39;yr&#39;</span>, <span class="st">&#39;holiday&#39;</span>, <span class="st">&#39;workingday&#39;</span>]</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cat <span class="op">=</span> [<span class="st">&#39;season&#39;</span>, <span class="st">&#39;mnth&#39;</span>, <span class="st">&#39;weekday&#39;</span>, <span class="st">&#39;weathersit&#39;</span>]</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_raw <span class="op">=</span> df[num <span class="op">+</span> cat].values.astype(<span class="bu">float</span>)  <span class="co"># カテゴリを生の数値のまま</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>X_oh <span class="op">=</span> pd.concat([df[num],</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    pd.get_dummies(df[cat].astype(<span class="st">&#39;category&#39;</span>), drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>)], axis<span class="op">=</span><span class="dv">1</span>).values</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, Xd <span class="kw">in</span> [(<span class="st">&#39;生の数値扱い&#39;</span>, X_raw), (<span class="st">&#39;ワンホット&#39;</span>, X_oh)]:</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    Xtr, Xte, ytr, yte <span class="op">=</span> train_test_split(Xd, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    imp <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>).fit(Xtr)  <span class="co"># 補完の中央値は訓練だけで学ぶ（先に分割してから）</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> LinearRegression().fit(imp.transform(Xtr), ytr).score(imp.transform(Xte), yte)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>name<span class="sc">:12s}</span><span class="ss"> テストR²: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">&#39;cnt&#39;</span>].values</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;atemp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>, <span class="st">&#39;yr&#39;</span>, <span class="st">&#39;holiday&#39;</span>, <span class="st">&#39;workingday&#39;</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cat <span class="op">=</span> [<span class="st">&#39;season&#39;</span>, <span class="st">&#39;mnth&#39;</span>, <span class="st">&#39;weekday&#39;</span>, <span class="st">&#39;weathersit&#39;</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>X_raw <span class="op">=</span> df[num <span class="op">+</span> cat].values.astype(<span class="bu">float</span>)  <span class="co"># カテゴリを生の数値のまま</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X_oh <span class="op">=</span> pd.concat([df[num],</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    pd.get_dummies(df[cat].astype(<span class="st">&#39;category&#39;</span>), drop_first<span class="op">=</span><span class="va">True</span>, dtype<span class="op">=</span><span class="bu">float</span>)], axis<span class="op">=</span><span class="dv">1</span>).values</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, Xd <span class="kw">in</span> [(<span class="st">&#39;生の数値扱い&#39;</span>, X_raw), (<span class="st">&#39;ワンホット&#39;</span>, X_oh)]:</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    Xtr, Xte, ytr, yte <span class="op">=</span> train_test_split(Xd, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    imp <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>).fit(Xtr)  <span class="co"># 補完の中央値は訓練だけで学ぶ（先に分割してから）</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> LinearRegression().fit(imp.transform(Xtr), ytr).score(imp.transform(Xte), yte)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>name<span class="sc">:12s}</span><span class="ss"> テストR²: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>生の数値扱い       テストR²: 0.829
 ワンホット        テストR²: 0.843</code></pre>
@@ -3613,8 +3555,8 @@ z \;=\; \frac{x - \mu}{\sigma}
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>4節のワンホット回帰では、<code>cat = [&#39;season&#39;, &#39;mnth&#39;, &#39;weekday&#39;, &#39;weathersit&#39;]</code> の4列をワンホットにしました。 このうち <code>mnth</code>（月）を外して、同じ回帰をやり直してください。 ワンホット後の説明変数の<strong>列数</strong>と、<strong>テストR²</strong>の2つを表示してください。</p>
 <div id="a6cb57ea" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3627,8 +3569,8 @@ z \;=\; \frac{x - \mu}{\sigma}
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①で <code>mnth</code> を外したときの<strong>テストR²</strong>を、小数第3位まで（例: 0.812）で答えてください。 あわせて、4節のワンホット（0.843）からどれだけ変わったかも見ておきましょう。</p>
 <div id="96e9e72b" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3652,27 +3594,27 @@ z \;=\; \frac{x - \mu}{\sigma}
 <p><code>KNNImputer</code> はこれを自動でやります。欠けていない列で行どうしの距離を測り、<strong>近い k 行の平均</strong>で穴を埋めます（k 近傍法の補完版です）。 距離を使うので、2節と同じくスケールに敏感です。標準化してから補完し、あとで単位を戻します。</p>
 <p>1節で穴を空ける前の本当の値が分かっているので、中央値補完と KNN 補完の誤差を直接比べてみます。</p>
 <div id="3f22cab0" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 穴を空ける前の本当の値（1節と同じファイルを読み直す）</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>orig <span class="op">=</span> pd.read_csv(<span class="ss">f&#39;</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/bike_day.csv&#39;</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[num_cols].isnull()          <span class="co"># 1節で空けた穴の位置</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 中央値補完</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>X_med <span class="op">=</span> pd.DataFrame(SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>).fit_transform(df[num_cols]), columns<span class="op">=</span>num_cols)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># KNN 補完（標準化 → 補完 → 単位を戻す）。StandardScaler は NaN を無視して平均・標準偏差を学ぶ</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler().fit(df[num_cols])</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">5</span>).fit_transform(sc.transform(df[num_cols]))</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>X_knn <span class="op">=</span> pd.DataFrame(sc.inverse_transform(Z), columns<span class="op">=</span>num_cols)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 穴の位置だけで、本当の値との平均絶対誤差を比べる</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;列          中央値補完   KNN補完   (穴の数)&#39;</span>)</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>]:</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> mask[c].values</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    e_med <span class="op">=</span> np.<span class="bu">abs</span>(X_med.loc[m, c] <span class="op">-</span> orig.loc[m, c]).mean()</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    e_knn <span class="op">=</span> np.<span class="bu">abs</span>(X_knn.loc[m, c] <span class="op">-</span> orig.loc[m, c]).mean()</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>c<span class="sc">:10s}</span><span class="ss">  </span><span class="sc">{</span>e_med<span class="sc">:8.4f}</span><span class="ss">   </span><span class="sc">{</span>e_knn<span class="sc">:8.4f}</span><span class="ss">   (</span><span class="sc">{</span>m<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">)&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 穴を空ける前の本当の値（1節と同じファイルを読み直す）</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>orig <span class="op">=</span> pd.read_csv(<span class="ss">f&#39;</span><span class="sc">{</span>DATA_DIR<span class="sc">}</span><span class="ss">/bike_day.csv&#39;</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> df[num_cols].isnull()          <span class="co"># 1節で空けた穴の位置</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 中央値補完</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>X_med <span class="op">=</span> pd.DataFrame(SimpleImputer(strategy<span class="op">=</span><span class="st">&#39;median&#39;</span>).fit_transform(df[num_cols]), columns<span class="op">=</span>num_cols)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># KNN 補完（標準化 → 補完 → 単位を戻す）。StandardScaler は NaN を無視して平均・標準偏差を学ぶ</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler().fit(df[num_cols])</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">5</span>).fit_transform(sc.transform(df[num_cols]))</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>X_knn <span class="op">=</span> pd.DataFrame(sc.inverse_transform(Z), columns<span class="op">=</span>num_cols)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 穴の位置だけで、本当の値との平均絶対誤差を比べる</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;列          中央値補完   KNN補完   (穴の数)&#39;</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> [<span class="st">&#39;temp&#39;</span>, <span class="st">&#39;hum&#39;</span>, <span class="st">&#39;windspeed&#39;</span>]:</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> mask[c].values</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    e_med <span class="op">=</span> np.<span class="bu">abs</span>(X_med.loc[m, c] <span class="op">-</span> orig.loc[m, c]).mean()</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    e_knn <span class="op">=</span> np.<span class="bu">abs</span>(X_knn.loc[m, c] <span class="op">-</span> orig.loc[m, c]).mean()</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>c<span class="sc">:10s}</span><span class="ss">  </span><span class="sc">{</span>e_med<span class="sc">:8.4f}</span><span class="ss">   </span><span class="sc">{</span>e_knn<span class="sc">:8.4f}</span><span class="ss">   (</span><span class="sc">{</span>m<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">)&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>列          中央値補完   KNN補完   (穴の数)
 temp          0.1400     0.0131   (73)
@@ -3681,13 +3623,13 @@ windspeed     0.0613     0.0568   (73)</code></pre>
 </div>
 </div>
 <div id="531a83af" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># temp の穴について、本当の値と補完した値を散布図で比べる</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> mask[<span class="st">&#39;temp&#39;</span>].values</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(orig.loc[m, <span class="st">&#39;temp&#39;</span>], X_med.loc[m, <span class="st">&#39;temp&#39;</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">&#39;中央値補完&#39;</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(orig.loc[m, <span class="st">&#39;temp&#39;</span>], X_knn.loc[m, <span class="st">&#39;temp&#39;</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">&#39;KNN補完&#39;</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">&#39;k--&#39;</span>, lw<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">&#39;本当の値と一致する線&#39;</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;本当の temp&#39;</span>)<span class="op">;</span> plt.ylabel(<span class="st">&#39;補完した temp&#39;</span>)<span class="op">;</span> plt.legend()</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># temp の穴について、本当の値と補完した値を散布図で比べる</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> mask[<span class="st">&#39;temp&#39;</span>].values</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(orig.loc[m, <span class="st">&#39;temp&#39;</span>], X_med.loc[m, <span class="st">&#39;temp&#39;</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">&#39;中央値補完&#39;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(orig.loc[m, <span class="st">&#39;temp&#39;</span>], X_knn.loc[m, <span class="st">&#39;temp&#39;</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">&#39;KNN補完&#39;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">&#39;k--&#39;</span>, lw<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">&#39;本当の値と一致する線&#39;</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;本当の temp&#39;</span>)<span class="op">;</span> plt.ylabel(<span class="st">&#39;補完した temp&#39;</span>)<span class="op">;</span> plt.legend()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

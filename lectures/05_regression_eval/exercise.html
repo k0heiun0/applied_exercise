@@ -3300,23 +3300,7 @@ window.Quarto = {
 <section id="分析の地図今日はここ" class="level3">
 <h3 class="anchored" data-anchor-id="分析の地図今日はここ">分析の地図：今日はここ</h3>
 <p>データ解析は「① データの理解と目標の設定 → ② 前処理（preprocessing）とデータ解析 → ③ 結果の解釈と目標との整合」の3つのフェーズを回ります。今日は色の濃いところを扱います。</p>
-<div id="5e1c0004" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：分析の地図（全14回のどこにいるか）</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>phases <span class="op">=</span> [<span class="st">&#39;① データの理解と</span><span class="ch">\n</span><span class="st">目標の設定&#39;</span>, <span class="st">&#39;② 前処理と</span><span class="ch">\n</span><span class="st">データ解析&#39;</span>, <span class="st">&#39;③ 結果の解釈と</span><span class="ch">\n</span><span class="st">目標との整合&#39;</span>]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;#0066cc&#39;</span>, <span class="st">&#39;#2a9d8f&#39;</span>, <span class="st">&#39;#e63946&#39;</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>here <span class="op">=</span> {<span class="dv">2</span>, <span class="dv">3</span>}</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (p, c, x) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(phases, colors, [<span class="fl">0.17</span>, <span class="fl">0.5</span>, <span class="fl">0.83</span>]), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    on <span class="op">=</span> i <span class="kw">in</span> here</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ax.text(x, <span class="fl">0.62</span>, p, ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">13</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="dv">11</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">&#39;white&#39;</span>, bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">&#39;round,pad=0.6&#39;</span>, facecolor<span class="op">=</span>c,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                     alpha<span class="op">=</span><span class="fl">0.95</span> <span class="cf">if</span> on <span class="cf">else</span> <span class="fl">0.25</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x0, x1 <span class="kw">in</span> [(<span class="fl">0.29</span>, <span class="fl">0.365</span>), (<span class="fl">0.62</span>, <span class="fl">0.695</span>)]:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">&#39;&#39;</span>, xy<span class="op">=</span>(x1, <span class="fl">0.62</span>), xytext<span class="op">=</span>(x0, <span class="fl">0.62</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">&#39;-&gt;&#39;</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>))</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5e1c0004" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3346,9 +3330,9 @@ window.Quarto = {
 <p><strong>なぜルートをとるのか</strong>　二乗した時点で、単位も「台数の二乗」という直感の効かない量に化けます（この分割の MSE は約 <strong>69万</strong>＝台数²）。ルートで単位を<strong>台数に戻した</strong>のが RMSE。この分割では約 <strong>831</strong>。だから「平均しておよそ <strong>831 台</strong>ずれる」と、そのまま人に伝わる言葉になります。1日あたり平均およそ 4500 台の利用に対して約 2 割ぶんのずれ、と見当もつきます。</p>
 <p><strong>次節への橋渡し</strong>　この RMSE 831 を、「モデルを作らず、いつも<strong>テストデータの平均値 約4279 台</strong>で答えたとき」の RMSE 約 <strong>2003 台</strong>（＝テストデータの利用台数の標準偏差そのもの）と比べると、モデルが誤差を 4 割ほどまで縮めているとわかります。この「<strong>平均で答えるのと比べてどれだけ縮めたか</strong>」を割合で表したのが、次節でそろって出てくる R² です。</p>
 <div id="e4133e56" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 「引いて、二乗して、平均して、ルート」の4ステップで、RMSEを自分で計算してください</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 誤差の配列を作ってから、一歩ずつ順番に変形します。平方根には np.sqrt が使えます</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 「引いて、二乗して、平均して、ルート」の4ステップで、RMSEを自分で計算してください</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 誤差の配列を作ってから、一歩ずつ順番に変形します。平方根には np.sqrt が使えます</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3388,12 +3372,12 @@ R^2_{\text{adj}} = 1-(1-R^2)\,\frac{n-1}{n-p-1}
 \]</span></p>
 <p><span class="math inline">\(p\)</span> は変数の数、<span class="math inline">\(n\)</span> はデータ数。<span class="math inline">\(p\)</span> を増やすとペナルティ <span class="math inline">\((n-1)/(n-p-1)\)</span> が大きくなり、<strong>役に立たない変数を足すと下がる</strong>ように補正されます。この訓練データ（<span class="math inline">\(n=584,\ p=11\)</span>）では、素の R² 0.7911 に対し調整済みは 0.7871 と<strong>ごくわずかに下がる</strong>だけ——11 変数はデータ数に対して十分少なく、水増しがほとんどないという意味です。ただし調整済み R² も<strong>同じ訓練データ内</strong>の話。本命はやはり、次節の「テスト（交差検証）で測る」です。</p>
 <div id="40e5e15c" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rmse_lib <span class="op">=</span> np.sqrt(mean_squared_error(y_te, pred))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mae_lib <span class="op">=</span> mean_absolute_error(y_te, pred)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>r2_lib <span class="op">=</span> r2_score(y_te, pred)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;RMSE: </span><span class="sc">{</span>rmse_lib<span class="sc">:.1f}</span><span class="ss">  → 平均およそ</span><span class="sc">{</span>rmse_lib<span class="sc">:.0f}</span><span class="ss">台ずれる&#39;</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;MAE : </span><span class="sc">{</span>mae_lib<span class="sc">:.1f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;R²  : </span><span class="sc">{</span>r2_lib<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rmse_lib <span class="op">=</span> np.sqrt(mean_squared_error(y_te, pred))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mae_lib <span class="op">=</span> mean_absolute_error(y_te, pred)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>r2_lib <span class="op">=</span> r2_score(y_te, pred)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;RMSE: </span><span class="sc">{</span>rmse_lib<span class="sc">:.1f}</span><span class="ss">  → 平均およそ</span><span class="sc">{</span>rmse_lib<span class="sc">:.0f}</span><span class="ss">台ずれる&#39;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;MAE : </span><span class="sc">{</span>mae_lib<span class="sc">:.1f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;R²  : </span><span class="sc">{</span>r2_lib<span class="sc">:.4f}</span><span class="ss">&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE: 831.3  → 平均およそ831台ずれる
 MAE : 617.4
@@ -3417,29 +3401,7 @@ R²  : 0.8277</code></pre>
 <p><strong>発展：ばらつきそのものを読む</strong>　平均が同じでも ± が大きいモデルは、データの一部に<strong>弱点</strong>を抱えている疑いがあります（ある分割だけ大きく外す）。だからモデルを比べるときは、平均だけでなく ± まで見て「<strong>安定して勝っているか</strong>」を確かめます。ここで測った ± は、この先モデルを比べる場面でそのまま土俵として使えます。</p>
 <p><strong>発展：分割数 K はいくつにするか</strong>　K を 3・5・10 と変えると、平均 R² は 0.787 / 0.783 / 0.778 とほとんど動きません。一方 ± は 0.012 / 0.042 / 0.072 と <strong>K を増やすほど大きく</strong>なります。K を大きくすると 1 回あたりのテストが小さくなり、各回のスコアが振れやすくなるためです（究極は 1 件だけ抜く一個抜き法＝LOO。正確ですが計算は重い）。平均の推定値は K によらず安定するので、実務では計算の軽い <strong>5 分割か 10 分割</strong>が定番。迷えば 5 で十分です。</p>
 <p><strong>つまずき：shuffle を忘れると評価が壊れる</strong>　<code>KFold</code> に <code>shuffle=True</code> を指定せず、<code>cross_val_score</code> に <code>cv=5</code> と数字だけ渡すと、回帰では<strong>並び順のまま</strong>分割されます。このデータは<strong>日付順</strong>に並んでいるので、各分割が特定の季節・年に偏り（冬だけで学習して夏を当てるような分割になり）、試しに shuffle を外すと R² の平均は <strong>0.15 前後</strong>まで崩れます。だから<strong>混ぜてから分ける</strong>のが基本。ただし時系列予測など、順番自体に意味があるデータでは別の作法（過去で学び未来で測る）を使います。交差検証の作法——前処理を各分割の訓練内で完結させる、shuffle の要否、時系列やグループ構造に合った分割の選び方——は、scikit-learn 公式ドキュメントの交差検証の節に図つきで整理されています。細部はそちらに譲ります。</p>
-<div id="5e1c0005" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 図：K分割交差検証のしくみ（5分割・テスト役が順に交代する）</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> [<span class="bu">len</span>(te) <span class="cf">for</span> _, te <span class="kw">in</span> KFold(n_splits<span class="op">=</span>K).split(X)]   <span class="co"># 各ブロックに入る日数</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="fl">3.6</span>))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">&#39;off&#39;</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>x0, bw, gap <span class="op">=</span> <span class="fl">0.13</span>, <span class="fl">0.128</span>, <span class="fl">0.006</span>          <span class="co"># ブロックの左端・幅・すきま</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(K):</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ax.text(x0 <span class="op">+</span> j <span class="op">*</span> (bw <span class="op">+</span> gap) <span class="op">+</span> bw <span class="op">/</span> <span class="dv">2</span>, <span class="fl">0.93</span>, <span class="ss">f&#39;ブロック</span><span class="sc">{</span>j<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>sizes[j]<span class="sc">}</span><span class="ss">日&#39;</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            ha<span class="op">=</span><span class="st">&#39;center&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(K):</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    top <span class="op">=</span> <span class="fl">0.83</span> <span class="op">-</span> k <span class="op">*</span> <span class="fl">0.155</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(K):</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        is_test <span class="op">=</span> (j <span class="op">==</span> k)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        ax.add_patch(plt.Rectangle((x0 <span class="op">+</span> j <span class="op">*</span> (bw <span class="op">+</span> gap), top <span class="op">-</span> <span class="fl">0.13</span>), bw, <span class="fl">0.13</span>,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                                   facecolor<span class="op">=</span><span class="st">&#39;#e76f51&#39;</span> <span class="cf">if</span> is_test <span class="cf">else</span> <span class="st">&#39;#0066cc&#39;</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                                   alpha<span class="op">=</span><span class="fl">0.9</span> <span class="cf">if</span> is_test <span class="cf">else</span> <span class="fl">0.55</span>))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.02</span>, top <span class="op">-</span> <span class="fl">0.065</span>, <span class="ss">f&#39;</span><span class="sc">{</span>k<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">回目&#39;</span>, ha<span class="op">=</span><span class="st">&#39;left&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.80</span>, top <span class="op">-</span> <span class="fl">0.065</span>, <span class="st">&#39;→ R²を1つ&#39;</span>, ha<span class="op">=</span><span class="st">&#39;left&#39;</span>, va<span class="op">=</span><span class="st">&#39;center&#39;</span>, fontsize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">&#39;#555&#39;</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>ax.text(x0, <span class="fl">0.005</span>, <span class="st">&#39;青＝訓練（学習に使う）／オレンジ＝テスト（採点に使う）　&#39;</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;5つのR²を「平均 ± ばらつき」にまとめる&#39;</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span> ax.set_ylim(<span class="op">-</span><span class="fl">0.03</span>, <span class="dv">1</span>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()<span class="op">;</span> plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5e1c0005" class="cell" data-cellview="form" data-jupyter="{&quot;source_hidden&quot;:true}" data-tags="[&quot;remove-input&quot;]" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -3450,12 +3412,12 @@ R²  : 0.8277</code></pre>
 </div>
 <p><strong>この図の読み方</strong>　横に並ぶ5つのブロックが、731 日を5等分したかたまりです（147 日と 146 日×4）。縦の5段が5回ぶんの採点で、各段でオレンジのブロックだけがテスト役、残りの青4つが訓練です。1回目はブロック1、2回目はブロック2……とオレンジが右へひとつずつずれ、5段を通すと<strong>どのブロックもちょうど一度だけテストに回り、一度も訓練とテストを兼ねない</strong>——ここが交差検証の肝です。段ごとに学習をやり直して R² をひとつ出すので、採点は5つ手に入ります。その平均が実力の推定値、ばらつきがその推定の不確かさで、上で見た 0.783 ± 0.042 はこの5つから出た数字です。なお図は5つのかたまりを左から順に並べていますが、<code>shuffle=True</code> を付けると先に行をよく混ぜてから切るので、各ブロックの中身は日付順のひと続きではなく、季節も年もまざった顔ぶれになります。</p>
 <div id="41ea8100" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> Pipeline([(<span class="st">&#39;scaler&#39;</span>, StandardScaler()), (<span class="st">&#39;model&#39;</span>, LinearRegression())])</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 5分割の交差検証でR²を測り、「平均 ± ばらつき」の形で表示してください</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 分割役の KFold をシャッフルありで作って、cross_val_score の cv に渡します</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 5つのスコアの平均は .mean()、ばらつきは .std() で出せます</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> Pipeline([(<span class="st">&#39;scaler&#39;</span>, StandardScaler()), (<span class="st">&#39;model&#39;</span>, LinearRegression())])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: 5分割の交差検証でR²を測り、「平均 ± ばらつき」の形で表示してください</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 分割役の KFold をシャッフルありで作って、cross_val_score の cv に渡します</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: 5つのスコアの平均は .mean()、ばらつきは .std() で出せます</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3476,11 +3438,11 @@ R²  : 0.8277</code></pre>
 <p><strong>RMSE と MAE の差を、交差検証でも読む</strong>　平均どうしでも RMSE（887）&gt; MAE（657）で、比はおよそ 1.35。1 回分割の比（831/617 ≒ 1.35）とぴたり一致します。<strong>大きく外す日が一定割合ある</strong>という性格が、分割を変えても安定して見えるわけです。もしどれか一つの分割だけ差が異常に開いていたら、その分割に<strong>極端な外れ日</strong>が入ったサインとして拾えます。</p>
 <p><strong>報告するなら</strong>　相手が業務の人なら、「平均およそ <strong>887 台（± 50 台）</strong>ずれます」がいちばん親切です——単位付きで、そのままリスク判断に使えるから。R² 0.78 は、別モデルと横並びに比べるときの物差し。どちらか一方でなく、<strong>両方を手元に持っておく</strong>のが、ひいき目のない報告のコツです。</p>
 <div id="df74b14f" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cv_r2 <span class="op">=</span> cross_val_score(pipe, X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cv_rmse <span class="op">=</span> <span class="op">-</span>cross_val_score(pipe, X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">&#39;neg_root_mean_squared_error&#39;</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;R²  : </span><span class="sc">{</span>cv_r2<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>cv_r2<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;RMSE: </span><span class="sc">{</span>cv_rmse<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> ± </span><span class="sc">{</span>cv_rmse<span class="sc">.</span>std()<span class="sc">:.1f}</span><span class="ss">  → 平均およそ</span><span class="sc">{</span>cv_rmse<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss">台ずれる&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cv_r2 <span class="op">=</span> cross_val_score(pipe, X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">&#39;r2&#39;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>cv_rmse <span class="op">=</span> <span class="op">-</span>cross_val_score(pipe, X, y, cv<span class="op">=</span>kf, scoring<span class="op">=</span><span class="st">&#39;neg_root_mean_squared_error&#39;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;R²  : </span><span class="sc">{</span>cv_r2<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>cv_r2<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">&#39;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;RMSE: </span><span class="sc">{</span>cv_rmse<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> ± </span><span class="sc">{</span>cv_rmse<span class="sc">.</span>std()<span class="sc">:.1f}</span><span class="ss">  → 平均およそ</span><span class="sc">{</span>cv_rmse<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss">台ずれる&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R²  : 0.783 ± 0.042
 RMSE: 887.4 ± 51.5  → 平均およそ887台ずれる</code></pre>
@@ -3491,10 +3453,10 @@ RMSE: 887.4 ± 51.5  → 平均およそ887台ずれる</code></pre>
 <h3 class="anchored" data-anchor-id="todo③指標を変えて比較するmae">TODO③：指標を変えて比較する（MAE）</h3>
 <p><code>scoring</code> を変えれば、同じ手順でMAEでも交差検証できます。MAEの5分割交差検証を行い、「平均 ± ばらつき」で表示して、上のRMSEと比べてください。</p>
 <div id="daa9eedb" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: MAEで5分割交差検証し、「平均 ± ばらつき」で表示して、RMSEの結果と見比べてください</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: RMSEのときと同じ書き方で、scoring の名前をMAE用に変えるだけです</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: MAE用の名前も「neg_」で始まります。マイナス付きで返る約束にも注意</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: MAEで5分割交差検証し、「平均 ± ばらつき」で表示して、RMSEの結果と見比べてください</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: RMSEのときと同じ書き方で、scoring の名前をMAE用に変えるだけです</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ヒント: MAE用の名前も「neg_」で始まります。マイナス付きで返る約束にも注意</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3532,8 +3494,8 @@ RMSE: 887.4 ± 51.5  → 平均およそ887台ずれる</code></pre>
 <h3 class="anchored" data-anchor-id="応用①変形">応用①（変形）</h3>
 <p>4節では <code>KFold(n_splits=5, shuffle=True, random_state=42)</code> で RMSE の交差検証をしました。分け方の運が本当にならされているか、乱数を変えて確かめます。 <code>random_state=0</code> の <code>KFold</code> に変えて、同じ <code>pipe</code>, <code>X</code>, <code>y</code> で RMSE の5分割交差検証を行い、5つの分割それぞれの RMSE と、平均 ± 標準偏差を表示してください。</p>
 <div id="4f6b50ab" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3546,8 +3508,8 @@ RMSE: 887.4 ± 51.5  → 平均およそ887台ずれる</code></pre>
 <h3 class="anchored" data-anchor-id="応用②判断">応用②（判断）</h3>
 <p>応用①で出した RMSE の<strong>平均</strong>は何台ですか。小数第1位まで答えてください（例: 123.4）。</p>
 <div id="60d7ed2e" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ここにコードを書く</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>...<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <details>
 <summary>
@@ -3572,28 +3534,28 @@ RMSE: 887.4 ± 51.5  → 平均およそ887台ずれる</code></pre>
 <p>手順は単純です。訓練データの一部を<strong>較正用</strong>に取り分け、そこで残差の大きさの分位点（たとえば上位 10% の境目）を測り、それを予測の上下に足して区間にします。</p>
 <p>ライブラリ MAPIE を使えば数行で書けます。</p>
 <div id="de14eeb1" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていないので、なければインストールする</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;mapie&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q mapie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab には入っていないので、なければインストールする</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.util</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> importlib.util.find_spec(<span class="st">&#39;mapie&#39;</span>) <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install <span class="op">-</span>q mapie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="66d324c7" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mapie.regression <span class="im">import</span> SplitConformalRegressor</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 訓練データ X_tr をさらに「学習用」と「較正用」に分ける</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>X_fit, X_cal, y_fit, y_cal <span class="op">=</span> train_test_split(X_tr, y_tr, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 学習用で pipe を学習 → 較正用で残差の分位点を測る → テストで区間を出す（信頼水準 90%）</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>cp <span class="op">=</span> SplitConformalRegressor(estimator<span class="op">=</span>pipe, confidence_level<span class="op">=</span><span class="fl">0.9</span>, prefit<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>cp.fit(X_fit, y_fit).conformalize(X_cal, y_cal)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>pt, iv <span class="op">=</span> cp.predict_interval(X_te)          <span class="co"># pt: 点予測, iv: (件数, 2, 1) の下限・上限</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>lo, hi <span class="op">=</span> iv[:, <span class="dv">0</span>, <span class="dv">0</span>], iv[:, <span class="dv">1</span>, <span class="dv">0</span>]</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;実際 </span><span class="sc">{</span>y_te[i]<span class="sc">:5.0f}</span><span class="ss">  予測 </span><span class="sc">{</span>pt[i]<span class="sc">:5.0f}</span><span class="ss">  区間 [</span><span class="sc">{</span>lo[i]<span class="sc">:5.0f}</span><span class="ss">, </span><span class="sc">{</span>hi[i]<span class="sc">:5.0f}</span><span class="ss">]&#39;</span>)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>inside <span class="op">=</span> (y_te <span class="op">&gt;=</span> lo) <span class="op">&amp;</span> (y_te <span class="op">&lt;=</span> hi)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;区間に入った割合: </span><span class="sc">{</span>inside<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">（</span><span class="sc">{</span>inside<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> / </span><span class="sc">{</span><span class="bu">len</span>(y_te)<span class="sc">}</span><span class="ss"> 日）&#39;</span>)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;区間の半幅: </span><span class="sc">{</span>((hi <span class="op">-</span> lo) <span class="op">/</span> <span class="dv">2</span>)<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss"> 台&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mapie.regression <span class="im">import</span> SplitConformalRegressor</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 訓練データ X_tr をさらに「学習用」と「較正用」に分ける</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_fit, X_cal, y_fit, y_cal <span class="op">=</span> train_test_split(X_tr, y_tr, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 学習用で pipe を学習 → 較正用で残差の分位点を測る → テストで区間を出す（信頼水準 90%）</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>cp <span class="op">=</span> SplitConformalRegressor(estimator<span class="op">=</span>pipe, confidence_level<span class="op">=</span><span class="fl">0.9</span>, prefit<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>cp.fit(X_fit, y_fit).conformalize(X_cal, y_cal)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>pt, iv <span class="op">=</span> cp.predict_interval(X_te)          <span class="co"># pt: 点予測, iv: (件数, 2, 1) の下限・上限</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>lo, hi <span class="op">=</span> iv[:, <span class="dv">0</span>, <span class="dv">0</span>], iv[:, <span class="dv">1</span>, <span class="dv">0</span>]</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;実際 </span><span class="sc">{</span>y_te[i]<span class="sc">:5.0f}</span><span class="ss">  予測 </span><span class="sc">{</span>pt[i]<span class="sc">:5.0f}</span><span class="ss">  区間 [</span><span class="sc">{</span>lo[i]<span class="sc">:5.0f}</span><span class="ss">, </span><span class="sc">{</span>hi[i]<span class="sc">:5.0f}</span><span class="ss">]&#39;</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>inside <span class="op">=</span> (y_te <span class="op">&gt;=</span> lo) <span class="op">&amp;</span> (y_te <span class="op">&lt;=</span> hi)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;区間に入った割合: </span><span class="sc">{</span>inside<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">（</span><span class="sc">{</span>inside<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> / </span><span class="sc">{</span><span class="bu">len</span>(y_te)<span class="sc">}</span><span class="ss"> 日）&#39;</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;区間の半幅: </span><span class="sc">{</span>((hi <span class="op">-</span> lo) <span class="op">/</span> <span class="dv">2</span>)<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss"> 台&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>実際  6606  予測  6313  区間 [ 5064,  7562]
 実際  1550  予測  1535  区間 [  286,  2784]
@@ -3605,16 +3567,16 @@ RMSE: 887.4 ± 51.5  → 平均およそ887台ずれる</code></pre>
 </div>
 </div>
 <div id="9aab2e4a" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 予測値の小さい順に並べて、区間（帯）と実際の値（点）を描く</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> np.argsort(pt)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.arange(<span class="bu">len</span>(pt))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.fill_between(xs, lo[order], hi[order], color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, label<span class="op">=</span><span class="st">&#39;90% 予測区間&#39;</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, pt[order], color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">&#39;点予測&#39;</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs, y_te[order], s<span class="op">=</span><span class="dv">12</span>, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, label<span class="op">=</span><span class="st">&#39;実際の利用台数&#39;</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;テストデータの日（予測値の小さい順）&#39;</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;利用台数&#39;</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 予測値の小さい順に並べて、区間（帯）と実際の値（点）を描く</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> np.argsort(pt)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.arange(<span class="bu">len</span>(pt))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.fill_between(xs, lo[order], hi[order], color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, label<span class="op">=</span><span class="st">&#39;90% 予測区間&#39;</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, pt[order], color<span class="op">=</span><span class="st">&#39;#0066cc&#39;</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">&#39;点予測&#39;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs, y_te[order], s<span class="op">=</span><span class="dv">12</span>, color<span class="op">=</span><span class="st">&#39;#e63946&#39;</span>, label<span class="op">=</span><span class="st">&#39;実際の利用台数&#39;</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;テストデータの日（予測値の小さい順）&#39;</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;利用台数&#39;</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
